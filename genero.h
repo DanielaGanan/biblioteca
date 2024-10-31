@@ -5,7 +5,7 @@ class Genero
 {
 public:
     Genero();
-    //Hola
+    //probando
 };
 
 #endif // GENERO_H
