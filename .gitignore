@@ -1,0 +1,15 @@
+# Ignora carpetas del sistema y archivos temporales
+Configuración local/
+Cookies/
+Datos de programa/
+Documents/
+Downloads/
+Favorites/
+Games/
+IntelGraphicsProfiles/
+Links/
+Music/
+Videos/
+ntuser.dat.LOG1
+ntuser.dat.LOG2
+ntuser.ini
