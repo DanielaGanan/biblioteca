@@ -1,3 +1,14 @@
 #include "pagarcuota.h"
+#include "ui_pagarcuota.h"
 
-pagarCuota::pagarCuota() {}
+PagarCuota::PagarCuota(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::PagarCuota)
+{
+    ui->setupUi(this);
+}
+
+PagarCuota::~PagarCuota()
+{
+    delete ui;
+}

@@ -1,10 +1,22 @@
 #ifndef PAGARCUOTA_H
 #define PAGARCUOTA_H
 
-class pagarCuota
+#include <QWidget>
+
+namespace Ui {
+class PagarCuota;
+}
+
+class PagarCuota : public QWidget
 {
+    Q_OBJECT
+
 public:
-    pagarCuota();
+    explicit PagarCuota(QWidget *parent = nullptr);
+    ~PagarCuota();
+
+private:
+    Ui::PagarCuota *ui;
 };
 
 #endif // PAGARCUOTA_H
