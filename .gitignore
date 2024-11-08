@@ -13,3 +13,8 @@ Videos/
 ntuser.dat.LOG1
 ntuser.dat.LOG2
 ntuser.ini
+/build
+.gitignore
+biblioteca.pro
+biblioteca.pro.user
+biblioteca.pro.user.cb8e28f
