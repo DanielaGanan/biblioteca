@@ -13,7 +13,14 @@ Videos/
 ntuser.dat.LOG1
 ntuser.dat.LOG2
 ntuser.ini
+
+# Ignora la carpeta generada en la compilación
 /build
-biblioteca.pro
-biblioteca.pro.user
-biblioteca.pro.user.cb8e28f
+
+# Ignorar archivos de configuración de Qt
+*.pro.user
+*.pro.user.*
+*.pro
+*.qmake.stash
+.qmake.*
+*.qmlproject.user
