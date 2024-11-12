@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <Libro.h>
+#include <agregarnuevolibro.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
