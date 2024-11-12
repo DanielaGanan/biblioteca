@@ -15,7 +15,7 @@ ntuser.dat.LOG2
 ntuser.ini
 
 # Ignora la carpeta generada en la compilación
-/build
+build/*
 
 # Ignorar archivos de configuración de Qt
 *.pro.user
