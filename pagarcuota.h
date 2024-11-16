@@ -2,7 +2,6 @@
 #define PAGARCUOTA_H
 
 #include <QWidget>
-#include "qdebug.h"
 #include "socio.h"
 #include <QDate>
 
@@ -17,7 +16,7 @@ class PagarCuota : public QWidget
 public:
     explicit PagarCuota(QWidget *parent = nullptr);
     ~PagarCuota();
-
+/*
     int getIdCuotaPrestamo();
     float getCuota();
     QDate getFecha();
@@ -34,7 +33,7 @@ private slots:
     bool eliminarPago();
     void listarPagos(); //Va en slots o no?
     void buscarPagoSocio(Socio); //Busca un pago de un socio en particular
-
+*/
 private:
     Ui::PagarCuota *ui;
     int idCuotaPrestamo;

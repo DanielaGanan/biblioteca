@@ -1,19 +1,17 @@
 #include "socio.h"
-#include "ui_socio.h"
+//#include "ui_socio.h"
 
-Socio::Socio(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::Socio)
+Socio::Socio()
 {
-    ui->setupUi(this);
-    this->setWindowTitle("Socios");
+    //ui->setupUi(this);
+    //this->setWindowTitle("Socios");
 }
 
 Socio::~Socio()
 {
-    delete ui;
+    //delete ui;
 }
-
+/*
 //Getters
 int Socio::getIdSocio() const
 {
@@ -41,3 +39,4 @@ bool Socio::consultarEstado()
 {
 
 }
+*/

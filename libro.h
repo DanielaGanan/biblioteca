@@ -1,33 +1,39 @@
 #ifndef LIBRO_H
 #define LIBRO_H
-
-#include "librodatos.h"
-#include <QWidget>
 #include <QString>
-#include <agregarnuevolibro.h>
 
-namespace Ui {
-class Libro;
-}
-
-class Libro : public QWidget
+class libro
 {
-    Q_OBJECT
-
 public:
-    explicit Libro(QWidget *parent = nullptr);
-    ~Libro();
+    // Constructor libro
+    libro(const QString &titulo, const QString &autor, const QString &genero, const QString &editorial, int año, const QString &isbn, int stock);
 
-    // Metodos
-private slots:
-    void onAgregarLibro();
-    void onModificarLibro();
-    void onEliminarLibro();
-    void actualizarTabla();
+    // Métodos getters
+    QString getTitulo() const;
+    QString getAutor() const;
+    QString getGenero() const;
+    QString getEditorial() const;
+    int getAño() const;
+    QString getIsbn() const;
+    int getStock() const;
+
+    // Métodos setters
+    void setTitulo(const QString &titulo);
+    void setAutor(const QString &autor);
+    void setGenero(const QString &genero);
+    void setEditorial(const QString &editorial);
+    void setAño(int año);
+    void setIsbn(const QString &isbn);
+    void setStock(int stock);
 
 private:
-    QList<libroDatos> libros;
-    void actualizarLibro(int fila, const Libro &libroSeleccionado);
+    QString m_titulo;
+    QString m_autor;
+    QString m_genero;
+    QString m_editorial;
+    int m_año;
+    QString m_isbn;
+    int m_stock;
 };
 
 #endif // LIBRO_H

@@ -2,6 +2,7 @@
 #define AGREGARNUEVOLIBRO_H
 
 #include <QDialog>
+#include <QString>
 #include <QMessageBox>
 
 namespace Ui {
@@ -18,11 +19,13 @@ public:
 
     QString getTitulo() const;
     QString getAutor() const;
+    QString getGenero() const;
     QString getEditorial() const;
     int getAño() const;
+    QString getIsbn() const;
     int getStock() const;
 
-    void cargarDatos(const QString &titulo, const QString &autor, const QString &editorial, int año, int stock);
+    void cargarDatos(const QString &titulo, const QString &autor, const QString &genero, const QString &editorial, const QDate &año, const QString &isbn, int stock);
 
 private slots:
     void on_botonAceptar_clicked();

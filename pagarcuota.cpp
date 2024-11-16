@@ -12,7 +12,7 @@ PagarCuota::~PagarCuota()
 {
     delete ui;
 }
-
+/*
 //Metodos getters
 int getIdCuotaPrestamo()
 {
@@ -82,3 +82,4 @@ void PagarCuota::buscarPagoSocio(Socio)
 {
 
 }
+*/

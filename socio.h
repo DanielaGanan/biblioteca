@@ -1,26 +1,22 @@
 #ifndef SOCIO_H
 #define SOCIO_H
 
-#include <QWidget>
-#include "Persona.h"
+#include <persona.h>
+//#include "qwidget.h"
 
-namespace Ui {
-class Socio;
-}
+class Socio
 
-class Socio : public QWidget
 {
-    Q_OBJECT
 
 public:
-    explicit Socio(QWidget *parent = nullptr);
+    explicit Socio();
     ~Socio();
 
 private slots:
     bool consultarEstado();
 
 private:
-    Ui::Socio *ui;
+    //Ui::Socio *ui;
     Persona persona; // Composición para tener disponibles los métodos de Persona
     int idSocio;
     bool estado;

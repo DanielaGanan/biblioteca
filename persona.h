@@ -1,8 +1,7 @@
 #ifndef PERSONA_H
 #define PERSONA_H
-#include <stedio.h>
 
-
+//#include <stedio.h>
 #include <QObject>
 
 class Persona : public QObject

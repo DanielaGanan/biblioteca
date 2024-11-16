@@ -12,35 +12,40 @@ SOURCES += \
     agregarnuevolibro.cpp \
     empleado.cpp \
     libro.cpp \
-    librodatos.cpp \
     main.cpp \
     mainwindow.cpp \
     pagarcuota.cpp \
     persona.cpp \
     prestamo.cpp \
-    socio.cpp
+    socio.cpp \
+    tablalibros.cpp
 
 HEADERS += \
     agregarnuevolibro.h \
     empleado.h \
     libro.h \
-    librodatos.h \
     mainwindow.h \
     pagarcuota.h \
     persona.h \
     prestamo.h \
-    socio.h
+    socio.h \
+    tablalibros.h
 
 FORMS += \
     agregarnuevolibro.ui \
     empleado.ui \
-    libro.ui \
     mainwindow.ui \
     pagarcuota.ui \
     prestamo.ui \
-    socio.ui
+    tablalibros.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    readme
+
+RESOURCES += \
+    resource.qrc
