@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    agregarempleado.cpp \
     agregarnuevolibro.cpp \
     empleado.cpp \
     libro.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
     tablalibros.cpp
 
 HEADERS += \
+    agregarempleado.h \
     agregarnuevolibro.h \
     empleado.h \
     libro.h \
@@ -32,6 +34,7 @@ HEADERS += \
     tablalibros.h
 
 FORMS += \
+    agregarempleado.ui \
     agregarnuevolibro.ui \
     empleado.ui \
     mainwindow.ui \
