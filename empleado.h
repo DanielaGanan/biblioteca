@@ -35,12 +35,14 @@ public:
     void setIdEmpleado(int idEmpleado);
  //   void setUsuario(QString usuario);
  //   void setContrasenia(QString contrasenia);
+    void mostrarEmpleados();
+    // Empleado* buscarEmpleado(int dni, int idEmpleado);
+    Empleado* buscarEmpleado(int idEmpleado);
 
 private slots:
     bool agregarEmpleadoNuevo();
     bool eliminarEmpleado();
     bool modificarEmpleado();
-    void mostrarEmpleados();
 
 private:
     Ui::Empleado *ui;

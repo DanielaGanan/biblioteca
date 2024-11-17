@@ -47,7 +47,11 @@ Empleado::Empleado(QWidget *parent)
 
 Empleado::~Empleado()
 {
-    delete ui;
+    // Liberamos la memoria de los empleados almacenados en el QVector
+    for (auto empleado : vecEmpleados) {
+        delete empleado;  // Liberamos la memoria del puntero
+    }
+    //delete ui;
 }
 
 
@@ -85,6 +89,19 @@ void Empleado::setContrasenia(QString contrasenia)
     this->contrasenia = contrasenia;
 }
 */
+
+// Empleado* Empleado::buscarEmpleado(int dni, int idEmpleado)
+Empleado* Empleado::buscarEmpleado(int idEmpleado)
+{
+    for (Empleado* empleado : vecEmpleados){
+     //   if (empleado->idEmpleado = idEmpleado || empleado->dni = dni)
+        if (empleado->idEmpleado == idEmpleado){
+            return empleado;
+        }
+    }
+    return nullptr;
+}
+
 // Metodo para agregar empleados
 bool Empleado::agregarEmpleadoNuevo()
 {
@@ -105,15 +122,32 @@ bool Empleado::agregarEmpleadoNuevo()
         QString nombre = agregar.nombre();
         QString apellido = agregar.apellido();
         int dni = agregar.dni();
+        QString direccion = agregar.direccion();
         int telefono = agregar.telefono();
         int idEmpleado = agregar.idEmpleado();
 
-        //Validamos que todos los campos esten llenos
-        if (nombre.isEmpty() || apellido.isEmpty() || dni == false || telefono == false || idEmpleado == false){
-            QMessageBox::warning(this, "Error", "Error al cargar empleado");
+        // Verificar que el dni o el id no sea duplicado
+        if (buscarEmpleado(idEmpleado) != nullptr){
+            QMessageBox::warning(this, "Error", "Ya existe un empleado con ese DNI o ID");
+            return false;  // No se agrega el empleado si ya existe
+        }
+
+        // Para un cartel si hay ingresos no validos
+        QString errores;
+        if (nombre.isEmpty()) errores += "El nombre esta vacio\n";
+        if (apellido.isEmpty()) errores += "El apellido esta vacio\n";
+        if (dni == -1) errores += "El DNI es invalido\n";
+        if (direccion.isEmpty()) errores += "La direccion esta vacio\n";
+        if (telefono == -1) errores += "El teléfono es invalido\n";
+        if (idEmpleado == -1) errores += "El ID de empleado es invalido\n";
+
+        // Si hay errores,se muestra un solo mensaje con todos los errores
+        if (!errores.isEmpty()) {
+            // Muestra todos los errores en un único mensaje
+            QMessageBox::warning(this, "Error", "Errores en los campos:\n" + errores);
             return false;
         } else {
-           // Empleado* empleado = new Empleado(nombre, apellido, dni, telegono, idEmpleado);
+           // Empleado* empleado = new Empleado(nombre, apellido, dni, direccion, telegono, idEmpleado);
             Empleado* empleado = new Empleado(idEmpleado);
 
            qDebug() << "idEmpleado:" << idEmpleado;
@@ -130,7 +164,7 @@ bool Empleado::agregarEmpleadoNuevo()
 // Metodo para eliminar empleados
 bool Empleado::eliminarEmpleado()
 {
-    qDebug() << "entro";
+    qDebug() << "entroEliminar";
 
     // Declaramos un iterador tipo persona para poder recorrer y eliminar la persona seleccionada
     QVector <Empleado*>::iterator it;
@@ -152,7 +186,6 @@ bool Empleado::eliminarEmpleado()
     for (it = vecEmpleados.begin(); it != vecEmpleados.end(); ){
 
         if (QString::number((*it)->getIdEmpleado()) == idEmpleadoSeleccionado) {
-        //if (idEmpleadoSeleccionado == QString::number(*it.id)) {
 
             // Libera la memoria asignada al empleado
             delete *it;
@@ -169,8 +202,6 @@ bool Empleado::eliminarEmpleado()
             ++it;
         }
     }
-
-    if (!seEncontro) QMessageBox::warning(this, "Error", "No se encontro la persona", QMessageBox::Ok);
 }
 
 // Metodo para modificar empleados
@@ -185,13 +216,13 @@ bool Empleado::modificarEmpleado()
         // tomamos el empleado de la fila selacciona
         Empleado* empleadoSeleccionado = vecEmpleados[filaSeleccionada];
 
+        // Llenar los datos en el formulario
+        //**  !! Llenar una vez que esten los atributos de persona !! **
+        agregar.llenarFormulario(empleadoSeleccionado->getIdEmpleado());
+
         int respuesta; // Para saber si se apreto ok o cancelar
 
         respuesta = agregar.exec(); // Se abre ventana
-
-        // Llenar los datos en el formulario
-        //Llenar una vez que esten los atributos de persona
-        agregar.llenarFormulario(empleadoSeleccionado->getIdEmpleado());
 
         // si se apreta cancelar, se sale del programa sino se toman los datos del formularioAgregar
         if(respuesta == QDialog::Rejected) return false;

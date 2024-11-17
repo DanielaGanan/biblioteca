@@ -25,6 +25,30 @@ void agregarEmpleado::on_buttonBox_rejected()
     reject(); // Para saber que se cerro
 }
 
+
+int agregarEmpleado::validarNumero(QLineEdit* num)
+{
+    // Tenemos el contenido del qline
+    QString texto = num->text();
+
+    // Para verificar que el texto se pudo convertir en un numero
+    bool esNumero;
+
+    int numero = texto.toInt(&esNumero);
+
+    // Verifica si el numero se pudo convertir y que sea positivo
+    if (esNumero && numero >= 0) {
+        qDebug () << "Se ingreso el numero: " << numero;
+        return numero;
+
+    } else {
+        qDebug() << "Numero no valido";
+
+        num->clear(); //Limpiar qline
+        return -1;
+    }
+}
+
 QString agregarEmpleado::nombre()
 {
     qDebug() << "Retorna nombre:" << ui->nombreEmpleado->text();
@@ -45,80 +69,18 @@ QString agregarEmpleado::direccion()
 
 int agregarEmpleado::dni()
 {
-    // Tenemos el contenido del qline
-    QString texto = ui->dniEmpleado->text();
-
-    // Para verificar que el texto se pudo convertir en un numero
-    bool siEsNumero;
-
-    // convierte el texto a un entero
-    int dni = texto.toInt(&siEsNumero);
-
-    // Verifica si el numero se pudo convertir y que sea positivo
-    if (siEsNumero && dni >= 0) {
-        qDebug () << "Se ingreso el numero: " << dni;
-
-        return dni;
-
-    } else {
-        QMessageBox::warning(this, "Numero no valida", "DNI debe ser un numero", QMessageBox::Ok);
-        qDebug() << "Numero no valido";
-        ui->dniEmpleado->clear();
-        return -1;
-    }
+    return validarNumero(ui->dniEmpleado);
 }
 
 int agregarEmpleado::telefono()
 {
-    // Tenemos el contenido del qline
-    QString texto = ui->telefonoEmpleado->text();
-
-    // Para verificar que el texto se pudo convertir en un numero
-    bool siEsNumero;
-
-    // convierte el texto a un entero
-    int telefono = texto.toInt(&siEsNumero);
-
-    // Verifica si el numero se pudo convertir y que sea positivo
-    if (siEsNumero && telefono >= 0) {
-        qDebug () << "Se ingreso el numero: " << telefono;
-
-        return telefono;
-
-    } else {
-        QMessageBox::warning(this, "Numero no valida", "Telefono debe ser un numero", QMessageBox::Ok);
-        qDebug() << "Numero no valido";
-        ui->telefonoEmpleado->clear();
-        return false;
-    }
+    return validarNumero(ui->telefonoEmpleado);
 }
 
 
 int agregarEmpleado::idEmpleado()
 {
-    // Tenemos el contenido del qline
-    QString texto = ui->idEmpleado->text();
-
-    qDebug () << "Se ingreso el id: " << ui->idEmpleado->text();
-
-    // Para verificar que el texto se pudo convertir en un numero
-    bool siEsNumero;
-
-    // convierte el texto a un entero
-    int idEmpleado = texto.toInt(&siEsNumero);
-
-    // Verifica si el numero se pudo convertir y que sea positivo
-    if (siEsNumero && idEmpleado >= 0) {
-        qDebug () << "Se ingreso el numero: " << idEmpleado;
-
-        return idEmpleado;
-
-    } else {
-        QMessageBox::warning(this, "Numero no valida", "Id Empleado debe ser un numero", QMessageBox::Ok);
-        qDebug() << "Numero no valido";
-        ui->idEmpleado->clear();
-        return false;
-    }
+    return validarNumero(ui->idEmpleado);
 }
 
 
@@ -144,8 +106,6 @@ void agregarEmpleado::llenarFormulario(int idEmpleado)
     ui->direccionEmpleado->setText(direccion);
     ui->telefonoEmpleado->setText(telefono);  */
     ui->idEmpleado->setText(QString::number(idEmpleado));
-
-
 }
 
 

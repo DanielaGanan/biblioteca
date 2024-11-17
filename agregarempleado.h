@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "QDebug"
 #include "QMessageBox"
+#include <QLineEdit>
 
 namespace Ui {
 class agregarEmpleado;
@@ -35,6 +36,7 @@ public slots:
                           QString telefono, int idEmpleado); */
 
     void llenarFormulario(int idEmpleado);
+    int validarNumero(QLineEdit* num);
 
 private:
     Ui::agregarEmpleado *ui;
