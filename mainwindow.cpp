@@ -10,11 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect (ui->abrirVentanaLibros, &QPushButton::clicked, this, &MainWindow::on_abrirVentanaLibros_clicked);
-    connect (ui->abrirVentanaUsuarios, &QPushButton::clicked, this, &MainWindow::on_abrirVentanaUsuarios_clicked);
-    connect (ui->abrirVentanaPrestamos, &QPushButton::clicked, this, &MainWindow::on_abrirVentanaPrestamos_clicked);
-    connect (ui->abrirVentanaDevoluciones, &QPushButton::clicked, this, &MainWindow::on_abrirVentanaDevoluciones_clicked);
-    connect (ui->abrirVentanaPagos, &QPushButton::clicked, this, &MainWindow::on_abrirVentanaPagos_clicked);
+
 }
 
 MainWindow::~MainWindow()
