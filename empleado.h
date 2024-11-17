@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "QDebug"
+#include "vector"
+#include "agregarempleado.h"
 //#include "persona.h"
 
 namespace Ui {
@@ -35,13 +37,16 @@ public:
  //   void setContrasenia(QString contrasenia);
 
 private slots:
-    bool agregarEmpleado();
+    bool agregarEmpleadoNuevo();
     bool eliminarEmpleado();
     bool modificarEmpleado();
+    void mostrarEmpleados();
 
 private:
     Ui::Empleado *ui;
     int idEmpleado;
+    agregarEmpleado agregar;
+    QVector <Empleado*> vecEmpleados;
 //  QString usuario;
   //  QString contrasenia;
 };

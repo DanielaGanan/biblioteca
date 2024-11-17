@@ -31,6 +31,10 @@ public slots:
     int idEmpleado();
 
     void limpiarPantalla();
+   /* void llenarFormulario(QString nombre, QString apellido, QString dni, QString direccion,
+                          QString telefono, int idEmpleado); */
+
+    void llenarFormulario(int idEmpleado);
 
 private:
     Ui::agregarEmpleado *ui;

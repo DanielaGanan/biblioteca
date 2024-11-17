@@ -61,7 +61,7 @@ int agregarEmpleado::dni()
         return dni;
 
     } else {
-        QMessageBox::warning(this, "Numero no valida", "Debe ser un numero positivo", QMessageBox::Ok);
+        QMessageBox::warning(this, "Numero no valida", "DNI debe ser un numero", QMessageBox::Ok);
         qDebug() << "Numero no valido";
         ui->dniEmpleado->clear();
         return -1;
@@ -86,10 +86,10 @@ int agregarEmpleado::telefono()
         return telefono;
 
     } else {
-        QMessageBox::warning(this, "Numero no valida", "Debe ser un numero positivo", QMessageBox::Ok);
+        QMessageBox::warning(this, "Numero no valida", "Telefono debe ser un numero", QMessageBox::Ok);
         qDebug() << "Numero no valido";
         ui->telefonoEmpleado->clear();
-        return -1;
+        return false;
     }
 }
 
@@ -98,6 +98,8 @@ int agregarEmpleado::idEmpleado()
 {
     // Tenemos el contenido del qline
     QString texto = ui->idEmpleado->text();
+
+    qDebug () << "Se ingreso el id: " << ui->idEmpleado->text();
 
     // Para verificar que el texto se pudo convertir en un numero
     bool siEsNumero;
@@ -112,10 +114,10 @@ int agregarEmpleado::idEmpleado()
         return idEmpleado;
 
     } else {
-        QMessageBox::warning(this, "Numero no valida", "Debe ser un numero positivo", QMessageBox::Ok);
+        QMessageBox::warning(this, "Numero no valida", "Id Empleado debe ser un numero", QMessageBox::Ok);
         qDebug() << "Numero no valido";
         ui->idEmpleado->clear();
-        return -1;
+        return false;
     }
 }
 
@@ -130,7 +132,21 @@ void agregarEmpleado::limpiarPantalla()
     ui->telefonoEmpleado->clear();
 }
 
+// void agregarEmpleado::llenarFormulario(QString nombre, QString apellido, QString dni, QString direccion,
+//QString telefono, int idEmpleado);
 
+void agregarEmpleado::llenarFormulario(int idEmpleado)
+{
+
+/*    ui->nombreEmpleado->setText(nombre);
+    ui->apellidoEmpleado->setText(apellido);
+    ui->dniEmpleado->setText(dni);
+    ui->direccionEmpleado->setText(direccion);
+    ui->telefonoEmpleado->setText(telefono);  */
+    ui->idEmpleado->setText(QString::number(idEmpleado));
+
+
+}
 
 
 
