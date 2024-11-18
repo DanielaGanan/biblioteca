@@ -5,6 +5,11 @@
 #include <libro.h>
 #include <tablalibros.h>
 #include <agregarnuevolibro.h>
+#include <socio.h>
+#include <usuario.h>
+
+class InicioSesion;
+class VentanaUsuarios;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,6 +24,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios);
+    void setVentanaInicioSesion(InicioSesion *inicioSesion);
+
+    static QList<Usuario> usuarios;
+    static QList<Socio> socios;
 
 private slots:
     // Abrir ventana de libros
@@ -28,7 +38,11 @@ private slots:
     void on_abrirVentanaDevoluciones_clicked();
     void on_abrirVentanaPagos_clicked();
 
+    void on_cerrarSesion();
+
 private:
     Ui::MainWindow *ui;
+    VentanaUsuarios *ventanaUsuarios;
+    InicioSesion *inicioSesion;
 };
 #endif // MAINWINDOW_H

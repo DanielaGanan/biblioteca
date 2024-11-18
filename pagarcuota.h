@@ -2,7 +2,7 @@
 #define PAGARCUOTA_H
 
 #include <QWidget>
-#include "socio.h"
+// #include "socio.h"
 #include <QDate>
 
 namespace Ui {
@@ -39,7 +39,7 @@ private:
     int idCuotaPrestamo;
     float cuota;
     QDate fecha;
-    Socio socio;
+    // Socio socio;
 };
 
 #endif // PAGARCUOTA_H

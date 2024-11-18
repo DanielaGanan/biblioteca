@@ -1,0 +1,44 @@
+#include "iniciosesion.h"
+#include "ui_iniciosesion.h"
+#include "mainwindow.h"
+
+InicioSesion::InicioSesion(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::InicioSesion)
+{
+    ui->setupUi(this);
+    this->setWindowTitle("Iniciar sesion - Biblioteca");
+
+    connect(ui->botInicioSesion, &QPushButton::clicked, this, &InicioSesion::on_iniciarSesion);
+}
+
+InicioSesion::~InicioSesion()
+{
+    delete ui;
+}
+
+void InicioSesion::setVentanaMainWindow(MainWindow *mainWindow) {
+    this->mainWindow = mainWindow;
+}
+
+void InicioSesion::on_iniciarSesion() {
+    QString nombreUsuario = ui->usuarioLineEdit->text();
+    QString contraseña = ui->contrasenaLineEdit->text();
+
+    if (nombreUsuario.isEmpty() || contraseña.isEmpty()) {
+        QMessageBox::warning(this, "Advertencia", "Por favor ingrese un usuario y una contraseña.");
+        return;
+    }
+
+    for (const Usuario& usuario : mainWindow->usuarios) {
+        if (usuario.obtenerNombreUsuario() == nombreUsuario && usuario.obtenerContraseña() == contraseña) {
+            QMessageBox::information(this, "Login exitoso", "¡Bienvenido!");
+            this->close();
+            mainWindow->show();
+            ui->usuarioLineEdit->clear();
+            ui->contrasenaLineEdit->clear();
+            return;
+        }
+    }
+    QMessageBox::warning(this, "Error de inicio de sesión", "El usuario o contraseña son inválidos.");
+}
