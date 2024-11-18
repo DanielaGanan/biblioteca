@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     agregarempleado.cpp \
     agregarnuevolibro.cpp \
+    agregarprestamo.cpp \
     empleado.cpp \
     libro.cpp \
     main.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 HEADERS += \
     agregarempleado.h \
     agregarnuevolibro.h \
+    agregarprestamo.h \
     empleado.h \
     libro.h \
     mainwindow.h \
@@ -36,6 +38,7 @@ HEADERS += \
 FORMS += \
     agregarempleado.ui \
     agregarnuevolibro.ui \
+    agregarprestamo.ui \
     empleado.ui \
     mainwindow.ui \
     pagarcuota.ui \
