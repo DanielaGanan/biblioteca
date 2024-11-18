@@ -6,6 +6,13 @@ Prestamo::Prestamo(QWidget *parent)
     , ui(new Ui::Prestamo)
 {
     ui->setupUi(this);
+
+    this->setWindowTitle("Formulario Prestamo");
+/*
+    connect(this, ui->botonAgregarPrestamo, &QPushButton::clicked, this, &Prestamo::solicitarLibro);
+    connect(this, ui->botonModificarPrestamo, &QPushButton::clicked, this, &Prestamo::modificarPrestamo);
+    connect(this, ui->botonEliminarPrestamo, &QPushButton::clicked, this, &Prestamo::devolverLibro);
+*/
 }
 
 /*Prestamo::Prestamo(int idPrestamo, Libro libro,
@@ -117,6 +124,31 @@ void Prestamo::setFechaDevolucion(QDate fechaDevolucion)
     this->fechaDevolucion = fechaDevolucion;
 }
 
+/*
+void Prestamo::mostrarPrestamo()
+{
+    // limpia la tabla
+    ui->tablaPrestamo->setRowCount(0);
+
+    // Recorre el vector y muestra cada prestamo en una nueva fila en la tabla
+    for (const Prestamo* prestamo : prestamos) {
+
+        // almacenamos la cantidad de filas
+        int row = ui->tablaPrestamo->rowCount();
+
+        ui->tablaEmpleado->insertRow(row);
+
+        // Agrega en la fila los datos que corresponden en la columna
+        ui->tablaPrestamo->setItem(row, 0, new QTableWidgetItem(QString::number(prestamo->idPrestamo));
+    //    ui->tablaPrestamo->setItem(row, 1, new QTableWidgetItem(prestamo->libro.getNombre);
+        ui->tablaPrestamo->setItem(row, 2, new QTableWidgetItem(QString::number(prestamo->cantidad));
+        ui->tablaPrestamo->setItem(row, 3, new QTableWidgetItem(prestamo->empleados.getEmpleado);
+        ui->tablaPrestamo->setItem(row, 4, new QTableWidgetItem(prestamo->getFechaPrestamo());
+        ui->tablaPrestamo->setItem(row, 5, new QTableWidgetItem(prestamo->getFechaDevolucion());
+    }
+}*/
+
+
 // Para buscar los prestamos a un socio
 /*QVector Prestamo::buscarPrestamoSocio(Socio socio)
 {
@@ -125,7 +157,7 @@ void Prestamo::setFechaDevolucion(QDate fechaDevolucion)
 
 //Agregar o solicitar un prestamo
 bool Prestamo::solicitarLibro()
-{
+{    
     return false;
 }
 

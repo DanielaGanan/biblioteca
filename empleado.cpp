@@ -31,7 +31,6 @@ Empleado::Empleado(QWidget *parent)
     :QWidget(parent)
     , ui(new Ui::Empleado)
 
-
 {
     ui->setupUi(this);
 
@@ -47,11 +46,7 @@ Empleado::Empleado(QWidget *parent)
 
 Empleado::~Empleado()
 {
-    // Liberamos la memoria de los empleados almacenados en el QVector
-    for (auto empleado : vecEmpleados) {
-        delete empleado;  // Liberamos la memoria del puntero
-    }
-    //delete ui;
+    delete ui;
 }
 
 
@@ -93,9 +88,9 @@ void Empleado::setContrasenia(QString contrasenia)
 // Empleado* Empleado::buscarEmpleado(int dni, int idEmpleado)
 Empleado* Empleado::buscarEmpleado(int idEmpleado)
 {
-    for (Empleado* empleado : vecEmpleados){
+    for (Empleado* empleado : listaEmpleados){
      //   if (empleado->idEmpleado = idEmpleado || empleado->dni = dni)
-        if (empleado->idEmpleado == idEmpleado){
+        if (empleado->getIdEmpleado() == idEmpleado){
             return empleado;
         }
     }
@@ -153,7 +148,7 @@ bool Empleado::agregarEmpleadoNuevo()
            qDebug() << "idEmpleado:" << idEmpleado;
 
            // se agrega la persona al vector
-           vecEmpleados.push_back(empleado);
+           listaEmpleados.push_back(empleado);
 
            // Llama a la funcion mostrarPersonas en la tabla
            mostrarEmpleados();
@@ -167,7 +162,7 @@ bool Empleado::eliminarEmpleado()
     qDebug() << "entroEliminar";
 
     // Declaramos un iterador tipo persona para poder recorrer y eliminar la persona seleccionada
-    QVector <Empleado*>::iterator it;
+    QList <Empleado*>::iterator it;
 
     // para obtener la fila seleccionada
     int filaSeleccionada = ui->tablaEmpleado->currentRow();
@@ -183,15 +178,12 @@ bool Empleado::eliminarEmpleado()
 
     bool seEncontro = false;
 
-    for (it = vecEmpleados.begin(); it != vecEmpleados.end(); ){
+    for (it = listaEmpleados.begin(); it != listaEmpleados.end(); ){
 
         if (QString::number((*it)->getIdEmpleado()) == idEmpleadoSeleccionado) {
 
-            // Libera la memoria asignada al empleado
-            delete *it;
-
             // lo elimina del vector
-            it = vecEmpleados.erase(it);
+            it = listaEmpleados.erase(it);
 
             // lo elimina de la tabla
             ui->tablaEmpleado->removeRow(filaSeleccionada);
@@ -214,7 +206,7 @@ bool Empleado::modificarEmpleado()
     if (filaSeleccionada >= 0) {
 
         // tomamos el empleado de la fila selacciona
-        Empleado* empleadoSeleccionado = vecEmpleados[filaSeleccionada];
+        Empleado* empleadoSeleccionado = listaEmpleados[filaSeleccionada];
 
         // Llenar los datos en el formulario
         //**  !! Llenar una vez que esten los atributos de persona !! **
@@ -253,7 +245,7 @@ void Empleado::mostrarEmpleados()
     ui->tablaEmpleado->setRowCount(0);
 
     // Recorre el vector y muestra cada persona en una nueva fila en la tabla
-    for (const Empleado* empleado : vecEmpleados) {
+    for (const Empleado* empleado : listaEmpleados) {
 
         // almacenamos la cantidad de filas
         int row = ui->tablaEmpleado->rowCount();

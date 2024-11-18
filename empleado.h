@@ -3,8 +3,9 @@
 
 #include <QWidget>
 #include "QDebug"
-#include "vector"
+//#include "QVector"
 #include "agregarempleado.h"
+#include "QList"
 //#include "persona.h"
 
 namespace Ui {
@@ -48,7 +49,7 @@ private:
     Ui::Empleado *ui;
     int idEmpleado;
     agregarEmpleado agregar;
-    QVector <Empleado*> vecEmpleados;
+    QList <Empleado*> listaEmpleados;
 //  QString usuario;
   //  QString contrasenia;
 };

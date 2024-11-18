@@ -49,11 +49,6 @@ int agregarPrestamo::validarNumero(QLineEdit* num)
     }
 }
 
-int agregarPrestamo::idPrestamo()
-{
-    return validarNumero(ui->idPrestamoQLine);
-}
-
 
 void agregarPrestamo::llenarFormulario()
 {
@@ -74,7 +69,34 @@ void agregarPrestamo::llenarFormulario()
 }
 
 
+int agregarPrestamo::idPrestamo()
+{
+    return validarNumero(ui->idPrestamoQLine);
+}
+/*
+libro agregarPrestamo::libros()
+{
+    QString titulo = ui->libroComboBox->currentText();
 
+    for ( libro libr : libros){
+        if(titulo == libr.getTitulo()) return libr;
+    }
+
+    return nullptr;
+}
+*/
+/*
+Empleado agregarPrestamo::empleado()
+{
+    QString dni = ui->empleadoComboBox->currentText();
+
+    for ( Empleado empl : empleados ){
+        if(dni == empl.getIdEmpleado()) return libr;
+    }
+
+    return nullptr;
+}
+*/
 
 
 

@@ -8,6 +8,7 @@
 #include "empleado.h"
 #include <QDate>
 #include<vector>
+#include "agregarprestamo.h"
 
 
 namespace Ui {
@@ -48,10 +49,11 @@ public:
     void setFechaDevolucion(QDate fechaDevolucion);
 
   //  QVector buscarPrestamoSocio(Socio socio); // Para buscar los prestamos a un socio
+    void mostrarPrestamo();
+private slots:
     bool solicitarLibro();  //Agregar o solicitar un prestamo
     bool devolverLibro();   //Devuelve un libro o libros
     bool modificarPrestamo(); // Para modificar un prestamo
-private slots:
 
 
 private:
@@ -63,6 +65,8 @@ private:
     QVector <Empleado*> empleados;
     QDate fechaPrestamo;
     QDate fechaDevolucion;
+    agregarPrestamo agregar;
+    QVector <Prestamo*> prestamos;
 
 };
 
