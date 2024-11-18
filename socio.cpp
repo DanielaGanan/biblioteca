@@ -1,42 +1,16 @@
 #include "socio.h"
-//#include "ui_socio.h"
+#include "persona.h"
 
-Socio::Socio()
-{
-    //ui->setupUi(this);
-    //this->setWindowTitle("Socios");
+Socio::Socio(const QString& nombre, const QString& apellido, const QString& libroPrestado) : Persona(nombre, apellido) {
+    this->establecerLibroPrestado(libroPrestado);
 }
 
-Socio::~Socio()
-{
-    //delete ui;
-}
-/*
-//Getters
-int Socio::getIdSocio() const
-{
-    return idSocio;
+Socio::~Socio() {}
+
+QString Socio::obtenerLibroPrestado() const {
+    return libroPrestado;
 }
 
-bool Socio::getEstado() const
-{
-    return estado;
+void Socio::establecerLibroPrestado(QString libro) {
+    this->libroPrestado= libro;
 }
-
-//Setters
-void Socio::setIdSocio(const int idSocio)
-{
-    this->idSocio = idSocio;
-}
-
-void Socio::setEstado(const bool estado)
-{
-    this->estado = estado;
-}
-
-//Métodos de acciones en el formulario
-bool Socio::consultarEstado()
-{
-
-}
-*/

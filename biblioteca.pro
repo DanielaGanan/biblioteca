@@ -10,7 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     agregarnuevolibro.cpp \
-    empleado.cpp \
+    formulariousuario.cpp \
+    iniciosesion.cpp \
     libro.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -18,26 +19,33 @@ SOURCES += \
     persona.cpp \
     prestamo.cpp \
     socio.cpp \
-    tablalibros.cpp
+    tablalibros.cpp \
+    usuario.cpp \
+    ventanausuarios.cpp
 
 HEADERS += \
     agregarnuevolibro.h \
-    empleado.h \
+    formulariousuario.h \
+    iniciosesion.h \
     libro.h \
     mainwindow.h \
     pagarcuota.h \
     persona.h \
     prestamo.h \
     socio.h \
-    tablalibros.h
+    tablalibros.h \
+    usuario.h \
+    ventanausuarios.h
 
 FORMS += \
     agregarnuevolibro.ui \
-    empleado.ui \
+    formulariousuario.ui \
+    iniciosesion.ui \
     mainwindow.ui \
     pagarcuota.ui \
     prestamo.ui \
-    tablalibros.ui
+    tablalibros.ui \
+    ventanausuarios.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
