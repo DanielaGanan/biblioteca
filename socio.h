@@ -6,14 +6,23 @@
 class Socio : public Persona
 {
 public:
-    Socio(const QString& nombre, const QString& apellido, const QString& libroPrestado);
+    Socio(const QString& nombre,
+          const QString& apellido,
+          const int& dni,
+          const QString& direccion,
+          const QString& telefono,
+          const QString& estado
+          );
     ~Socio();
-    QString obtenerLibroPrestado() const;
-    void establecerLibroPrestado(QString libro);
+
+    //Getters
+    QString getEstadoSocio() const;
+
+    //Setters
+    void setEstadoSocio(const QString estado);
 
 private:
-    // QList<Libro> librosPrestados = [];
-    QString libroPrestado;
+    QString EstadoSocio;
 };
 
 

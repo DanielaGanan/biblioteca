@@ -1,6 +1,13 @@
 #include "usuario.h"
 
-Usuario::Usuario(const QString& nombre, const QString& apellido, const QString& nombreUsuario, const QString& contraseña) : Persona(nombre, apellido) {
+Usuario::Usuario(const QString& nombre,
+                 const QString& apellido,
+                 const int& dni,
+                 const QString& direccion,
+                 const QString& telefono,
+                 const QString& nombreUsuario,
+                 const QString& contraseña)
+    : Persona(nombre, apellido, dni, direccion, telefono) {
     establecerNombreUsuario(nombreUsuario);
     establecerContraseña(contraseña);
 }

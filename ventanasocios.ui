@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VentanaSocios</class>
+ <widget class="QWidget" name="VentanaSocios">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>583</width>
+    <height>443</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="lbBuscar">
+         <property name="text">
+          <string>Buscar:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtBuscar"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="lbBuscarPor">
+         <property name="text">
+          <string>Buscar por:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbNombre">
+         <property name="text">
+          <string>Nombre</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbApellido">
+         <property name="text">
+          <string>Apellido</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbDni">
+         <property name="text">
+          <string>DNI</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbEstado">
+         <property name="text">
+          <string>Estado</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="tbSocios">
+       <column>
+        <property name="text">
+         <string>Nombre</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Apellido</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>DNI</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Dirección</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Estado</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="btnAgregar">
+         <property name="text">
+          <string>Agregar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnModificar">
+         <property name="text">
+          <string>Modificar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnEliminar">
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCerrar">
+       <property name="text">
+        <string>Cerrar</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -9,6 +9,9 @@ class Usuario : public Persona
 public:
     Usuario(const QString& nombre = "",
             const QString& apellido = "",
+            const int& dni = 0,
+            const QString& direccion = "",
+            const QString& telefono = "",
             const QString& nombreUsuario = "",
             const QString& contraseña = ""
             );

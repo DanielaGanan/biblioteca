@@ -8,15 +8,27 @@ class Persona
 protected:
     QString Nombre;
     QString Apellido;
+    int Dni;
+    QString Direccion;
+    QString Telefono;
 
 public:
-    Persona(QString nombre, QString apellido);
+    Persona(QString nombre, QString apellido, int dni, QString direccion, QString telefono);
     ~Persona();
 
+    //Getters
     QString obtenerNombre() const;
-    void establecerNombre(QString nombre);
     QString obtenerApellido() const;
+    int obtenerDni() const;
+    QString obtenerDireccion() const;
+    QString obtenerTelefono() const;
+
+    //Setters
+    void establecerNombre(QString nombre);
     void establecerApellido(QString apellido);
+    void establecerDni(int dni);
+    void establecerDireccion(QString direccion);
+    void establecerTelefono(QString telefono);
 };
 
 #endif // PERSONA_H

@@ -21,6 +21,7 @@ SOURCES += \
     socio.cpp \
     tablalibros.cpp \
     usuario.cpp \
+    ventanasocios.cpp \
     ventanausuarios.cpp
 
 HEADERS += \
@@ -35,6 +36,7 @@ HEADERS += \
     socio.h \
     tablalibros.h \
     usuario.h \
+    ventanasocios.h \
     ventanausuarios.h
 
 FORMS += \
@@ -45,6 +47,7 @@ FORMS += \
     pagarcuota.ui \
     prestamo.ui \
     tablalibros.ui \
+    ventanasocios.ui \
     ventanausuarios.ui
 
 # Default rules for deployment.
