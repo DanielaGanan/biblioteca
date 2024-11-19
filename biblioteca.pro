@@ -24,6 +24,7 @@ agregarempleado.cpp \
     socio.cpp \
     tablalibros.cpp \
     usuario.cpp \
+    ventanasocios.cpp \
     ventanausuarios.cpp
 
 HEADERS += \
@@ -41,6 +42,7 @@ agregarempleado.h \
     socio.h \
     tablalibros.h \
     usuario.h \
+    ventanasocios.h \
     ventanausuarios.h
     ventanausuarios.h
 
@@ -55,6 +57,7 @@ agregarempleado.ui \
     pagarcuota.ui \
     prestamo.ui \
     tablalibros.ui \
+    ventanasocios.ui \
     ventanausuarios.ui
 
 # Default rules for deployment.
