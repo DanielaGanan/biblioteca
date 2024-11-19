@@ -1,16 +1,26 @@
 #include "socio.h"
 #include "persona.h"
 
-Socio::Socio(const QString& nombre, const QString& apellido, const QString& libroPrestado) : Persona(nombre, apellido) {
-    this->establecerLibroPrestado(libroPrestado);
+Socio::Socio(const QString& nombre,
+             const QString& apellido,
+             const int& dni,
+             const QString& direccion,
+             const QString& telefono,
+             const QString& estado)
+    : Persona(nombre, apellido, dni, direccion, telefono) {
+    this->setEstadoSocio(estado);
 }
 
 Socio::~Socio() {}
 
-QString Socio::obtenerLibroPrestado() const {
-    return libroPrestado;
+//Getters
+QString Socio::getEstadoSocio() const
+{
+    return EstadoSocio;
 }
 
-void Socio::establecerLibroPrestado(QString libro) {
-    this->libroPrestado= libro;
+//Setters
+void Socio::setEstadoSocio(QString estado)
+{
+    this->EstadoSocio = estado;
 }

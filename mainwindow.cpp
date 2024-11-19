@@ -4,9 +4,9 @@
 #include "prestamo.h"
 #include "ui_mainwindow.h"
 #include "ventanausuarios.h"
+#include "ventanasocios.h"
 
 QList<Usuario> MainWindow::usuarios;
-QList<Socio> MainWindow::socios;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -54,9 +54,13 @@ void MainWindow::on_abrirVentanaPagos_clicked()
     PagarCuota *ventana = new PagarCuota();
     ventana->show();
 }
+void MainWindow::on_abrirVentanaSocios_clicked()
+{
+    VentanaSocios *ventana = new VentanaSocios();
+    ventana->show();
+    //ventanaSocios->show();
+}
 
 void MainWindow::setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios) {
     this->ventanaUsuarios = ventanaUsuarios;
 }
-
-

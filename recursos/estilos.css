@@ -1,12 +1,4 @@
-/* Estilo general para la ventana principal */
-* {
-    display: flex;
-	width: auto;
-height: auto;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-}
+
 QMainWindow {
     background-color: #f4f4f9;  /* Color de fondo suave */
     border-radius: 10px; /* Bordes redondeados para la ventana */
@@ -46,6 +38,7 @@ QPushButton:hover {
 
 /* Estilo para los QLineEdit (campos de texto) */
 QLineEdit {
+    color: black;
     font-size: 14px;
     padding: 10px;
     background-color: #f2f2f2;  /* Fondo gris claro */
@@ -61,24 +54,22 @@ QLineEdit:focus {
 
 /* Estilo para la QTableWidget (tabla) */
 QTableWidget {
-    width: 100%;
     font-size: 14px;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     background-color: #ffffff;  /* Fondo blanco */
     selection-background-color: #4CAF50;  /* Color de selección verde */
     gridline-color: #ddd;  /* Color de las líneas de la tabla */
 }
 
 /* Estilo para las cabeceras de la tabla */
-QHeaderView::section {
-    min-width: 30px; 
+QHeaderView::section { 
     height: 35px;
+    width: 35px;
     background-color: #4CAF50;
     color: white;
     font-weight: bold;
-    padding: 5px;
-    margin: 5px;
+    padding: 2px;
     border: none;
     border-radius: 5px;
 }
@@ -87,7 +78,7 @@ QHeaderView::section {
 QTableWidget::item {
     width: 150px;
     color: black;
-    padding: 10px;
+    padding: 2px;
     border-bottom: 1px solid #ddd;  /* Línea divisoria entre filas */
 }
 
@@ -102,10 +93,8 @@ QForm {
 
 /* Estilo para los QLabel (etiquetas de texto) */
 QLabel {
-    font-size: 14px;
-    color: #222222;  /* Texto gris oscuro */
-    height: 40px;
-    width: 50px;
+    font-size: 12px;
+    color: #fff; 
 }
 
 /* Estilo para los QScrollBar (barras de desplazamiento) */
@@ -121,5 +110,11 @@ QScrollBar::handle {
 
 QScrollBar::handle:hover {
     background-color: #45a049;  /* Cambio de color al pasar el ratón */
+}
+
+QMessage {
+font-family: impact;
+color: white;
+
 }
 

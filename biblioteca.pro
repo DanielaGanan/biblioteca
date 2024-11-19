@@ -9,7 +9,10 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+agregarempleado.cpp \
     agregarnuevolibro.cpp \
+    agregarprestamo.cpp \
+    empleado.cpp \
     formulariousuario.cpp \
     iniciosesion.cpp \
     libro.cpp \
@@ -21,10 +24,14 @@ SOURCES += \
     socio.cpp \
     tablalibros.cpp \
     usuario.cpp \
+    ventanasocios.cpp \
     ventanausuarios.cpp
 
 HEADERS += \
+agregarempleado.h \
     agregarnuevolibro.h \
+    agregarprestamo.h \
+    empleado.h \
     formulariousuario.h \
     iniciosesion.h \
     libro.h \
@@ -35,16 +42,22 @@ HEADERS += \
     socio.h \
     tablalibros.h \
     usuario.h \
+    ventanasocios.h \
+    ventanausuarios.h
     ventanausuarios.h
 
 FORMS += \
+agregarempleado.ui \
     agregarnuevolibro.ui \
+    agregarprestamo.ui \
+    empleado.ui \
     formulariousuario.ui \
     iniciosesion.ui \
     mainwindow.ui \
     pagarcuota.ui \
     prestamo.ui \
     tablalibros.ui \
+    ventanasocios.ui \
     ventanausuarios.ui
 
 # Default rules for deployment.

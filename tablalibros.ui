@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>tablaLibros</class>
  <widget class="QWidget" name="tablaLibros">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -82,8 +85,23 @@
     </property>
     <item row="0" column="0" colspan="2">
      <widget class="QTableWidget" name="tabla">
+      <property name="font">
+       <font>
+        <family>Impact</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true"/>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::WinPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <property name="lineWidth">
+       <number>0</number>
       </property>
       <property name="autoScrollMargin">
        <number>10</number>

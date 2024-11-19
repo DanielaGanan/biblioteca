@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Prestamo</class>
- <widget class="QWidget" name="Prestamo">
+ <class>Empleado</class>
+ <widget class="QWidget" name="Empleado">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>721</width>
-    <height>391</height>
+    <width>623</width>
+    <height>393</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>701</width>
+     <width>601</width>
      <height>371</height>
     </rect>
    </property>
@@ -27,7 +27,7 @@
      <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
     </property>
     <item row="1" column="2">
-     <widget class="QPushButton" name="botonEliminarPrestamo">
+     <widget class="QPushButton" name="botonEliminarEmpleado">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -46,7 +46,7 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="botonAgregarPrestamo">
+     <widget class="QPushButton" name="botonAgregarEmpleado">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -65,7 +65,7 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="botonModificarPrestamo">
+     <widget class="QPushButton" name="botonModificarEmpleado">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -90,7 +90,7 @@
      </widget>
     </item>
     <item row="0" column="0" colspan="3">
-     <widget class="QTableWidget" name="tablaPrestamo">
+     <widget class="QTableWidget" name="tablaEmpleado">
       <property name="autoScrollMargin">
        <number>10</number>
       </property>
@@ -108,37 +108,32 @@
       </attribute>
       <column>
        <property name="text">
-        <string>Id Prestamo</string>
+        <string>Nombre</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Libro</string>
+        <string>Apellido</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Socio</string>
+        <string>DNI</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Cantidad</string>
+        <string>Direccion</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Empleado</string>
+        <string>Telefono</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Fecha Prestamo</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Fecha Devolución</string>
+        <string>ID Empleado</string>
        </property>
       </column>
      </widget>
