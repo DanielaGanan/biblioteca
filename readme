@@ -1,0 +1,49 @@
+NAMESPACE NINJAS - PROYECTO BIBLIOTECA -> GESTION DE LIBROS Y SOCIOS
+Este proyecto es una aplicación de escritorio para la gestión de una biblioteca. 
+Permite administrar libros, empleados, préstamos y pagos de cuotas mediante una interfaz gráfica sencilla e 
+intuitiva.
+
+---------------------------- Instalación -------------------------------------
+
+Paso 1: Descargar el instalador
+Descarga el archivo del instalador desde este enlace:
+
+--> Descargar Instalador <--
+
+Paso 2: Ejecutar el instalador
+Abre el archivo descargado (por ejemplo, ProyectoBiblioteca-Setup.exe).
+Sigue las instrucciones del asistente de instalación:
+Elige dónde quieres instalar la aplicación (se recomienda la opción predeterminada).
+Haz clic en "Siguiente" hasta completar la instalación.
+
+Paso 3: Abrir la aplicación
+Una vez instalado, busca el acceso directo en el escritorio o en el menú de inicio (en Windows).
+Haz doble clic para abrir la aplicación y empezar a usarla.
+
+---------------------------- Funcionalidades ----------------------------------
+
+El programa cuenta con las siguientes características principales:
+
+1. Gestión de libros
+
+Agregar: Permite añadir nuevos libros con detalles como título, autor, género, ISBN, editorial, año de publicación y stock.
+Modificar: Actualiza la información de un libro existente.
+Eliminar: Elimina un libro del sistema.
+Buscar y filtrar: Encuentra libros fácilmente mediante filtros por título, género, autor, editorial o ISBN.
+Visualización: Los libros se muestran en una tabla organizada y fácil de navegar.
+
+2. Gestión de empleados
+
+Permite registrar y actualizar datos de los empleados encargados de la biblioteca.
+
+3. Préstamos y devoluciones
+
+Registra préstamos de libros a los socios de la biblioteca.
+Gestiona devoluciones y verifica el estado de los libros.
+
+4. Pagos de cuotas
+
+Registra los pagos de las cuotas mensuales de los socios.
+Requisitos del sistema
+Sistema operativo: Windows 10/11, macOS o una distribución moderna de Linux.
+Dependencias adicionales: Todas las bibliotecas necesarias están incluidas en el instalador.

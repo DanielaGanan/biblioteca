@@ -9,10 +9,12 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    agregarempleado.cpp \
+agregarempleado.cpp \
     agregarnuevolibro.cpp \
     agregarprestamo.cpp \
     empleado.cpp \
+    formulariousuario.cpp \
+    iniciosesion.cpp \
     libro.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -20,30 +22,40 @@ SOURCES += \
     persona.cpp \
     prestamo.cpp \
     socio.cpp \
-    tablalibros.cpp
+    tablalibros.cpp \
+    usuario.cpp \
+    ventanausuarios.cpp
 
 HEADERS += \
-    agregarempleado.h \
+agregarempleado.h \
     agregarnuevolibro.h \
     agregarprestamo.h \
     empleado.h \
+    formulariousuario.h \
+    iniciosesion.h \
     libro.h \
     mainwindow.h \
     pagarcuota.h \
     persona.h \
     prestamo.h \
     socio.h \
-    tablalibros.h
+    tablalibros.h \
+    usuario.h \
+    ventanausuarios.h
+    ventanausuarios.h
 
 FORMS += \
-    agregarempleado.ui \
+agregarempleado.ui \
     agregarnuevolibro.ui \
     agregarprestamo.ui \
     empleado.ui \
+    formulariousuario.ui \
+    iniciosesion.ui \
     mainwindow.ui \
     pagarcuota.ui \
     prestamo.ui \
-    tablalibros.ui
+    tablalibros.ui \
+    ventanausuarios.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,16 +1,22 @@
 #ifndef PERSONA_H
 #define PERSONA_H
 
-//#include <stedio.h>
-#include <QObject>
+#include <QString>
 
-class Persona : public QObject
+class Persona
 {
-    Q_OBJECT
-public:
-    explicit Persona(QObject *parent = nullptr);
+protected:
+    QString Nombre;
+    QString Apellido;
 
-signals:
+public:
+    Persona(QString nombre, QString apellido);
+    ~Persona();
+
+    QString obtenerNombre() const;
+    void establecerNombre(QString nombre);
+    QString obtenerApellido() const;
+    void establecerApellido(QString apellido);
 };
 
 #endif // PERSONA_H
