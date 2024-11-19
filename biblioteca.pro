@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     agregarnuevolibro.cpp \
+    archivo.cpp \
     formulariousuario.cpp \
     iniciosesion.cpp \
     libro.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     agregarnuevolibro.h \
+    archivo.h \
     formulariousuario.h \
     iniciosesion.h \
     libro.h \
