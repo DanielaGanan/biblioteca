@@ -13,6 +13,7 @@ agregarempleado.cpp \
     agregarnuevolibro.cpp \
     agregarprestamo.cpp \
     empleado.cpp \
+    archivo.cpp \
     formulariousuario.cpp \
     iniciosesion.cpp \
     libro.cpp \
@@ -32,6 +33,7 @@ agregarempleado.h \
     agregarnuevolibro.h \
     agregarprestamo.h \
     empleado.h \
+    archivo.h \
     formulariousuario.h \
     iniciosesion.h \
     libro.h \
