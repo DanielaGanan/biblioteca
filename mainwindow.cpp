@@ -13,11 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-<<<<<<< HEAD
-
-=======
     connect(ui->botCerrarSesion, &QPushButton::clicked, this, &MainWindow::on_cerrarSesion);
->>>>>>> a6fb945adb1e8df371437104efd1eda750e51f72
+
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +22,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// ------------ INICIO DE SESION --------------------
+void MainWindow::setVentanaInicioSesion(InicioSesion *inicioSesion) {
+    this->inicioSesion = inicioSesion;
+}
+void MainWindow::on_cerrarSesion() {
+    inicioSesion->show();
+    this->close();
+}
+// ------------ MENU DE NAVEGACION ------------------
 void MainWindow::on_abrirVentanaLibros_clicked()
 {
     tablaLibros *ventana = new tablaLibros();
@@ -41,8 +47,7 @@ void MainWindow::on_abrirVentanaPrestamos_clicked()
 }
 void MainWindow::on_abrirVentanaDevoluciones_clicked()
 {
-    tablaLibros *ventana = new tablaLibros();
-    ventana->show();
+
 }
 void MainWindow::on_abrirVentanaPagos_clicked()
 {
@@ -54,11 +59,4 @@ void MainWindow::setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios) {
     this->ventanaUsuarios = ventanaUsuarios;
 }
 
-void MainWindow::setVentanaInicioSesion(InicioSesion *inicioSesion) {
-    this->inicioSesion = inicioSesion;
-}
-void MainWindow::on_cerrarSesion() {
-    inicioSesion->show();
-    this->close();
-}
 
