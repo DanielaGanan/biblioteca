@@ -19,7 +19,7 @@ public:
     explicit VentanaUsuarios(QWidget *parent = nullptr);
     ~VentanaUsuarios();
     void setVentanaMainWindow(MainWindow *mainWindow);
-    void llenarTabla(Usuario usuari);
+    void llenarTabla(const QList<Usuario> &usuari);
 
 private slots:
     void on_agregarUsuario();

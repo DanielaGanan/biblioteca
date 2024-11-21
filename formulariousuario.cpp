@@ -50,12 +50,8 @@ void FormularioUsuarios::on_aceptar() {
     usuario.establecerNombre(ui->line_nombre->text());
     usuario.establecerApellido(ui->line_apellido->text());
 
-    int dni = validarNumero(ui->line_dni);
-    if (dni == -1) {
-        QMessageBox::warning(this, "Advertencia", "El DNI debe ser un número positivo válido.");
-        return; // Detener el proceso de aceptar si el DNI es inválido.
-    }
-    usuario.establecerDni(dni);
+    if(validarNumero(ui->line_dni) == -1)      return; // retorna si el dni no es valido
+    usuario.establecerDni(validarNumero(ui->line_dni));
 
     usuario.establecerDireccion(ui->line_direccion->text());
     usuario.establecerTelefono(ui->line_telefono->text());
@@ -69,7 +65,13 @@ Usuario FormularioUsuarios::getUsuario() const {
     return usuario;
 }
 
-void FormularioUsuarios::setUsuarioEditar(QString user, QString pass) {
+void FormularioUsuarios::setUsuarioEditar(QString nom, QString apell, int dni, QString dire, QString tel, QString user, QString pass) {
+
+    ui->line_nombre->setText(nom);
+    ui->line_apellido->setText(apell);
+    ui->line_dni->setText(QString::number(dni));
+    ui->line_direccion->setText(dire);
+    ui->line_telefono->setText(tel);
     ui->line_nombreUsuario->setText(user);
     ui->line_contrasena->setText(pass);
 }

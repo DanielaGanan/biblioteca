@@ -23,7 +23,7 @@ VentanaUsuarios::VentanaUsuarios(QWidget *parent)
         "Apellido",
         "DNI",
         "Dirección",
-        "Telefono"
+        "Telefono",
         "Usuario",
         "Contraseña"
     });
@@ -57,6 +57,7 @@ VentanaUsuarios::~VentanaUsuarios()
 
 
 void VentanaUsuarios::on_agregarUsuario() {
+
     FormularioUsuarios *formulario = new FormularioUsuarios;
 
     formulario->setWindowTitle("Agregar usuario");
@@ -74,7 +75,7 @@ void VentanaUsuarios::on_agregarUsuario() {
             }
 
             if(mainWindow->usuarios[i].obtenerDni() == usuario.obtenerDni()) {
-                QMessageBox::warning(this, "Agregar usuario", "Este dni ya existe", QMessageBox::Ok);
+                QMessageBox::warning(this, "Agregar usuario", "Dni inválido", QMessageBox::Ok);
                 formulario->deleteLater();
                 return;
             }
@@ -82,42 +83,61 @@ void VentanaUsuarios::on_agregarUsuario() {
         // Si no existe, agregar el nuevo usuario
         mainWindow->usuarios.append(usuario);
 
-        llenarTabla(usuario);
+        llenarTabla(mainWindow->usuarios);
     }
     formulario->deleteLater();
 }
 
 void VentanaUsuarios::on_editarUsuario() {
     FormularioUsuarios *formulario = new FormularioUsuarios;
+
     formulario->setWindowTitle("Editar usuario");
 
     int indice = ui->tabla->currentRow();
+
     if (indice == -1) {
         QMessageBox::warning(this, "Advertencia", "Debe seleccionar una fila primero.", QMessageBox::Ok);
         return;
     }
 
+    // Para mostrar los datos en el formulario
+    QString nombre = mainWindow->usuarios[indice].obtenerNombre();
+    QString apellido = mainWindow->usuarios[indice].obtenerApellido();
+    int dni = mainWindow->usuarios[indice].obtenerDni();
+    QString direccion = mainWindow->usuarios[indice].obtenerDireccion();
+    QString telefono = mainWindow->usuarios[indice].obtenerTelefono();
     QString usuario = mainWindow->usuarios[indice].getNombreUsuario();
     QString contraseña = mainWindow->usuarios[indice].getContraseña();
-    formulario->setUsuarioEditar(usuario, contraseña);
 
+    formulario->setUsuarioEditar(nombre, apellido, dni, direccion, telefono, usuario, contraseña);
+
+    // si se acepta se agrega un usuario
     if (formulario->exec() == QDialog::Accepted) {
+
         Usuario usuario = formulario->getUsuario();
 
         for (int i = 0; i < mainWindow->usuarios.length(); i++){
-            if(mainWindow->usuarios[i].getNombreUsuario() == usuario.getNombreUsuario()) {
-                QMessageBox::warning(this, "Agregar usuario", "Este usuario ya existe", QMessageBox::Ok);
-                formulario->deleteLater();
-                return;
+            if (i != indice) { // Excluir el indice del usuario actual
+                if(mainWindow->usuarios[i].getNombreUsuario() == usuario.getNombreUsuario()) {
+                    QMessageBox::warning(this, "Agregar usuario", "Este usuario ya existe", QMessageBox::Ok);
+                    formulario->deleteLater();
+                    return;
+                }
+
+                if(mainWindow->usuarios[i].obtenerDni() == usuario.obtenerDni()) {
+                    QMessageBox::warning(this, "Agregar usuario", "Dni inválido", QMessageBox::Ok);
+                    formulario->deleteLater();
+                    return;
+                }
             }
         }
+
         mainWindow->usuarios[indice] = usuario;
 
-        ui->tabla->setItem(indice, 0, new QTableWidgetItem(usuario.getNombreUsuario()));
-        ui->tabla->setItem(indice, 1, new QTableWidgetItem(usuario.getContraseña()));
+        llenarTabla(mainWindow->usuarios);
     }
-    formulario->deleteLater();
 
+    formulario->deleteLater();
 }
 
 void VentanaUsuarios::on_eliminarUsuario() {
@@ -131,6 +151,7 @@ void VentanaUsuarios::on_eliminarUsuario() {
     advertencia = QMessageBox::critical(this, "Eliminar usuario", "¿Está seguro de que quiere eliminar este usuario?", QMessageBox::Yes|QMessageBox::No);
     if(advertencia == QMessageBox::Yes){
         ui->tabla->removeRow(indice);
+     //   llenarTabla(mainWindow->usuarios);
         mainWindow->usuarios.removeAt(indice);
     }
 }
@@ -143,16 +164,21 @@ void VentanaUsuarios::setVentanaMainWindow(MainWindow *mainWindow) {
     this->mainWindow = mainWindow;
 }
 
-void VentanaUsuarios::llenarTabla(Usuario usuari)
+void VentanaUsuarios::llenarTabla(const QList<Usuario>& usuarios)
 {
-    int fila = ui->tabla->rowCount();
-    ui->tabla->insertRow(fila);
+    // Limpiar la tabla antes de llenarla
+    ui->tabla->setRowCount(0);
 
-    ui->tabla->setItem(fila, 0, new QTableWidgetItem(usuari.obtenerNombre()));
-    ui->tabla->setItem(fila, 1, new QTableWidgetItem(usuari.obtenerApellido()));
-    ui->tabla->setItem(fila, 2, new QTableWidgetItem(QString::number(usuari.obtenerDni())));
-    ui->tabla->setItem(fila, 3, new QTableWidgetItem(usuari.obtenerDireccion()));
-    ui->tabla->setItem(fila, 4, new QTableWidgetItem(usuari.obtenerTelefono()));
-    ui->tabla->setItem(fila, 5, new QTableWidgetItem(usuari.getNombreUsuario()));
-    ui->tabla->setItem(fila, 6, new QTableWidgetItem(usuari.getContraseña()));
+    for (int i = 0; i < usuarios.length(); i++){
+
+        ui->tabla->insertRow(i);
+
+        ui->tabla->setItem(i, 0, new QTableWidgetItem(usuarios[i].obtenerNombre()));
+        ui->tabla->setItem(i, 1, new QTableWidgetItem(usuarios[i].obtenerApellido()));
+        ui->tabla->setItem(i, 2, new QTableWidgetItem(QString::number(usuarios[i].obtenerDni())));
+        ui->tabla->setItem(i, 3, new QTableWidgetItem(usuarios[i].obtenerDireccion()));
+        ui->tabla->setItem(i, 4, new QTableWidgetItem(usuarios[i].obtenerTelefono()));
+        ui->tabla->setItem(i, 5, new QTableWidgetItem(usuarios[i].getNombreUsuario()));
+        ui->tabla->setItem(i, 6, new QTableWidgetItem(usuarios[i].getContraseña()));
+    }
 }
