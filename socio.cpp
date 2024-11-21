@@ -19,8 +19,18 @@ QString Socio::getEstadoSocio() const
     return EstadoSocio;
 }
 
+QVector<QStringList> Socio::getSocios() const
+{
+    return Socios;
+}
+
 //Setters
 void Socio::setEstadoSocio(QString estado)
 {
     this->EstadoSocio = estado;
+}
+
+void Socio::setSocios(const QVector<QStringList> socios)
+{
+    this->Socios = socios;
 }

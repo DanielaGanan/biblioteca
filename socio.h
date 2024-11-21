@@ -2,6 +2,7 @@
 #define SOCIO_H
 
 #include "persona.h"
+#include <QVector>
 
 class Socio : public Persona
 {
@@ -17,12 +18,15 @@ public:
 
     //Getters
     QString getEstadoSocio() const;
+    QVector<QStringList> getSocios() const;
 
     //Setters
     void setEstadoSocio(const QString estado);
+    void setSocios(const QVector<QStringList> socios);
 
 private:
     QString EstadoSocio;
+    QVector<QStringList> Socios;
 };
 
 
