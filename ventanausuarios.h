@@ -19,12 +19,13 @@ public:
     explicit VentanaUsuarios(QWidget *parent = nullptr);
     ~VentanaUsuarios();
     void setVentanaMainWindow(MainWindow *mainWindow);
+    void llenarTabla(Usuario usuari);
 
 private slots:
-    void on_agregar();
-    void on_editar();
-    void on_eliminar();
-    void on_cerrar();
+    void on_agregarUsuario();
+    void on_editarUsuario();
+    void on_eliminarUsuario();
+    void on_cerrarUsuario();
 
 private:
     Ui::VentanaUsuarios *ui;

@@ -17,11 +17,13 @@ public:
             );
     ~Usuario();
 
-    QString obtenerNombreUsuario() const;
-    void establecerNombreUsuario(QString user);
+    // Getters
+    QString getNombreUsuario() const;
+    QString getContraseña() const;
 
-    QString obtenerContraseña() const;
-    void establecerContraseña(QString pass);
+    // Setters
+    void setNombreUsuario(QString user);
+    void setContraseña(QString pass);
 
 private:
     QString NombreUsuario;

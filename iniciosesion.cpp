@@ -31,7 +31,7 @@ void InicioSesion::on_iniciarSesion() {
     }
 
     for (const Usuario& usuario : mainWindow->usuarios) {
-        if (usuario.obtenerNombreUsuario() == nombreUsuario && usuario.obtenerContraseña() == contraseña) {
+        if (usuario.getNombreUsuario() == nombreUsuario && usuario.getContraseña() == contraseña) {
             QMessageBox::information(this, "Login exitoso", "¡Bienvenido!");
             this->close();
             mainWindow->show();

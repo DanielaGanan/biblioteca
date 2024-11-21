@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <usuario.h>
 #include <QMessageBox>
+#include "QLineEdit"
 
 namespace Ui {
 class FormularioUsuarios;
@@ -16,8 +17,9 @@ class FormularioUsuarios : public QDialog
 public:
     explicit FormularioUsuarios(QWidget *parent = nullptr);
     ~FormularioUsuarios();
-    Usuario obtenerUsuario() const;
-    void establecerUsuarioEditar(QString nombreUsuario, QString contraseña);
+    Usuario getUsuario() const;
+    void setUsuarioEditar(QString nombreUsuario, QString contraseña);
+    int validarNumero(QLineEdit* num);
 
 private slots:
     void on_aceptar();

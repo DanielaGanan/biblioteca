@@ -8,24 +8,24 @@ Usuario::Usuario(const QString& nombre,
                  const QString& nombreUsuario,
                  const QString& contraseña)
     : Persona(nombre, apellido, dni, direccion, telefono) {
-    establecerNombreUsuario(nombreUsuario);
-    establecerContraseña(contraseña);
+    setNombreUsuario(nombreUsuario);
+    setContraseña(contraseña);
 }
 
 Usuario::~Usuario() {}
 
-QString Usuario::obtenerNombreUsuario() const {
+QString Usuario::getNombreUsuario() const {
     return NombreUsuario;
 }
 
-void Usuario::establecerNombreUsuario(QString user) {
-    NombreUsuario = user;
-}
-
-QString Usuario::obtenerContraseña() const {
+QString Usuario::getContraseña() const {
     return Contraseña;
 }
 
-void Usuario::establecerContraseña(QString contraseña) {
+void Usuario::setNombreUsuario(QString user) {
+    NombreUsuario = user;
+}
+
+void Usuario::setContraseña(QString contraseña) {
     Contraseña = contraseña;
 }
