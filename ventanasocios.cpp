@@ -1,7 +1,7 @@
 #include "ventanasocios.h"
 #include "ui_ventanasocios.h"
 #include "archivo.h"
-#include "socio.h"
+#include "mainwindow.h"
 
 VentanaSocios::VentanaSocios(QWidget *parent)
     : QWidget(parent)
@@ -20,10 +20,6 @@ VentanaSocios::VentanaSocios(QWidget *parent)
     connect(ui->btnModificar, &QPushButton::clicked, this, &VentanaSocios::on_modificar);
     connect(ui->btnEliminar, &QPushButton::clicked, this, &VentanaSocios::on_eliminar);
     connect(ui->btnCerrar, &QPushButton::clicked, this, &VentanaSocios::on_cerrar);
-
-    Socio *socioD = new Socio("","",0,"","","");
-    this->cargarArchivo(socioD);
-    this->cargarTabla(socioD);
 }
 
 VentanaSocios::~VentanaSocios()
@@ -56,36 +52,38 @@ void VentanaSocios::on_cerrar()
 }
 
 //Método para cargar el archivo
-void VentanaSocios::cargarArchivo(Socio *socio)
+void VentanaSocios::cargarArchivo()
 {
-    qDebug() << "Cargando archivo";
     Archivo *archivo = new Archivo("socios.csv");
-    socio->setSocios(archivo->leerArchivo());
-    qDebug() << "Se cargo el archivo";
+    mainWindow->socios.append(archivo->leerArchivo());
 }
 
 //Método para cargar datos en la tabla
-void VentanaSocios::cargarTabla(Socio *socio)
+void VentanaSocios::actualizarTabla(QVector<QStringList> datos)
 {
     QTableWidget *tabla = ui->tbSocios;
-    QVector<QStringList> datosSocios;
-    datosSocios = socio->getSocios();
-    tabla->setRowCount(datosSocios.size());
-    qDebug() << datosSocios.size();
+    tabla->setRowCount(datos.size());
+    tabla->setRowCount(datos.size()-1);
+    tabla->setColumnCount(datos[0].size());
 
-    for (int fila = 0; fila < datosSocios.size(); fila++)
+    for (int fila = 0; fila < datos.size(); ++fila)
     {
         if (fila == 0)
         {
-            tabla->setHorizontalHeaderLabels(datosSocios[fila]);
+            tabla->setHorizontalHeaderLabels(datos[fila]);
         }
         else
         {
-            for (int columna = 0; columna < datosSocios[fila].size(); ++columna)
+            for (int columna = 0; columna < datos[fila].size(); ++columna)
             {
-                tabla->setItem(fila - 1, columna, new QTableWidgetItem(datosSocios[fila][columna]));
+                tabla->setItem(fila - 1, columna, new QTableWidgetItem(datos[fila][columna]));
             }
         }
     }
 
+}
+
+void VentanaSocios::setVentanaMainWindow(MainWindow *mainWindow)
+{
+    this->mainWindow = mainWindow;
 }

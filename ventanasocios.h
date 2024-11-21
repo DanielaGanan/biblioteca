@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "socio.h"
 
+class MainWindow;
+
 namespace Ui {
 class VentanaSocios;
 }
@@ -16,8 +18,10 @@ public:
     explicit VentanaSocios(QWidget *parent = nullptr);
     ~VentanaSocios();
 
-    void cargarArchivo(Socio *socio);
-    void cargarTabla(Socio *socio);
+    void setVentanaMainWindow(MainWindow *mainWindow);
+
+    void cargarArchivo();
+    void actualizarTabla(QVector<QStringList> datos);
 
 private slots:
     void on_agregar();
@@ -28,6 +32,7 @@ private slots:
 private:
     Ui::VentanaSocios *ui;
     Socio *socio;
+    MainWindow *mainWindow;
 };
 
 #endif // VENTANASOCIOS_H

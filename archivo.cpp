@@ -18,9 +18,7 @@ QVector<QStringList> Archivo::leerArchivo()
     while (!entrada.atEnd())
     {
         QString linea = entrada.readLine();
-        qDebug() << linea;
         QStringList columnas = linea.split(",");
-        qDebug() << columnas;
         datos.append(columnas);
     }
 

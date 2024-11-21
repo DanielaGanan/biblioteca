@@ -7,6 +7,7 @@
 #include "ventanasocios.h"
 
 QList<Usuario> MainWindow::usuarios;
+QVector<QStringList> MainWindow::socios;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -47,9 +48,8 @@ void MainWindow::on_abrirVentanaPagos_clicked()
 }
 void MainWindow::on_abrirVentanaSocios_clicked()
 {
-    VentanaSocios *ventana = new VentanaSocios();
-    ventana->show();
-    //ventanaSocios->show();
+    ventanaSocios->show();
+    this->ventanaSocios->actualizarTabla(this->socios);
 }
 
 void MainWindow::setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios) {
@@ -60,8 +60,12 @@ void MainWindow::setVentanaInicioSesion(InicioSesion *inicioSesion) {
     this->inicioSesion = inicioSesion;
 }
 
+void MainWindow::setVentanaSocios(VentanaSocios *ventanaSocios)
+{
+    this->ventanaSocios = ventanaSocios;
+}
+
 void MainWindow::on_cerrarSesion() {
     inicioSesion->show();
     this->close();
 }
-

@@ -70,36 +70,9 @@
      </item>
      <item>
       <widget class="QTableWidget" name="tbSocios">
-       <column>
-        <property name="text">
-         <string>Nombre</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Apellido</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>DNI</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Dirección</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Telefono</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Estado</string>
-        </property>
-       </column>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>

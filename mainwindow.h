@@ -9,6 +9,7 @@
 
 class InicioSesion;
 class VentanaUsuarios;
+class VentanaSocios;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,8 +26,12 @@ public:
     ~MainWindow();
     void setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios);
     void setVentanaInicioSesion(InicioSesion *inicioSesion);
+    void setVentanaSocios(VentanaSocios *ventanaSocios);
+    void cargarArchivo();
+
 
     static QList<Usuario> usuarios;
+    static QVector<QStringList> socios;
 
 private slots:
     // Abrir ventana de libros
@@ -43,5 +48,6 @@ private:
     Ui::MainWindow *ui;
     VentanaUsuarios *ventanaUsuarios;
     InicioSesion *inicioSesion;
+    VentanaSocios *ventanaSocios;
 };
 #endif // MAINWINDOW_H
