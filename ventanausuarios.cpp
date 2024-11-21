@@ -43,11 +43,13 @@ VentanaUsuarios::VentanaUsuarios(QWidget *parent)
     ui->tabla->setItem(0, 5, new QTableWidgetItem(admin.getNombreUsuario()));
     ui->tabla->setItem(0, 6, new QTableWidgetItem(admin.getContraseña()));
 
-    // Conectamos los botones
+    // Conectamos los botones y qline
     connect(ui->botAgregar, &QPushButton::clicked, this, &VentanaUsuarios::on_agregarUsuario);
     connect(ui->botEditar, &QPushButton::clicked, this, &VentanaUsuarios::on_editarUsuario);
     connect(ui->botEliminar, &QPushButton::clicked, this, &VentanaUsuarios::on_eliminarUsuario);
     connect(ui->botCerrar, &QPushButton::clicked, this, &VentanaUsuarios::on_cerrarUsuario);
+
+    connect(ui->lineBuscar, &QLineEdit::textEdited, this, &VentanaUsuarios::on_buscarUsuario);
 }
 
 VentanaUsuarios::~VentanaUsuarios()
@@ -93,11 +95,20 @@ void VentanaUsuarios::on_editarUsuario() {
 
     formulario->setWindowTitle("Editar usuario");
 
-    int indice = ui->tabla->currentRow();
+    int filaSeleccionada = ui->tabla->currentRow();
 
-    if (indice == -1) {
+    if (filaSeleccionada == -1) {
         QMessageBox::warning(this, "Advertencia", "Debe seleccionar una fila primero.", QMessageBox::Ok);
         return;
+    }
+
+    QString usuarioSeleccionado = ui->tabla->item(filaSeleccionada, 5)->text();
+    int indice;
+
+    for (int i = 0; i< mainWindow->usuarios.length(); i ++){
+        if (mainWindow->usuarios[i].getNombreUsuario() == usuarioSeleccionado){
+            indice = i;
+        }
     }
 
     // Para mostrar los datos en el formulario
@@ -141,7 +152,17 @@ void VentanaUsuarios::on_editarUsuario() {
 }
 
 void VentanaUsuarios::on_eliminarUsuario() {
-    int indice = ui->tabla->currentRow();
+    int filaSeleccionada = ui->tabla->currentRow();
+
+    QString usuarioSeleccionado = ui->tabla->item(filaSeleccionada, 5)->text();
+    int indice;
+
+    for (int i = 0; i< mainWindow->usuarios.length(); i ++){
+        if (mainWindow->usuarios[i].getNombreUsuario() == usuarioSeleccionado){
+            indice = i;
+        }
+    }
+
     if (indice < 0) {
         QMessageBox::warning(this, "Error", "Debe seleccionar un usuario para eliminar", QMessageBox::Ok);
     } else if (indice == 0) {
@@ -151,12 +172,63 @@ void VentanaUsuarios::on_eliminarUsuario() {
     advertencia = QMessageBox::critical(this, "Eliminar usuario", "¿Está seguro de que quiere eliminar este usuario?", QMessageBox::Yes|QMessageBox::No);
     if(advertencia == QMessageBox::Yes){
         ui->tabla->removeRow(indice);
-     //   llenarTabla(mainWindow->usuarios);
         mainWindow->usuarios.removeAt(indice);
     }
 }
 
-void VentanaUsuarios::on_cerrarUsuario() {
+void VentanaUsuarios::on_buscarUsuario(){
+
+    // que radiobutton se selecciono
+    int columna = -1;
+
+    if (ui->button_dni->isChecked()) {
+        columna = 0;
+    } else if (ui->button_Nombre->isChecked()) {
+        columna = 1;
+    } else if (ui->button_Apellido->isChecked()) {
+        columna = 2;
+    } else if (ui->botton_usuario->isChecked()) {
+        columna = 3;
+    }
+
+    if (columna == -1) return;
+
+    QString texto = ui->lineBuscar->text();
+
+    QList<Usuario> usuariosFiltrados;
+
+    // buscar los usuarios que coincidan con el texto en la columna seleccionada
+    for (int i = 0; i < mainWindow->usuarios.length(); ++i) {
+
+        Usuario usuario = mainWindow->usuarios[i];
+
+        bool coincide = false;
+
+        switch (columna) {
+        case 0:
+            coincide = QString::number(usuario.obtenerDni()).contains(texto, Qt::CaseInsensitive);
+            break;
+        case 1:
+            coincide = usuario.obtenerNombre().contains(texto, Qt::CaseInsensitive);
+            break;
+        case 2:
+            coincide = usuario.obtenerApellido().contains(texto, Qt::CaseInsensitive);
+            break;
+        case 3:
+            coincide = usuario.getNombreUsuario().contains(texto, Qt::CaseInsensitive);
+            break;
+        }
+
+        // Si coincide agregar el usuario a la lista filtrada
+        if (coincide) {
+            usuariosFiltrados.append(usuario);
+        }
+    }
+
+    llenarTabla(usuariosFiltrados);
+}
+
+void VentanaUsuarios::on_cerrarUsuario(){
     this->close();
 }
 

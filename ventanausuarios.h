@@ -26,6 +26,7 @@ private slots:
     void on_editarUsuario();
     void on_eliminarUsuario();
     void on_cerrarUsuario();
+    void on_buscarUsuario();
 
 private:
     Ui::VentanaUsuarios *ui;
