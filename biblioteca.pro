@@ -9,10 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-agregarempleado.cpp \
     agregarnuevolibro.cpp \
     agregarprestamo.cpp \
-    empleado.cpp \
     archivo.cpp \
     formulariousuario.cpp \
     iniciosesion.cpp \
@@ -29,10 +27,8 @@ agregarempleado.cpp \
     ventanausuarios.cpp
 
 HEADERS += \
-agregarempleado.h \
     agregarnuevolibro.h \
     agregarprestamo.h \
-    empleado.h \
     archivo.h \
     formulariousuario.h \
     iniciosesion.h \
@@ -49,10 +45,8 @@ agregarempleado.h \
     ventanausuarios.h
 
 FORMS += \
-agregarempleado.ui \
     agregarnuevolibro.ui \
     agregarprestamo.ui \
-    empleado.ui \
     formulariousuario.ui \
     iniciosesion.ui \
     mainwindow.ui \
