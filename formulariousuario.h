@@ -17,7 +17,9 @@ class FormularioUsuarios : public QDialog
 public:
     explicit FormularioUsuarios(QWidget *parent = nullptr);
     ~FormularioUsuarios();
+
     Usuario getUsuario() const;
+
     void setUsuarioEditar(QString nombre, QString apellido,
                           int dni, QString direccion, QString telefono,
                           QString nombreUsuario, QString contraseña);

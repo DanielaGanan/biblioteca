@@ -176,6 +176,14 @@ void VentanaUsuarios::on_eliminarUsuario() {
     }
 }
 
+Usuario VentanaUsuarios::buscarUsuarioDni(int dni){
+
+    for (int i = 0; i < mainWindow->usuarios.length(); ++i) {
+        if(mainWindow->usuarios[i].obtenerDni() == dni) return mainWindow->usuarios[i];
+    }
+}
+
+
 void VentanaUsuarios::on_buscarUsuario(){
 
     // que radiobutton se selecciono

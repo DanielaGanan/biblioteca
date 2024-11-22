@@ -6,6 +6,7 @@
 #include <tablalibros.h>
 #include <agregarnuevolibro.h>
 #include <usuario.h>
+#include <claseprestamo.h>
 
 class InicioSesion;
 class VentanaUsuarios;
@@ -27,6 +28,7 @@ public:
     void setVentanaInicioSesion(InicioSesion *inicioSesion);
 
     static QList<Usuario> usuarios;
+    static QList<clasePrestamo> prestamos;
 
 private slots:
     // Abrir ventana de libros

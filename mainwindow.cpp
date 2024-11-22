@@ -7,6 +7,7 @@
 #include "ventanasocios.h"
 
 QList<Usuario> MainWindow::usuarios;
+QList<clasePrestamo> MainWindow::prestamos;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

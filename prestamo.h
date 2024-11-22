@@ -3,12 +3,10 @@
 
 #include <QWidget>
 #include "QDebug"
-#include "libro.h"
-#include "socio.h"
-#include <QDate>
-#include<vector>
-#include "agregarprestamo.h"
+#include <agregarprestamo.h>
+#include <claseprestamo.h>
 
+class MainWindow;
 
 namespace Ui {
 class Prestamo;
@@ -20,24 +18,24 @@ class Prestamo : public QWidget
 
 public:
     explicit Prestamo(QWidget *parent = nullptr);
-   /* Prestamo(int idPrestamo, Libro libro, Socio socio, int cantidad,
-             Empleado empleado, QDate fechaPrestamo, QDate fechaDevolucion);
-    */
-
-    Prestamo(int idPrestamo, QVector<libro*> libros, int cantidad, QDate fechaPrestamo, QDate fechaDevolucion, QWidget *parent);
-
     ~Prestamo();
 
+    void setVentanaMainWindow(MainWindow *mainWindow);
+    void llenarTabla(const QList<clasePrestamo> &prestamos);
 
 
 private slots:
-    bool solicitarLibro();  //Agregar o solicitar un prestamo
-    bool devolverLibro();   //Devuelve un libro o libros
-    bool modificarPrestamo(); // Para modificar un prestamo
+    void on_agregarPrestamo();
+    void on_editarPrestamo();
+    void on_eliminarPrestamo();
+    void on_cerrarPrestamo();
+    void on_buscarPrestamo();
 
 
 private:
     Ui::Prestamo *ui;
+    clasePrestamo *clasPrestamo;
+    MainWindow *mainWindow;
 
 };
 

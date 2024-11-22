@@ -18,8 +18,10 @@ class VentanaUsuarios : public QDialog
 public:
     explicit VentanaUsuarios(QWidget *parent = nullptr);
     ~VentanaUsuarios();
+
     void setVentanaMainWindow(MainWindow *mainWindow);
     void llenarTabla(const QList<Usuario> &usuari);
+    Usuario buscarUsuarioDni(int dni);
 
 private slots:
     void on_agregarUsuario();

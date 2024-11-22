@@ -12,6 +12,7 @@ SOURCES += \
     agregarnuevolibro.cpp \
     agregarprestamo.cpp \
     archivo.cpp \
+    claseprestamo.cpp \
     formulariousuario.cpp \
     iniciosesion.cpp \
     libro.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     agregarnuevolibro.h \
     agregarprestamo.h \
     archivo.h \
+    claseprestamo.h \
     formulariousuario.h \
     iniciosesion.h \
     libro.h \
