@@ -6,7 +6,11 @@
 #include <tablalibros.h>
 #include <agregarnuevolibro.h>
 #include <usuario.h>
+<<<<<<< HEAD
 #include <claseprestamo.h>
+=======
+#include <QList>
+>>>>>>> master
 
 class InicioSesion;
 class VentanaUsuarios;
@@ -27,8 +31,13 @@ public:
     void setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios);
     void setVentanaInicioSesion(InicioSesion *inicioSesion);
 
+    // Declaramos las listas de tipo 'static' para que uso global
     static QList<Usuario> usuarios;
+<<<<<<< HEAD
     static QList<clasePrestamo> prestamos;
+=======
+    static QList<libro> libros;
+>>>>>>> master
 
 private slots:
     // Abrir ventana de libros

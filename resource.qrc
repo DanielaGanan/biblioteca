@@ -2,4 +2,9 @@
     <qresource prefix="/new/prefix1">
         <file>recursos/estante background.jpg</file>
     </qresource>
+    <qresource prefix="/">
+        <file>recursos/estilos.css</file>
+        <file>recursos/estante background.jpg</file>
+        <file>recursos/icono libros.jpg</file>
+    </qresource>
 </RCC>

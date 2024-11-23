@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>790</width>
+    <width>1525</width>
     <height>717</height>
    </rect>
   </property>
@@ -152,6 +152,9 @@ color: black;
        </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="abrirVentanaUsuarios">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Usuario</string>
          </property>
@@ -166,6 +169,9 @@ color: black;
        </item>
        <item row="0" column="0">
         <widget class="QPushButton" name="abrirVentanaLibros">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
           <string notr="true"/>
          </property>
@@ -219,13 +225,97 @@ background-position: center;
      <string>Cerrar sesión</string>
     </property>
    </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>10</y>
+      <width>351</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="1" column="2">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="cargarLibrosMw">
+       <property name="text">
+        <string>Cargar Libros</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="0" colspan="3">
+      <widget class="QTableWidget" name="tablaLIbrosMw">
+       <column>
+        <property name="text">
+         <string>Titulo</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Autor</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Genero</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Editorial</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Fecha</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>ISBN</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Stock</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>790</width>
+     <width>1525</width>
      <height>26</height>
     </rect>
    </property>
