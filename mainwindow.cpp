@@ -6,7 +6,8 @@
 #include "ventanausuarios.h"
 #include "ventanasocios.h"
 
-QList<Usuario> MainWindow::usuarios;
+QList<Usuario> MainWindow::usuarios;    // Inicializamos la lista estática
+QList<libro> MainWindow::libros;        // Inicializamos la lista estática
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -30,6 +31,12 @@ void MainWindow::on_cerrarSesion() {
     inicioSesion->show();
     this->close();
 }
+void MainWindow::setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios) {
+    this->ventanaUsuarios = ventanaUsuarios;
+}
+
+
+
 // ------------ MENU DE NAVEGACION ------------------
 void MainWindow::on_abrirVentanaLibros_clicked()
 {
@@ -61,6 +68,3 @@ void MainWindow::on_abrirVentanaSocios_clicked()
     //ventanaSocios->show();
 }
 
-void MainWindow::setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios) {
-    this->ventanaUsuarios = ventanaUsuarios;
-}

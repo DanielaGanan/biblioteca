@@ -10,11 +10,6 @@ QWidget {
     background-color: #011526;  /* Fondo blanco para los widgets */
     border-radius: 8px;  /* Bordes redondeados */
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
 }
 
 /* Estilo para los QPushButton (botones) */
@@ -30,13 +25,13 @@ QPushButton {
     cursor: pointer;
     transition: background-color 0.3s; /* Transición suave en el color de fondo */
     text-align: center;
+    cursor: pointer;
 }
 
 QPushButton:hover {
     background-color: #45a049; /* Un verde más oscuro cuando el mouse está sobre el botón */
 }
 
-/* Estilo para los QLineEdit (campos de texto) */
 QLineEdit {
     color: black;
     font-size: 14px;
@@ -48,11 +43,10 @@ QLineEdit {
 }
 
 QLineEdit:focus {
-    border-color: #4CAF50;  /* Cambio de color del borde cuando el campo tiene el foco */
+    border: 3px solid #4CAF50;  /* Cambio de color del borde cuando el campo tiene el foco */
     background-color: white;  /* Fondo blanco cuando se selecciona */
 }
 
-/* Estilo para la QTableWidget (tabla) */
 QTableWidget {
     font-size: 14px;
     border: none;
@@ -62,19 +56,16 @@ QTableWidget {
     gridline-color: #ddd;  /* Color de las líneas de la tabla */
 }
 
-/* Estilo para las cabeceras de la tabla */
 QHeaderView::section { 
     height: 35px;
-    width: 35px;
     background-color: #4CAF50;
     color: white;
     font-weight: bold;
-    padding: 2px;
+    
     border: none;
-    border-radius: 5px;
+    
 }
 
-/* Estilo para las filas de la tabla */
 QTableWidget::item {
     width: 150px;
     color: black;
@@ -83,7 +74,7 @@ QTableWidget::item {
 }
 
 QTableWidget::item:selected {
-    background-color: #f2f2f2; /* Color de fondo cuando se selecciona una fila */
+    background-color: #4CAF50; /* Color de verde  */
 }
 
 QForm {
@@ -91,30 +82,13 @@ QForm {
 	height: 50px;
 }
 
-/* Estilo para los QLabel (etiquetas de texto) */
+
 QLabel {
     font-size: 12px;
     color: #fff; 
 }
 
-/* Estilo para los QScrollBar (barras de desplazamiento) */
-QScrollBar {
-    background-color: #f1f1f1;  /* Fondo gris claro */
-    border-radius: 10px;
-}
-
-QScrollBar::handle {
-    background-color: #4CAF50;  /* Color de la manija */
-    border-radius: 10px;
-}
-
-QScrollBar::handle:hover {
-    background-color: #45a049;  /* Cambio de color al pasar el ratón */
-}
-
 QMessage {
-font-family: impact;
 color: white;
-
 }
 

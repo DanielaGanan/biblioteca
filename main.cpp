@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // Leer el archivo CSS desde los recursos
-    QFile file(":/recursos/estilos.css");  // Asegúrate de que la ruta sea correcta
+    QFile file(":/recursos/estilos.css");  // Asegurarse de que la ruta sea correcta
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream ts(&file);
         QString styles = ts.readAll();
@@ -22,11 +22,10 @@ int main(int argc, char *argv[])
         qDebug() << "No se pudo abrir el archivo CSS";
     }
 
-    MainWindow w;
-    w.show();
-    MainWindow mW;
-    InicioSesion is;
-    VentanaUsuarios vU;
+    MainWindow mW;                  // Ventana principal
+    InicioSesion is;                // Ventana inicio sesión
+    is.show();                      // Mostrar ventana inicio de sesión
+    VentanaUsuarios vU;             // Ventana usuarios
 
     mW.setVentanaInicioSesion(&is);
     mW.setVentanaUsuarios(&vU);

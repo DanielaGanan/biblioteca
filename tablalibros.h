@@ -33,7 +33,7 @@ private slots:
 
 private:
     Ui::tablaLibros *ui;
-    QList<libro> libros;  // Lista para almacenar los libros
+    QList<libro> &libros;  // Referencia a la lista estática 'libros'
     void actualizarTabla();
 };
 
