@@ -7,12 +7,12 @@
 class Socio : public Persona
 {
 public:
-    Socio(const QString& nombre,
-          const QString& apellido,
-          const int& dni,
-          const QString& direccion,
-          const QString& telefono,
-          const QString& estado
+    Socio(const QString& nombre = "",
+          const QString& apellido = "",
+          const int& dni = 0,
+          const QString& direccion = "",
+          const QString& telefono = "",
+          const QString& estado = ""
           );
     ~Socio();
 

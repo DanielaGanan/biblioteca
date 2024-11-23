@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     agregarnuevolibro.cpp \
     agregarprestamo.cpp \
+    agregarsocio.cpp \
     archivo.cpp \
     claseprestamo.cpp \
     formulariousuario.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
 HEADERS += \
     agregarnuevolibro.h \
     agregarprestamo.h \
+    agregarsocio.h \
     archivo.h \
     claseprestamo.h \
     formulariousuario.h \
@@ -49,6 +51,7 @@ HEADERS += \
 FORMS += \
     agregarnuevolibro.ui \
     agregarprestamo.ui \
+    agregarsocio.ui \
     formulariousuario.ui \
     iniciosesion.ui \
     mainwindow.ui \

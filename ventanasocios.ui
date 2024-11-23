@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>583</width>
-    <height>443</height>
+    <width>757</width>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,40 +66,20 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="btnLimpiar">
+         <property name="text">
+          <string>Limpiar Búsqueda</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
       <widget class="QTableWidget" name="tbSocios">
-       <column>
-        <property name="text">
-         <string>Nombre</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Apellido</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>DNI</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Dirección</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Telefono</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Estado</string>
-        </property>
-       </column>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>

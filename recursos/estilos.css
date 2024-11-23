@@ -32,6 +32,30 @@ QPushButton:hover {
     background-color: #45a049; /* Un verde más oscuro cuando el mouse está sobre el botón */
 }
 
+QRadioButton {
+    color: white;
+}
+
+QSpinBox {
+    color: black;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #f2f2f2;  /* Fondo gris claro */
+    border: 1px solid #ccc;  /* Borde gris */
+    border-radius: 5px;  /* Bordes redondeados */
+    transition: border-color 0.3s;
+}
+
+QComboBox {
+    color: black;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #f2f2f2;  /* Fondo gris claro */
+    border: 1px solid #ccc;  /* Borde gris */
+    border-radius: 5px;  /* Bordes redondeados */
+    transition: border-color 0.3s;
+}
+
 QLineEdit {
     color: black;
     font-size: 14px;
