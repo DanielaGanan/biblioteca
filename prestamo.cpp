@@ -99,9 +99,10 @@ void Prestamo::on_editarPrestamo(){
     // Para mostrar los datos en el formulario
     int id = mainWindow->prestamos[indice].getIdPrestamo();
     int cant = mainWindow->prestamos[indice].getCantidad();
-    Usuario* usu = mainWindow->prestamos[indice].getUsuario();
     QDate fprestamo = mainWindow->prestamos[indice].getFechaPrestamo();
     QDate fdevolucion = mainWindow->prestamos[indice].getFechaDevolucion();
+ //   libro* lib = mainWindow->prestamos[indice].getUsuario();
+    Usuario* usu = mainWindow->prestamos[indice].getUsuario();
 
     formulario->setPrestamoEditar(id, cant, fprestamo, fdevolucion, usu);
 
@@ -131,6 +132,11 @@ void Prestamo::on_editarPrestamo(){
 void Prestamo::on_eliminarPrestamo(){
     int filaSeleccionada = ui->tablaPrestamo->currentRow();
 
+    if (filaSeleccionada < 0) {
+        QMessageBox::warning(this, "Error", "Debe seleccionar un prestamo para eliminar", QMessageBox::Ok);
+        return; // Salir del método si no hay selección
+    }
+
     QString prestamoSeleccionado = ui->tablaPrestamo->item(filaSeleccionada, 0)->text();
     int indice;
 
@@ -142,16 +148,15 @@ void Prestamo::on_eliminarPrestamo(){
         }
     }
 
-    if (indice < 0) {
-        QMessageBox::warning(this, "Error", "Debe seleccionar un prestamo para eliminar", QMessageBox::Ok);
-    }
-
     QMessageBox::StandardButton advertencia;
     advertencia = QMessageBox::critical(this, "Eliminar prestamo", "¿Esta seguro de que quiere eliminar este prestamo?", QMessageBox::Yes|QMessageBox::No);
+
     if(advertencia == QMessageBox::Yes){
         ui->tablaPrestamo->removeRow(indice);
         mainWindow->prestamos.removeAt(indice);
     }
+
+    llenarTabla(mainWindow->prestamos);
 }
 
 void Prestamo::on_cerrarPrestamo(){

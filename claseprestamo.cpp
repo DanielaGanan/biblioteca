@@ -6,14 +6,6 @@ clasePrestamo::clasePrestamo(const int& idPrestamo, const int& cantidad,
     : idPrestamo(idPrestamo), cantidad(cantidad),
     fechaPrestamo(fechaPrestamo), fechaDevolucion(fechaDevolucion), usuario(usuario) {}
 
-/*
-clasePrestamo::clasePrestamo(const int& idPrestamo, const int& cantidad,
-                             const QDate& fechaPrestamo,
-                             const QDate& fechaDevolucion,
-                             Usuario *usuario)
-    : idPrestamo(idPrestamo), cantidad(cantidad),
-    fechaPrestamo(fechaPrestamo), fechaDevolucion(fechaDevolucion), usuario(usuario) {}
-*/
 
 clasePrestamo::~clasePrestamo() {}
 
@@ -36,9 +28,10 @@ QDate clasePrestamo::getFechaDevolucion() const{
 }
 
 /*
-libro clasePrestamo::getlibro(){
+libro clasePrestamo::getlibro() const{
     return libro;
 }
+
 
 Socio clasePrestamo::getsocio(){
     return socio;
@@ -64,10 +57,11 @@ void clasePrestamo::setFechaPrestamo(const QDate& nuevaFechaPrestamo){
 void clasePrestamo::setFechaDevolucion(const QDate& nuevaFechaDevolucion){
     this->fechaDevolucion = nuevaFechaDevolucion;
 }
-/*
+ /*
 void clasePrestamo::setlibro(libro* nuevolibro){
     this->libro = nuevolibro;
 }
+
 
 void clasePrestamo::setsocio(Socio* nuevoSocio){
     this->socio = nuevoSocio;

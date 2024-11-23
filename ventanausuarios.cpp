@@ -154,6 +154,11 @@ void VentanaUsuarios::on_editarUsuario() {
 void VentanaUsuarios::on_eliminarUsuario() {
     int filaSeleccionada = ui->tabla->currentRow();
 
+    if (filaSeleccionada < 0) {
+        QMessageBox::warning(this, "Error", "Debe seleccionar un usuario para eliminar", QMessageBox::Ok);
+        return; // Salir del método si no hay selección
+    }
+
     QString usuarioSeleccionado = ui->tabla->item(filaSeleccionada, 5)->text();
     int indice;
 
@@ -162,18 +167,20 @@ void VentanaUsuarios::on_eliminarUsuario() {
             indice = i;
         }
     }
-
+/*
     if (indice < 0) {
         QMessageBox::warning(this, "Error", "Debe seleccionar un usuario para eliminar", QMessageBox::Ok);
-    } else if (indice == 0) {
-        QMessageBox::warning(this, "Error", "Al menos debe haber 1 usuario registrado", QMessageBox::Ok);
-    }
+    }*/
+
     QMessageBox::StandardButton advertencia;
     advertencia = QMessageBox::critical(this, "Eliminar usuario", "¿Esta seguro de que quiere eliminar este usuario?", QMessageBox::Yes|QMessageBox::No);
+
     if(advertencia == QMessageBox::Yes){
         ui->tabla->removeRow(indice);
         mainWindow->usuarios.removeAt(indice);
     }
+
+    llenarTabla(mainWindow->usuarios);
 }
 
 Usuario VentanaUsuarios::buscarUsuarioDni(int dni){

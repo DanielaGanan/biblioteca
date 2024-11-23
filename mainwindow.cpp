@@ -6,13 +6,9 @@
 #include "ventanausuarios.h"
 #include "ventanasocios.h"
 
-<<<<<<< HEAD
 QList<Usuario> MainWindow::usuarios;
 QList<clasePrestamo> MainWindow::prestamos;
-=======
-QList<Usuario> MainWindow::usuarios;    // Inicializamos la lista estática
 QList<libro> MainWindow::libros;        // Inicializamos la lista estática
->>>>>>> master
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

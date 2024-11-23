@@ -14,12 +14,6 @@ clasePrestamo(const int& idPrestamo = 0, const int& cantidad = 0,
                   const QDate& fechaPrestamo = QDate::currentDate(),
                   const QDate& fechaDevolucion = QDate::currentDate(),
                   Usuario* usuario = nullptr);
-/*
-    clasePrestamo(const int& idPrestamo, const int& cantidad,
-                  const QDate& fechaPrestamo,
-                  const QDate& fechaDevolucion,
-                  Usuario usuario);
-*/
 
     ~clasePrestamo();
 
@@ -28,7 +22,7 @@ clasePrestamo(const int& idPrestamo = 0, const int& cantidad = 0,
     int getCantidad() const;
     QDate getFechaPrestamo() const;
     QDate getFechaDevolucion() const;
-    //libro* getlibro();
+    //libro* getlibro() const;
     //Socio* getsocio();
     Usuario* getUsuario() const;
 

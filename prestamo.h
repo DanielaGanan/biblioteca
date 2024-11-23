@@ -34,7 +34,6 @@ private slots:
 
 private:
     Ui::Prestamo *ui;
-   // clasePrestamo *clasPrestamo;
     MainWindow *mainWindow;
 
 };
