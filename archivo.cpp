@@ -8,6 +8,12 @@ QVector<QStringList> Archivo::leerArchivo()
 {
     QFile archivo(rutaArchivo);
 
+    if (!archivo.exists()) {
+        qDebug() << "El archivo no existe. Se procede a crearlo";
+        archivo.open(QIODevice::WriteOnly | QIODevice::Text);
+        archivo.close();
+    }
+
     if (!archivo.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         qDebug() << "Error: No se pudo abrir el archivo";
@@ -15,10 +21,19 @@ QVector<QStringList> Archivo::leerArchivo()
     }
 
     QTextStream entrada(&archivo);
+
+    bool primeraFila = true;
     while (!entrada.atEnd())
     {
         QString linea = entrada.readLine();
         QStringList columnas = linea.split(",");
+
+        if (primeraFila)
+        {
+            primeraFila = !primeraFila;
+            continue;
+        }
+
         datos.append(columnas);
     }
 

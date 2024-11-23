@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>583</width>
-    <height>443</height>
+    <width>757</width>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,6 +63,13 @@
         <widget class="QRadioButton" name="rbEstado">
          <property name="text">
           <string>Estado</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnLimpiar">
+         <property name="text">
+          <string>Limpiar Búsqueda</string>
          </property>
         </widget>
        </item>

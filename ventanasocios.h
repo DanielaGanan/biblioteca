@@ -22,6 +22,15 @@ public:
 
     void cargarArchivo();
     void actualizarTabla(QVector<QStringList> datos);
+    bool validarSiExisteDni(QString nuevoDni);
+    void buscar();
+
+    //Metodos de busqueda
+    void buscarPorFiltro(QString &texto, int columna);
+    int buscarIndexPorDni(QString &dni);
+
+    //Limpia los filtros
+    void limpiar();
 
 private slots:
     void on_agregar();
