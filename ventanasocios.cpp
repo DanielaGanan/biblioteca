@@ -58,6 +58,7 @@ void VentanaSocios::on_agregar()
         //Agregar el nuevo socio al vector y mostrarlo
         mainWindow->socios.append(nuevoSocio);
         actualizarTabla(mainWindow->socios);
+        guardarArchivo();
     }
 
     form->deleteLater();
@@ -92,7 +93,7 @@ void VentanaSocios::on_modificar()
             //Gurado los datos editados desde el formulario
             QStringList nuevoSocio = form->getSocio();
             mainWindow->socios.replace(indice, nuevoSocio);
-
+            guardarArchivo();
             limpiar();
         }
     }
@@ -129,7 +130,7 @@ void VentanaSocios::on_eliminar()
         if (advertencia == QMessageBox::Yes)
         {
             mainWindow->socios.remove(indice);
-
+            guardarArchivo();
             limpiar();
         }
     }
@@ -151,6 +152,17 @@ void VentanaSocios::cargarArchivo()
 {
     Archivo *archivo = new Archivo("socios.csv");
     mainWindow->socios.append(archivo->leerArchivo());
+}
+
+//Método para guardar el archivo
+void VentanaSocios::guardarArchivo()
+{
+    Archivo *archivo = new Archivo("socios.csv");
+
+    if (!archivo->guardarArchivo(mainWindow->socios))
+    {
+        QMessageBox::critical(this, "Error", "No se pudo guardar el archivo");
+    }
 }
 
 //Método para cargar datos en la tabla

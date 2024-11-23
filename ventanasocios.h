@@ -21,6 +21,7 @@ public:
     void setVentanaMainWindow(MainWindow *mainWindow);
 
     void cargarArchivo();
+    void guardarArchivo();
     void actualizarTabla(QVector<QStringList> datos);
     bool validarSiExisteDni(QString nuevoDni);
     void buscar();

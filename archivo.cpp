@@ -42,10 +42,8 @@ QVector<QStringList> Archivo::leerArchivo()
     return datos;
 }
 
-bool Archivo::guardarArchivo()
+bool Archivo::guardarArchivo(QVector<QStringList> &datos)
 {
-    QVector<QStringList> datos;
-    datos.append(QStringList({"Nuevo", "Dato", "Fila"}));
     QFile archivo(rutaArchivo);
 
     if (!archivo.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -61,5 +59,4 @@ bool Archivo::guardarArchivo()
     }
     archivo.close();
     return true;
-
 }
