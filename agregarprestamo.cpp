@@ -44,10 +44,11 @@ void agregarPrestamo::on_aceptar() {
     if(validarNumero(ui->cantidadQLine) == -1)      return; // retorna si la cantidad no es valido
     claPrestamo.setCantidad(validarNumero(ui->cantidadQLine));
 
-    QDate fechaPrestamo = ui->fechaPresDate->date();
-    claPrestamo.setFechaPrestamo(fechaPrestamo);
 
+    QDate fechaPrestamo = ui->fechaPresDate->date();
     QDate fechaDevolucion = ui->fechaDevDate_2->date();
+
+    claPrestamo.setFechaPrestamo(fechaPrestamo);
     claPrestamo.setFechaDevolucion(fechaDevolucion);
 
 

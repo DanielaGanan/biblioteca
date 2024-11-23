@@ -64,6 +64,12 @@ void Prestamo::on_agregarPrestamo(){
             }
         }
 
+        if(prestamo.getFechaPrestamo() < prestamo.getFechaDevolucion()){
+            QMessageBox::warning(this, "Agregar prestamo", "La fecha de prestamo no puede ser despues de la fecha de devolucion", QMessageBox::Ok);
+            formulario->deleteLater();
+            return;
+        }
+
         // Si no existe, agregar el nuevo prestamos
         mainWindow->prestamos.append(prestamo);
 
