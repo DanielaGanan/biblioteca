@@ -9,21 +9,28 @@
 class clasePrestamo
 {
 public:
-  /*  clasePrestamo(int idPrestamo, int cantidad, const QDate& fechaPrestamo,
-                  const QDate& fechaDevolucion, libro* libro, Socio* socio, Usuario* usuario);*/
-    clasePrestamo(int idPrestamo, int cantidad, const QDate& fechaPrestamo,
-                  const QDate& fechaDevolucion, Usuario* usuario);
+
+clasePrestamo(const int& idPrestamo = 0, const int& cantidad = 0,
+                  const QDate& fechaPrestamo = QDate::currentDate(),
+                  const QDate& fechaDevolucion = QDate::currentDate(),
+                  Usuario* usuario = nullptr);
+/*
+    clasePrestamo(const int& idPrestamo, const int& cantidad,
+                  const QDate& fechaPrestamo,
+                  const QDate& fechaDevolucion,
+                  Usuario usuario);
+*/
 
     ~clasePrestamo();
 
     // Getters
-    int getIdPrestamo();
-    int getCantidad();
-    QDate getFechaPrestamo();
-    QDate getFechaDevolucion();
+    int getIdPrestamo() const;
+    int getCantidad() const;
+    QDate getFechaPrestamo() const;
+    QDate getFechaDevolucion() const;
     //libro* getlibro();
     //Socio* getsocio();
-    Usuario* getUsuario();
+    Usuario* getUsuario() const;
 
 
     // Setters

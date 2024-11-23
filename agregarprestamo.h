@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <libro.h>
 #include <socio.h>
-#include <claseprestamo.h>
+#include "claseprestamo.h"
 #include <usuario.h>
 #include "QMessageBox"
 #include "QLineEdit"
@@ -26,7 +26,8 @@ public:
     ~agregarPrestamo();
 
 
-    clasePrestamo* getPrestamo() const;
+    clasePrestamo getPrestamo() const;
+
     void setPrestamoEditar(int idPrestamo, int cantidad, const QDate& fechaPrestamo,
                            const QDate& fechaDevolucion, Usuario* usuario);
 
@@ -39,7 +40,7 @@ public slots:
 
 private:
     Ui::agregarPrestamo *ui;
-    clasePrestamo *prestamo;
+    clasePrestamo claPrestamo;
     Usuario* usuario;
     // Socio socio;
     // Libro libro;

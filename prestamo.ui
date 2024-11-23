@@ -70,30 +70,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="boton_idPrestamo">
+        <widget class="QRadioButton" name="botidPrestamo">
          <property name="text">
           <string>id Prestamo</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="boton_socio">
+        <widget class="QRadioButton" name="botsocio">
          <property name="text">
           <string>Socio</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="boton_libro">
+        <widget class="QRadioButton" name="botlibro">
          <property name="text">
           <string>Libro</string>
          </property>
         </widget>
        </item>
        <item>
+        <widget class="QRadioButton" name="botusuario">
+         <property name="text">
+          <string>Usuario</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>                             </string>
+          <string/>
          </property>
         </widget>
        </item>

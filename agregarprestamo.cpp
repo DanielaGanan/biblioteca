@@ -39,10 +39,16 @@ int agregarPrestamo::validarNumero(QLineEdit* num)
 void agregarPrestamo::on_aceptar() {
 
     if(validarNumero(ui->idPrestamoQLine) == -1)      return; // retorna si el id no es valido
-    prestamo->setIdPrestamo(validarNumero(ui->idPrestamoQLine));
+    claPrestamo.setIdPrestamo(validarNumero(ui->idPrestamoQLine));
 
     if(validarNumero(ui->cantidadQLine) == -1)      return; // retorna si la cantidad no es valido
-    prestamo->setCantidad(validarNumero(ui->cantidadQLine));
+    claPrestamo.setCantidad(validarNumero(ui->cantidadQLine));
+
+    QDate fechaPrestamo = ui->fechaPresDate->date();
+    claPrestamo.setFechaPrestamo(fechaPrestamo);
+
+    QDate fechaDevolucion = ui->fechaDevDate_2->date();
+    claPrestamo.setFechaDevolucion(fechaDevolucion);
 
 
     // Obtener el usuario seleccionado del QComboBox
@@ -57,28 +63,42 @@ void agregarPrestamo::on_aceptar() {
     }
 
     // Verificar si el nombre y apellido seleccionado son iguales
-    for (const Usuario& usuario : mainWindow->usuarios) {
+    for (Usuario& usuario : mainWindow->usuarios) {
         if (usuario.obtenerNombre() == nombreSeleccionado && usuario.obtenerApellido() == apellidoSeleccionado) {
-            // El nombre y apellido coinciden, realiza la acción deseada
             qDebug() << "Coincide con el usuario: " << nombreSeleccionado << apellidoSeleccionado;
+            claPrestamo.setUsuario(&usuario);
             break;
         }
     }
-
     accept();
 }
 
-clasePrestamo* agregarPrestamo::getPrestamo() const {
-    return nullptr;
+clasePrestamo agregarPrestamo::getPrestamo() const {
+    return claPrestamo;
 }
 
 void agregarPrestamo::llenarComboBox(const QList<Usuario>& usuarios){
 
     for (const Usuario& usuario : usuarios) {
         QString texto = usuario.obtenerNombre() + " " + usuario.obtenerApellido();
-        ui->empleadoComboBox->addItem(texto, usuario.obtenerNombre() + ";" + usuario.obtenerApellido());
+        ui->empleadoComboBox->addItem(texto);  // Solo agregar el texto
     }
 }
 
+void agregarPrestamo::setPrestamoEditar(int idPrestamo, int cantidad, const QDate& fechaPrestamo,
+                                        const QDate& fechaDevolucion, Usuario* usuario){
+    ui->idPrestamoQLine->setText(QString::number(idPrestamo));
+    ui->cantidadQLine->setText(QString::number(cantidad));
+    ui->fechaPresDate->setDate(fechaPrestamo);
+    ui->fechaDevDate_2->setDate(fechaDevolucion);
+
+    QString nombreApellido = usuario->obtenerNombre() + " " + usuario->obtenerApellido();
+    int index = ui->empleadoComboBox->findText(nombreApellido);
+    if (index != -1) {
+        ui->empleadoComboBox->setCurrentIndex(index);
+    }
+
+
+}
 
 

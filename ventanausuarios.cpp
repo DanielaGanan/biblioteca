@@ -169,7 +169,7 @@ void VentanaUsuarios::on_eliminarUsuario() {
         QMessageBox::warning(this, "Error", "Al menos debe haber 1 usuario registrado", QMessageBox::Ok);
     }
     QMessageBox::StandardButton advertencia;
-    advertencia = QMessageBox::critical(this, "Eliminar usuario", "¿Está seguro de que quiere eliminar este usuario?", QMessageBox::Yes|QMessageBox::No);
+    advertencia = QMessageBox::critical(this, "Eliminar usuario", "¿Esta seguro de que quiere eliminar este usuario?", QMessageBox::Yes|QMessageBox::No);
     if(advertencia == QMessageBox::Yes){
         ui->tabla->removeRow(indice);
         mainWindow->usuarios.removeAt(indice);

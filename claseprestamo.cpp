@@ -1,29 +1,37 @@
-#include "claseprestamo.h"
+#include <claseprestamo.h>
 
+clasePrestamo::clasePrestamo(const int& idPrestamo, const int& cantidad,
+                             const QDate& fechaPrestamo, const QDate& fechaDevolucion,
+                             Usuario* usuario)
+    : idPrestamo(idPrestamo), cantidad(cantidad),
+    fechaPrestamo(fechaPrestamo), fechaDevolucion(fechaDevolucion), usuario(usuario) {}
 
-clasePrestamo::clasePrestamo(int idPrestamo, int cantidad, const QDate& fechaPrestamo,
-                             const QDate& fechaDevolucion, Usuario* usuario)
-            : idPrestamo(idPrestamo), cantidad(cantidad), fechaPrestamo(fechaPrestamo),
-            fechaDevolucion(fechaDevolucion), usuario(usuario) {}
-
+/*
+clasePrestamo::clasePrestamo(const int& idPrestamo, const int& cantidad,
+                             const QDate& fechaPrestamo,
+                             const QDate& fechaDevolucion,
+                             Usuario *usuario)
+    : idPrestamo(idPrestamo), cantidad(cantidad),
+    fechaPrestamo(fechaPrestamo), fechaDevolucion(fechaDevolucion), usuario(usuario) {}
+*/
 
 clasePrestamo::~clasePrestamo() {}
 
 
 // Getters
-int clasePrestamo::getIdPrestamo(){
+int clasePrestamo::getIdPrestamo() const{
     return idPrestamo;
 }
 
-int clasePrestamo::getCantidad(){
+int clasePrestamo::getCantidad() const{
     return cantidad;
 }
 
-QDate clasePrestamo::getFechaPrestamo(){
+QDate clasePrestamo::getFechaPrestamo() const{
     return fechaPrestamo;
 }
 
-QDate clasePrestamo::getFechaDevolucion(){
+QDate clasePrestamo::getFechaDevolucion() const{
     return fechaDevolucion;
 }
 
@@ -36,7 +44,7 @@ Socio clasePrestamo::getsocio(){
     return socio;
 }*/
 
-Usuario* clasePrestamo::getUsuario(){
+Usuario *clasePrestamo::getUsuario() const{
     return usuario;
 }
 
@@ -68,6 +76,4 @@ void clasePrestamo::setsocio(Socio* nuevoSocio){
 void clasePrestamo::setUsuario(Usuario* nuevoUsuario){
     this->usuario = nuevoUsuario;
 }
-
-
 
