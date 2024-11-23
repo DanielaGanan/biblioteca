@@ -1,0 +1,94 @@
+
+QMainWindow {
+    background-color: #f4f4f9;  /* Color de fondo suave */
+    border-radius: 10px; /* Bordes redondeados para la ventana */
+   
+}
+
+/* Estilo para QWidget (puede aplicarse a cualquier ventana secundaria o contenedor) */
+QWidget {
+    background-color: #011526;  /* Fondo blanco para los widgets */
+    border-radius: 8px;  /* Bordes redondeados */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo para los QPushButton (botones) */
+QPushButton {
+    font-size: 12px;
+    color: white;  /* Texto blanco */
+    background-color: #4CAF50;  /* Color verde para los botones */
+    border: none;
+    border-radius: 5px; 
+    margin: 5px;
+    padding: 5px 5px; /* Padding para agrandar el botón */
+    min-width: 70px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transición suave en el color de fondo */
+    text-align: center;
+    cursor: pointer;
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Un verde más oscuro cuando el mouse está sobre el botón */
+}
+
+QLineEdit {
+    color: black;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #f2f2f2;  /* Fondo gris claro */
+    border: 1px solid #ccc;  /* Borde gris */
+    border-radius: 5px;  /* Bordes redondeados */
+    transition: border-color 0.3s;
+}
+
+QLineEdit:focus {
+    border: 3px solid #4CAF50;  /* Cambio de color del borde cuando el campo tiene el foco */
+    background-color: white;  /* Fondo blanco cuando se selecciona */
+}
+
+QTableWidget {
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    background-color: #ffffff;  /* Fondo blanco */
+    selection-background-color: #4CAF50;  /* Color de selección verde */
+    gridline-color: #ddd;  /* Color de las líneas de la tabla */
+}
+
+QHeaderView::section { 
+    height: 35px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    
+    border: none;
+    
+}
+
+QTableWidget::item {
+    width: 150px;
+    color: black;
+    padding: 2px;
+    border-bottom: 1px solid #ddd;  /* Línea divisoria entre filas */
+}
+
+QTableWidget::item:selected {
+    background-color: #4CAF50; /* Color de verde  */
+}
+
+QForm {
+	width: 50px;
+	height: 50px;
+}
+
+
+QLabel {
+    font-size: 12px;
+    color: #fff; 
+}
+
+QMessage {
+color: white;
+}
+

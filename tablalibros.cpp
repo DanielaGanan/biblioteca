@@ -1,10 +1,12 @@
 #include "tablalibros.h"
 #include "ui_tablalibros.h"
+#include "mainwindow.h"
 
 
 tablaLibros::tablaLibros(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::tablaLibros)
+    : QWidget(parent),
+    ui(new Ui::tablaLibros),
+    libros(MainWindow::libros)      // Inicializar la referencia
 {
     ui->setupUi(this);
 
@@ -21,6 +23,19 @@ tablaLibros::tablaLibros(QWidget *parent)
 
     // Cargar libros desde CSV
     connect(ui->botonCargarLista, &QPushButton::clicked, this, &tablaLibros::cargarDesdeCSV);
+
+    // Colocar nombre a ventana
+    this->setWindowTitle("Administración libros");
+
+    // Filtro general y radio buttons
+    // En el constructor de la clase tablaLibros:
+    connect(ui->campoFiltroGeneral, &QLineEdit::textChanged, this, &tablaLibros::filtrarLibros);
+    connect(ui->radioTitulo, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
+    connect(ui->radioAutor, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
+    connect(ui->radioGenero, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
+    connect(ui->radioEditorial, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
+
+
 }
 
 tablaLibros::~tablaLibros()
@@ -137,13 +152,64 @@ void tablaLibros::actualizarTabla()
 //  FILTROS DE BUSQUEDA
 void tablaLibros::filtrarLibros()
 {
+    // Obtiene el texto del campo de búsqueda
+    QString textoFiltro = ui->campoFiltroGeneral->text();
+
+    // Determina el filtro activo según el QRadioButton seleccionado
+    QString atributoFiltro;
+    if (ui->radioTitulo->isChecked()) {
+        atributoFiltro = "Titulo";
+    } else if (ui->radioAutor->isChecked()) {
+        atributoFiltro = "Autor";
+    } else if (ui->radioGenero->isChecked()) {
+        atributoFiltro = "Genero";
+    } else if (ui->radioEditorial->isChecked()) {
+        atributoFiltro = "Editorial";
+    }
+
+    // Limpia la tabla visualmente
+    ui->tabla->clearContents();
+    ui->tabla->setRowCount(0);
+
+    // Itera sobre la lista de libros y filtra dinámicamente
+    int fila = 0;
+    for (const libro &libroActual : libros) {
+        bool coincide = false;
+
+        // Filtra según el atributo seleccionado
+        if (atributoFiltro == "Titulo" && libroActual.getTitulo().contains(textoFiltro, Qt::CaseInsensitive)) {
+            coincide = true;
+        } else if (atributoFiltro == "Autor" && libroActual.getAutor().contains(textoFiltro, Qt::CaseInsensitive)) {
+            coincide = true;
+        } else if (atributoFiltro == "Genero" && libroActual.getGenero().contains(textoFiltro, Qt::CaseInsensitive)) {
+            coincide = true;
+        } else if (atributoFiltro == "Editorial" && libroActual.getEditorial().contains(textoFiltro, Qt::CaseInsensitive)) {
+            coincide = true;
+        }
+
+        // Si coincide, se agrega a la tabla
+        if (coincide) {
+            ui->tabla->insertRow(fila);
+            ui->tabla->setItem(fila, 0, new QTableWidgetItem(libroActual.getTitulo()));
+            ui->tabla->setItem(fila, 1, new QTableWidgetItem(libroActual.getAutor()));
+            ui->tabla->setItem(fila, 2, new QTableWidgetItem(libroActual.getGenero()));
+            ui->tabla->setItem(fila, 3, new QTableWidgetItem(libroActual.getEditorial()));
+            ui->tabla->setItem(fila, 4, new QTableWidgetItem(QString::number(libroActual.getAño())));
+            ui->tabla->setItem(fila, 5, new QTableWidgetItem(libroActual.getIsbn()));
+            ui->tabla->setItem(fila, 6, new QTableWidgetItem(QString::number(libroActual.getStock())));
+            fila++;
+        }
+    }
+    /*
     // Obtiene los textos de los campos de búsqueda
     QString tituloFiltro = ui->campoTituloBusqueda->text();
     QString autorFiltro = ui->campoAutorBusqueda->text();
     QString generoFiltro = ui->campoGeneroBusqueda->text();
     QString editorialFiltro = ui->campoEditorialBusqueda->text();
 
-    // Limpia solo la tabla visualmente; la lista de libros no se afecta
+
+
+    // Limpia la tabla visualmente
     ui->tabla->clearContents();
     ui->tabla->setRowCount(0);
 
@@ -177,7 +243,7 @@ void tablaLibros::filtrarLibros()
             ui->tabla->setItem(fila, 6, new QTableWidgetItem(QString::number(libroActual.getStock())));
             fila++;
         }
-    }
+    }*/
 }
 void tablaLibros::mostrarTodosLosLibros()
 {
@@ -229,7 +295,8 @@ void tablaLibros::cargarDesdeCSV() {
         }
         QTextStream out(&archivo);
         // Escribir los encabezados y datos de prueba
-        out << "Titulo,Autor,Genero,Editorial,Año,ISBN,Stock\n";/*
+        out << "Titulo,Autor,Genero,Editorial,Año,ISBN,Stock\n";
+        /*
             out << "Cien años de soledad,Gabriel Garcia Marquez,Ficción,Editorial Sudamericana,1967,1234567890,5\n";
             out << "1984,George Orwell,Ficción,Dystopian Books,1949,2345678901,3\n";
             out << "El principito,Antoine de Saint-Exupéry,Ficción infantil,Editorial Reynal & Hitchcock,1943,3456789012,10\n";

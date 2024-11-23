@@ -6,7 +6,8 @@
 #include "ventanausuarios.h"
 #include "ventanasocios.h"
 
-QList<Usuario> MainWindow::usuarios;
+QList<Usuario> MainWindow::usuarios;    // Inicializamos la lista estática
+QList<libro> MainWindow::libros;        // Inicializamos la lista estática
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->botCerrarSesion, &QPushButton::clicked, this, &MainWindow::on_cerrarSesion);
+
 }
 
 MainWindow::~MainWindow()
@@ -21,6 +23,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// ------------ INICIO DE SESION --------------------
+void MainWindow::setVentanaInicioSesion(InicioSesion *inicioSesion) {
+    this->inicioSesion = inicioSesion;
+}
+void MainWindow::on_cerrarSesion() {
+    inicioSesion->show();
+    this->close();
+}
+void MainWindow::setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios) {
+    this->ventanaUsuarios = ventanaUsuarios;
+}
+
+
+
+// ------------ MENU DE NAVEGACION ------------------
 void MainWindow::on_abrirVentanaLibros_clicked()
 {
     tablaLibros *ventana = new tablaLibros();
@@ -37,8 +54,7 @@ void MainWindow::on_abrirVentanaPrestamos_clicked()
 }
 void MainWindow::on_abrirVentanaDevoluciones_clicked()
 {
-    tablaLibros *ventana = new tablaLibros();
-    ventana->show();
+
 }
 void MainWindow::on_abrirVentanaPagos_clicked()
 {
@@ -50,18 +66,5 @@ void MainWindow::on_abrirVentanaSocios_clicked()
     VentanaSocios *ventana = new VentanaSocios();
     ventana->show();
     //ventanaSocios->show();
-}
-
-void MainWindow::setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios) {
-    this->ventanaUsuarios = ventanaUsuarios;
-}
-
-void MainWindow::setVentanaInicioSesion(InicioSesion *inicioSesion) {
-    this->inicioSesion = inicioSesion;
-}
-
-void MainWindow::on_cerrarSesion() {
-    inicioSesion->show();
-    this->close();
 }
 
