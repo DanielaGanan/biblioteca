@@ -14,7 +14,7 @@ public:
     QVector<QStringList> leerArchivo();
 
     //Método para guardar archivo
-    bool guardarArchivo();
+    bool guardarArchivo(QVector<QStringList> &datos);
 
 private:
     QString rutaArchivo;

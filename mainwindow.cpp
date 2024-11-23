@@ -9,6 +9,7 @@
 QList<Usuario> MainWindow::usuarios;
 QList<clasePrestamo> MainWindow::prestamos;
 QList<libro> MainWindow::libros;        // Inicializamos la lista estática
+QVector<QStringList> MainWindow::socios;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,7 +36,10 @@ void MainWindow::on_cerrarSesion() {
 void MainWindow::setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios) {
     this->ventanaUsuarios = ventanaUsuarios;
 }
-
+void MainWindow::setVentanaSocios(VentanaSocios *ventanaSocios)
+{
+    this->ventanaSocios = ventanaSocios;
+}
 
 
 // ------------ MENU DE NAVEGACION ------------------
@@ -64,8 +68,7 @@ void MainWindow::on_abrirVentanaPagos_clicked()
 }
 void MainWindow::on_abrirVentanaSocios_clicked()
 {
-    VentanaSocios *ventana = new VentanaSocios();
-    ventana->show();
-    //ventanaSocios->show();
+    ventanaSocios->show();
+    this->ventanaSocios->actualizarTabla(this->socios);
 }
 
