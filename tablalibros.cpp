@@ -10,10 +10,12 @@ tablaLibros::tablaLibros(QWidget *parent)
     ui->setupUi(this);
 
     // Colocar nombre a ventana
-    this->setWindowTitle("Administración libros");
+    this->setWindowTitle("Administrar libros");
 
     //  Adaptar encabezado de tabla
     ui->tabla->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    // Centrar encabezado vertical
+    ui->tabla->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
 
     // Ordenar los elementos de la tabla
     ui->tabla->setSortingEnabled(true);
@@ -22,15 +24,13 @@ tablaLibros::tablaLibros(QWidget *parent)
     connect(ui->modificarLibro, &QPushButton::clicked, this, &tablaLibros::onModificarLibro);
     connect(ui->eliminarLibro, &QPushButton::clicked, this, &tablaLibros::onEliminarLibro);
 
-    // Guardar en archivo
-    connect(ui->botonGuardarLista, &QPushButton::clicked, this, &tablaLibros::guardarEnCSV);
-
     // Filtro general y radio buttons
     connect(ui->campoFiltroGeneral, &QLineEdit::textChanged, this, &tablaLibros::filtrarLibros);
     connect(ui->radioTitulo, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
     connect(ui->radioAutor, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
     connect(ui->radioGenero, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
     connect(ui->radioEditorial, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
+    connect(ui->actualizarLista, &QPushButton::clicked, this, &tablaLibros::actualizarTabla);
 }
 
 tablaLibros::~tablaLibros()
@@ -127,6 +127,7 @@ void tablaLibros::onEliminarLibro()
 }
 void tablaLibros::actualizarTabla()
 {
+    ui->campoFiltroGeneral->clear();
     ui->tabla->setRowCount(mainWindow->libros.size());
 
     for (int i = 0; i < mainWindow->libros.size(); ++i) {
@@ -201,11 +202,6 @@ void tablaLibros::filtrarLibros()
             fila++;
         }
     }
-}
-void tablaLibros::mostrarTodosLosLibros()
-{
-    // Llama a filtrarLibros para refrescar la tabla con todos los libros
-    filtrarLibros();
 }
 
 // ARCHIVO CSV

@@ -6,6 +6,8 @@ PagarCuota::PagarCuota(QWidget *parent)
     , ui(new Ui::PagarCuota)
 {
     ui->setupUi(this);
+    // Colocar nombre a ventana
+    this->setWindowTitle("Actualizar pagos");
 }
 
 PagarCuota::~PagarCuota()

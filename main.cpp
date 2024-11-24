@@ -3,11 +3,18 @@
 #include "ventanasocios.h"
 #include "tablalibros.h"
 #include <QApplication>
+#include <QFontDatabase>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    // Cargar la fuente Montserrat
+    int fontId = QFontDatabase::addApplicationFont(":/Fuentes/Montserrat-Regular.ttf");
+    if (fontId != -1) {
+        QString fontFamily = QFontDatabase::applicationFontFamilies(fontId).at(0);
+        a.setFont(QFont(fontFamily));
+    }
     // Leer el archivo CSS desde los recursos
     QFile file(":/recursos/estilos.css");  // Asegurarse de que la ruta sea correcta
     if (file.open(QFile::ReadOnly | QFile::Text)) {

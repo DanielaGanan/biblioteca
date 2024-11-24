@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>254</width>
-    <height>104</height>
+    <width>372</width>
+    <height>139</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/recursos/Img/pagina-de-inicio-de-sesion.png</normaloff>:/recursos/Img/pagina-de-inicio-de-sesion.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
@@ -29,6 +33,10 @@
    </item>
    <item row="1" column="1">
     <widget class="QPushButton" name="botInicioSesion">
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;Haettenschweiler&quot;;
+letter-spacing: 1.2px;</string>
+     </property>
      <property name="text">
       <string>Iniciar sesion</string>
      </property>
@@ -51,16 +59,32 @@
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Montserrat</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;Montserrat&quot;;
+color: white;
+font-style: italic;
+</string>
+       </property>
        <property name="text">
         <string>Usuario</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="usuarioLineEdit"/>
-     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;Montserrat&quot;;
+color: white;
+font-style: italic;</string>
+       </property>
        <property name="text">
         <string>Contraseña</string>
        </property>
@@ -68,8 +92,26 @@
      </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="contrasenaLineEdit">
+       <property name="styleSheet">
+        <string notr="true">height: 35px;
+font-size: 14px;</string>
+       </property>
        <property name="echoMode">
         <enum>QLineEdit::EchoMode::Password</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="usuarioLineEdit">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">height: 35px;
+font-size: 14px;</string>
        </property>
       </widget>
      </item>
@@ -77,6 +119,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

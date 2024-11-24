@@ -5,6 +5,9 @@ FormularioUsuarios::FormularioUsuarios(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::FormularioUsuarios)
 {
+    // Colocar nombre a ventana
+    this->setWindowTitle("Agregar nuevo usuario");
+
     ui->setupUi(this);
     connect(ui->botones, &QDialogButtonBox::accepted, this, &FormularioUsuarios::on_aceptar);
     connect(ui->botones, &QDialogButtonBox::rejected, this, &FormularioUsuarios::reject);

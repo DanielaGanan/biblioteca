@@ -33,7 +33,6 @@ private slots:
     void onEliminarLibro();
     void actualizarLibro(int fila, const libro &libro);
     void filtrarLibros();
-    void mostrarTodosLosLibros();
     void guardarEnCSV();
 
 private:

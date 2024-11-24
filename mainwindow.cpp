@@ -20,6 +20,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     connect(ui->botCerrarSesion, &QPushButton::clicked, this, &MainWindow::on_cerrarSesion);
 
+    // ------------ MOSTRAR LEYENDA ------------
+    ui->abrirVentanaSocios->setToolTip("Gestionar socios");
+    ui->abrirVentanaLibros->setToolTip("Ver lista de libros");
+    ui->abrirVentanaUsuarios->setToolTip("Gestionar usuarios");
+    ui->abrirVentanaPagos->setToolTip("Controlar pagos");
+    ui->abrirVentanaPrestamos->setToolTip("Registrar prestamos");
+    ui->abrirVentanaDevoluciones->setToolTip("Registrar devoluciones");
+    ui->botCerrarSesion->setToolTip("Cerrar sesion / Cambiar de usuario");
+
 }
 
 MainWindow::~MainWindow()
@@ -75,4 +84,5 @@ void MainWindow::on_abrirVentanaSocios_clicked()
     ventanaSocios->show();
     this->ventanaSocios->actualizarTabla(this->socios);
 }
+
 
