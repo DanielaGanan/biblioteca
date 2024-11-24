@@ -32,6 +32,16 @@ QRadioButton {
     color: white;
 }
 
+QDateEdit {
+    color: black;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #f2f2f2;  /* Fondo gris claro */
+    border: 1px solid #ccc;  /* Borde gris */
+    border-radius: 5px;  /* Bordes redondeados */
+    transition: border-color 0.3s;
+}
+
 QSpinBox {
     color: black;
     font-size: 14px;
@@ -55,6 +65,8 @@ QComboBox QAbstractItemView
 	color:yellow;
 	background-color: black;
 }
+
+
 
 QLineEdit {
     color: black;
