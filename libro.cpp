@@ -1,5 +1,8 @@
 #include "libro.h"
 
+libro::libro()
+    : m_titulo(""), m_autor(""), m_genero(""), m_editorial(""), m_año(0), m_isbn(""), m_stock(0) {}
+
 libro::libro(const QString &titulo, const QString &autor, const QString &genero, const QString &editorial, int año, const QString &isbn, int stock)
     : m_titulo(titulo), m_autor(autor), m_genero(genero), m_editorial(editorial), m_año(año), m_isbn(isbn), m_stock(stock)
 {}

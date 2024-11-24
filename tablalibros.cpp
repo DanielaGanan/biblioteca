@@ -2,7 +2,6 @@
 #include "ui_tablalibros.h"
 #include "mainwindow.h"
 
-
 tablaLibros::tablaLibros(QWidget *parent)
     : QWidget(parent),
     ui(new Ui::tablaLibros),
@@ -10,32 +9,28 @@ tablaLibros::tablaLibros(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Colocar nombre a ventana
+    this->setWindowTitle("Administración libros");
+
+    //  Adaptar encabezado de tabla
+    ui->tabla->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Ordenar los elementos de la tabla
+    ui->tabla->setSortingEnabled(true);
+
     connect(ui->agregarLibro, &QPushButton::clicked, this, &tablaLibros::onAgregarLibro);
     connect(ui->modificarLibro, &QPushButton::clicked, this, &tablaLibros::onModificarLibro);
     connect(ui->eliminarLibro, &QPushButton::clicked, this, &tablaLibros::onEliminarLibro);
 
-    // conexion botones de busqeuda y filtrado
-    connect(ui->botonBuscar, &QPushButton::clicked, this, &tablaLibros::filtrarLibros);
-    connect(ui->mostrarTodos, &QPushButton::clicked, this, &tablaLibros::mostrarTodosLosLibros);
-
     // Guardar en archivo
     connect(ui->botonGuardarLista, &QPushButton::clicked, this, &tablaLibros::guardarEnCSV);
 
-    // Cargar libros desde CSV
-    connect(ui->botonCargarLista, &QPushButton::clicked, this, &tablaLibros::cargarDesdeCSV);
-
-    // Colocar nombre a ventana
-    this->setWindowTitle("Administración libros");
-
     // Filtro general y radio buttons
-    // En el constructor de la clase tablaLibros:
     connect(ui->campoFiltroGeneral, &QLineEdit::textChanged, this, &tablaLibros::filtrarLibros);
     connect(ui->radioTitulo, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
     connect(ui->radioAutor, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
     connect(ui->radioGenero, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
     connect(ui->radioEditorial, &QRadioButton::toggled, this, &tablaLibros::filtrarLibros);
-
-
 }
 
 tablaLibros::~tablaLibros()
@@ -62,6 +57,8 @@ void tablaLibros::onAgregarLibro()
 
         // Actualiza la tabla
         actualizarTabla();
+
+        guardarEnCSV();
     }
 }
 void tablaLibros::actualizarLibro(int fila, const libro &libro)
@@ -77,6 +74,8 @@ void tablaLibros::actualizarLibro(int fila, const libro &libro)
     ui->tabla->setItem(fila, 4, new QTableWidgetItem(QString::number(libro.getAño())));
     ui->tabla->setItem(fila, 5, new QTableWidgetItem(libro.getIsbn()));
     ui->tabla->setItem(fila, 6, new QTableWidgetItem(QString::number(libro.getStock())));
+
+    guardarEnCSV();
 }
 void tablaLibros::onModificarLibro()
 {
@@ -113,6 +112,7 @@ void tablaLibros::onModificarLibro()
     } else {
         QMessageBox::warning(this, "Error", "Por favor selecciona un libro para modificar.");
     }
+    guardarEnCSV();
 }
 void tablaLibros::onEliminarLibro()
 {
@@ -123,13 +123,14 @@ void tablaLibros::onEliminarLibro()
     } else {
         QMessageBox::warning(this, "Error", "Por favor selecciona un libro para eliminar.");
     }
+    guardarEnCSV();
 }
 void tablaLibros::actualizarTabla()
 {
-    ui->tabla->setRowCount(libros.size());
+    ui->tabla->setRowCount(mainWindow->libros.size());
 
-    for (int i = 0; i < libros.size(); ++i) {
-        const libro &libroActual = libros[i];
+    for (int i = 0; i < mainWindow->libros.size(); ++i) {
+        const libro &libroActual = mainWindow->libros[i];
 
         // Creamos un QVector de QStrings que contiene los valores de cada atributo del libro
         QVector<QString> datosLibro = {
@@ -200,59 +201,9 @@ void tablaLibros::filtrarLibros()
             fila++;
         }
     }
-    /*
-    // Obtiene los textos de los campos de búsqueda
-    QString tituloFiltro = ui->campoTituloBusqueda->text();
-    QString autorFiltro = ui->campoAutorBusqueda->text();
-    QString generoFiltro = ui->campoGeneroBusqueda->text();
-    QString editorialFiltro = ui->campoEditorialBusqueda->text();
-
-
-
-    // Limpia la tabla visualmente
-    ui->tabla->clearContents();
-    ui->tabla->setRowCount(0);
-
-    // Itera sobre la lista de libros y agrega solo los que coinciden con los filtros
-    int fila = 0;
-    for (const libro &libroActual : libros) {
-        bool coincide = true;
-
-        if (!tituloFiltro.isEmpty() && !libroActual.getTitulo().contains(tituloFiltro, Qt::CaseInsensitive)) {
-            coincide = false;
-        }
-        if (!autorFiltro.isEmpty() && !libroActual.getAutor().contains(autorFiltro, Qt::CaseInsensitive)) {
-            coincide = false;
-        }
-        if (!generoFiltro.isEmpty() && !libroActual.getGenero().contains(generoFiltro, Qt::CaseInsensitive)) {
-            coincide = false;
-        }
-        if (!editorialFiltro.isEmpty() && !libroActual.getEditorial().contains(editorialFiltro, Qt::CaseInsensitive)) {
-            coincide = false;
-        }
-
-        if (coincide) {
-            // Agrega el libro a la tabla si coincide con los filtros
-            ui->tabla->insertRow(fila);
-            ui->tabla->setItem(fila, 0, new QTableWidgetItem(libroActual.getTitulo()));
-            ui->tabla->setItem(fila, 1, new QTableWidgetItem(libroActual.getAutor()));
-            ui->tabla->setItem(fila, 2, new QTableWidgetItem(libroActual.getGenero()));
-            ui->tabla->setItem(fila, 3, new QTableWidgetItem(libroActual.getEditorial()));
-            ui->tabla->setItem(fila, 4, new QTableWidgetItem(QString::number(libroActual.getAño())));
-            ui->tabla->setItem(fila, 5, new QTableWidgetItem(libroActual.getIsbn()));
-            ui->tabla->setItem(fila, 6, new QTableWidgetItem(QString::number(libroActual.getStock())));
-            fila++;
-        }
-    }*/
 }
 void tablaLibros::mostrarTodosLosLibros()
 {
-    // Limpia los campos de búsqueda
-    ui->campoTituloBusqueda->clear();
-    ui->campoAutorBusqueda->clear();
-    ui->campoGeneroBusqueda->clear();
-    ui->campoEditorialBusqueda->clear();
-
     // Llama a filtrarLibros para refrescar la tabla con todos los libros
     filtrarLibros();
 }
@@ -333,7 +284,10 @@ void tablaLibros::cargarDesdeCSV() {
 
                 // Crear libro y agregarlo a la lista
                 libro nuevoLibro(titulo, autor, genero, editorial, año, isbn, stock);
-                libros.append(nuevoLibro);
+
+                // libros.append(nuevoLibro);
+
+                mainWindow->libros.append(nuevoLibro);
             }
         }
         archivo.close();
@@ -343,4 +297,8 @@ void tablaLibros::cargarDesdeCSV() {
     }
 }
 
+// Ventana MainWindow
+void tablaLibros::setVentanaMainWindow(MainWindow *mainWindow) {
+    this->mainWindow = mainWindow;
+}
 

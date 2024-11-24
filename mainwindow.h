@@ -12,6 +12,7 @@
 class InicioSesion;
 class VentanaUsuarios;
 class VentanaSocios;
+class tablaLibros;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,6 +30,7 @@ public:
     void setVentanaUsuarios(VentanaUsuarios *ventanaUsuarios);
     void setVentanaInicioSesion(InicioSesion *inicioSesion);
     void setVentanaSocios(VentanaSocios *ventanaSocios);
+    void setTablaLibros(tablaLibros *tablaLibro);
     void cargarArchivo();
 
 
@@ -54,5 +56,6 @@ private:
     VentanaUsuarios *ventanaUsuarios;
     InicioSesion *inicioSesion;
     VentanaSocios *ventanaSocios;
+    tablaLibros *tablalibro;
 };
 #endif // MAINWINDOW_H
