@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "iniciosesion.h"
 #include "ventanasocios.h"
+#include "ventanapagoscuotas.h"
 
 #include <QApplication>
 
@@ -25,17 +26,21 @@ int main(int argc, char *argv[])
 
     MainWindow mW;                  // Ventana principal
     InicioSesion is;                // Ventana inicio sesión
-    is.show();                      // Mostrar ventana inicio de sesión
     VentanaUsuarios vU;             // Ventana usuarios
     VentanaSocios vS;               // Ventana socios
+    VentanaPagosCuotas vP;          // Ventana pagos cuotas
 
     mW.setVentanaInicioSesion(&is);
     mW.setVentanaUsuarios(&vU);
     mW.setVentanaSocios(&vS);
+    mW.setVentanaPagosCuotas(&vP);
     is.setVentanaMainWindow(&mW);
     vU.setVentanaMainWindow(&mW);
     vS.setVentanaMainWindow(&mW);
+    vP.setVentanaMainWindow(&mW);
+
     vS.cargarArchivo(); //carga el archivo de socios
-    is.show();
+    vP.cargarArchivo(); //carga el archivo de pagosCuotas
+    is.show(); //Mostrar ventana de inicio de sesión
     return a.exec();
 }

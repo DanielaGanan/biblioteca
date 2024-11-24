@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     agregarnuevolibro.cpp \
+    agregarpago.cpp \
     agregarprestamo.cpp \
     agregarsocio.cpp \
     archivo.cpp \
@@ -19,17 +20,19 @@ SOURCES += \
     libro.cpp \
     main.cpp \
     mainwindow.cpp \
-    pagarcuota.cpp \
+    pagoscuotas.cpp \
     persona.cpp \
     prestamo.cpp \
     socio.cpp \
     tablalibros.cpp \
     usuario.cpp \
+    ventanapagoscuotas.cpp \
     ventanasocios.cpp \
     ventanausuarios.cpp
 
 HEADERS += \
     agregarnuevolibro.h \
+    agregarpago.h \
     agregarprestamo.h \
     agregarsocio.h \
     archivo.h \
@@ -38,26 +41,28 @@ HEADERS += \
     iniciosesion.h \
     libro.h \
     mainwindow.h \
-    pagarcuota.h \
+    pagoscuotas.h \
     persona.h \
     prestamo.h \
     socio.h \
     tablalibros.h \
     usuario.h \
+    ventanapagoscuotas.h \
     ventanasocios.h \
     ventanausuarios.h
     ventanausuarios.h
 
 FORMS += \
     agregarnuevolibro.ui \
+    agregarpago.ui \
     agregarprestamo.ui \
     agregarsocio.ui \
     formulariousuario.ui \
     iniciosesion.ui \
     mainwindow.ui \
-    pagarcuota.ui \
     prestamo.ui \
     tablalibros.ui \
+    ventanapagoscuotas.ui \
     ventanasocios.ui \
     ventanausuarios.ui
 
