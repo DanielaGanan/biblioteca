@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "pagarcuota.h"
 #include "ui_pagarcuota.h"
 
@@ -85,3 +86,5 @@ void PagarCuota::buscarPagoSocio(Socio)
 
 }
 */
+=======
+>>>>>>> 944893d066873667d03f804d52f8ac02a7237a45

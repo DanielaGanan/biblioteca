@@ -2,6 +2,8 @@
 #include "iniciosesion.h"
 #include "ventanasocios.h"
 #include "tablalibros.h"
+#include "ventanapagoscuotas.h"
+
 #include <QApplication>
 #include <QFontDatabase>
 
@@ -28,21 +30,26 @@ int main(int argc, char *argv[])
 
     MainWindow mW;                  // Ventana principal
     InicioSesion is;                // Ventana inicio sesión
-    is.show();                      // Mostrar ventana inicio de sesión
     VentanaUsuarios vU;             // Ventana usuarios
     VentanaSocios vS;               // Ventana socios
     tablaLibros tL;
+    VentanaPagosCuotas vP;          // Ventana pagos cuotas
 
     mW.setVentanaInicioSesion(&is);
     mW.setVentanaUsuarios(&vU);
     mW.setVentanaSocios(&vS);
     mW.setTablaLibros(&tL);
+    mW.setVentanaPagosCuotas(&vP);
+
     is.setVentanaMainWindow(&mW);
     vU.setVentanaMainWindow(&mW);
     vS.setVentanaMainWindow(&mW);
-    tL.setVentanaMainWindow(&mW);
-    vS.cargarArchivo();             //carga el archivo de socios
-    tL.cargarDesdeCSV();
-    is.show();
+    vP.setVentanaMainWindow(&mW);
+
+    vS.cargarArchivo(); //carga el archivo de socios
+    vP.cargarArchivo(); //carga el archivo de pagosCuotas
+    tL.cargarDesdeCSV(); //carga el archivo de libros
+    is.show(); //Mostrar ventana de inicio de sesión
+
     return a.exec();
 }
