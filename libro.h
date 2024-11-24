@@ -6,6 +6,7 @@ class libro
 {
 public:
     // Constructor libro
+    libro();
     libro(const QString &titulo, const QString &autor, const QString &genero, const QString &editorial, int año, const QString &isbn, int stock);
 
     // Métodos getters

@@ -5,10 +5,12 @@
 #include "ui_mainwindow.h"
 #include "ventanausuarios.h"
 #include "ventanasocios.h"
+#include "libro.h"
 
+// Inicializamos la lista estática
 QList<Usuario> MainWindow::usuarios;
 QList<clasePrestamo> MainWindow::prestamos;
-QList<libro> MainWindow::libros;        // Inicializamos la lista estática
+QList<libro> MainWindow::libros;
 QVector<QStringList> MainWindow::socios;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -40,13 +42,15 @@ void MainWindow::setVentanaSocios(VentanaSocios *ventanaSocios)
 {
     this->ventanaSocios = ventanaSocios;
 }
-
+void MainWindow::setTablaLibros(tablaLibros *tablaLibro) {
+    this->tablalibro = tablaLibro;
+}
 
 // ------------ MENU DE NAVEGACION ------------------
 void MainWindow::on_abrirVentanaLibros_clicked()
 {
-    tablaLibros *ventana = new tablaLibros();
-    ventana->show();
+    tablalibro->show();
+    this->tablalibro->actualizarTabla();
 }
 void MainWindow::on_abrirVentanaUsuarios_clicked()
 {
