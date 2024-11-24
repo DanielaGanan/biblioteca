@@ -15,14 +15,13 @@ QMainWindow {
 	font-family: 'Montserrat', sans-serif;
 }
 
-/* Estilo para QWidget (puede aplicarse a cualquier ventana secundaria o contenedor) */
+
 QWidget {
-    	/* background-color: #111111;   Fondo Negro Mate para los widgets */
+    	background-color: #111111; 
     	border-radius: 5px;  
 	font-family: 'Montserrat', sans-serif;
 }
 
-/* Estilo para los QPushButton (botones) */
 QPushButton {
     	font-size: 14px;
     	color: #111111;  /* Texto Negro Mate */
@@ -37,29 +36,29 @@ QPushButton {
 }
 
 QPushButton:hover {
-    	background-color: #00B2FF; /* Un verde más oscuro cuando el mouse está sobre el botón */
+    	background-color: #00B2FF;
 }
 
 QRadioButton {
-    color: white;
+    	color: white;
 	font-family: 'Montserrat', sans-serif;
 }
 
 QDateEdit {
-    color: black;
-    font-size: 14px;
-    padding: 10px;
-    background-color: #f2f2f2;  /* Fondo gris claro */
-    border: 1px solid #ccc;  /* Borde gris */
-    border-radius: 5px;  /* Bordes redondeados */
-    transition: border-color 0.3s;
+    	font-family: 'Montserrat', sans-serif;
+	color: black;
+    	font-size: 14px;
+    	padding: 5px;
+    	background-color: #f2f2f2; 
+    	border: 1px solid #ccc;
+    	border-radius: 5px;
 }
 
 QSpinBox {
 	font-family: 'Montserrat', sans-serif;
     	color: black;
     	font-size: 14px;
-    	padding: 10px;
+    	padding: 5px;
    	background-color: #f2f2f2;  /* Fondo gris claro */
     	border: 1px solid #ccc;  /* Borde gris */
     	border-radius: 5px;  /* Bordes redondeados */
@@ -69,24 +68,23 @@ QComboBox {
 	font-family: 'Montserrat', sans-serif;
     	color: black;
     	font-size: 14px;
-    	padding: 10px;
+    	padding: 5px;
     	background-color: #f2f2f2;  /* Fondo gris claro */
     	border: 1px solid #ccc;  /* Borde gris */
     	border-radius: 2px;  /* Bordes redondeados */
-    transition: border-color 0.3s;
 }
 
 QComboBox QAbstractItemView {
-	color:yellow;
-	background-color: black;
+	color: white;
+	font-family: 'Montserrat', sans-serif;
 }
 
-
-
 QLineEdit {
-    	color: black;
+	font-size: 14px;
+    	font-family: 'Montserrat', sans-serif;
+	color: black;
     	padding: 3px;
-    	background-color: #f2f2f2; 
+    	background-color: #cacaca; 
     	border: 1px solid #ccc; 
    	border-radius: 5px;  
 }
@@ -102,8 +100,7 @@ QTableWidget {
     border-radius: 2px;
     background-color: #ffffff; 
     selection-background-color: #4CAF50;  
-    gridline-color: #ddd;  
-	
+    gridline-color: #cacaca;  
 }
 
 QHeaderView {
@@ -125,7 +122,7 @@ QTableWidget::item {
     	width: 150px;
     	color: black;
     	padding: 2px;
-    	border: 1px solid #111111;
+    	border: 1px solid #cacaca;
 }
 
 QTableWidget::item:selected {
@@ -178,8 +175,9 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
 }
 
 QLabel {
-    font-size: 12px;
-    color: #fff; 
+    font-size: 14px;
+    color: #fff;
+    background-color: transparent; 
 }
 
 QMessageBox {

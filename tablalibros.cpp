@@ -13,6 +13,7 @@ tablaLibros::tablaLibros(QWidget *parent)
     this->setWindowTitle("Administrar libros");
 
     //  Adaptar encabezado de tabla
+    ui->tabla->setColumnWidth(0, 200);
     ui->tabla->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     // Centrar encabezado vertical
     ui->tabla->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
