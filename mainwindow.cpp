@@ -7,12 +7,8 @@
 #include "libro.h"
 #include "ventanapagoscuotas.h"
 
-<<<<<<< HEAD
-QVector<QStringList> MainWindow::usuarios;
-=======
 // Inicializamos la lista estática
-QList<Usuario> MainWindow::usuarios;
->>>>>>> origin/master
+QVector<QStringList> MainWindow::usuarios;
 QList<clasePrestamo> MainWindow::prestamos;
 QList<libro> MainWindow::libros;
 QVector<QStringList> MainWindow::socios;

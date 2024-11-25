@@ -35,22 +35,12 @@ public:
     void cargarArchivo();
     void setVentanaPagosCuotas(VentanaPagosCuotas *ventanaPagosCuotas);
 
-
-<<<<<<< HEAD
-    // Declaramos las listas de tipo 'static' para que uso global
-   // static QList<Usuario> usuarios;
-    static QList<clasePrestamo> prestamos;
-    static QList<libro> libros;
-    static QVector<QStringList> socios;
-    static QVector<QStringList> usuarios;
-=======
     // Declaramos las listas de tipo 'static' para uso global
-    static QList<Usuario> usuarios;
+    static QVector<QStringList> usuarios;
     static QList<clasePrestamo> prestamos;
     static QList<libro> libros;
     static QVector<QStringList> socios;
     static QVector<QStringList> pagosCuotas;
->>>>>>> origin/master
 
 private slots:
     // Abrir ventana de libros

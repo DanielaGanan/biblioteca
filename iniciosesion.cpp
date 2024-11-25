@@ -22,7 +22,6 @@ void InicioSesion::setVentanaMainWindow(MainWindow *mainWindow) {
 }
 
 void InicioSesion::on_iniciarSesion() {
-    mainWindow->show();
     QString nombreUsuario = ui->usuarioLineEdit->text();
     QString contraseña = ui->contrasenaLineEdit->text();
 

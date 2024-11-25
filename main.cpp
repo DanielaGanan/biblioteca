@@ -47,14 +47,10 @@ int main(int argc, char *argv[])
     vP.setVentanaMainWindow(&mW);
 
     vS.cargarArchivo(); //carga el archivo de socios
-<<<<<<< HEAD
     vU.cargarArchivo();
-    is.show();
-=======
     vP.cargarArchivo(); //carga el archivo de pagosCuotas
     tL.cargarDesdeCSV(); //carga el archivo de libros
     is.show(); //Mostrar ventana de inicio de sesión
 
->>>>>>> origin/master
     return a.exec();
 }
