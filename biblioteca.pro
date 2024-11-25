@@ -23,6 +23,7 @@ SOURCES += \
     pagoscuotas.cpp \
     persona.cpp \
     prestamo.cpp \
+    selectsocio.cpp \
     socio.cpp \
     tablalibros.cpp \
     usuario.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
     pagoscuotas.h \
     persona.h \
     prestamo.h \
+    selectsocio.h \
     socio.h \
     tablalibros.h \
     usuario.h \
@@ -61,6 +63,7 @@ FORMS += \
     iniciosesion.ui \
     mainwindow.ui \
     prestamo.ui \
+    selectsocio.ui \
     tablalibros.ui \
     ventanapagoscuotas.ui \
     ventanasocios.ui \

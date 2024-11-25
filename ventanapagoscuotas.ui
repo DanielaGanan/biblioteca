@@ -50,14 +50,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="lbDniUsuario">
+       <widget class="QRadioButton" name="rbDniUsuario">
         <property name="text">
          <string>DNI Usuario</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="rbIdSocio">
+       <widget class="QRadioButton" name="rbDniSocio">
         <property name="text">
          <string>DNI Socio</string>
         </property>

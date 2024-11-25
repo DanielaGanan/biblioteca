@@ -39,14 +39,13 @@ public:
     void setVentanaPagosCuotas(VentanaPagosCuotas *ventanaPagosCuotas);
     void setVentanaPrestamo(Prestamo *ventanaPrestamo);
 
-
     // Definicion en statico para usarlo global
-
+    static QVector<QStringList> prestamos;
+    static QVector<QStringList> usuarios;
     static QList<libro> libros;
     static QVector<QStringList> socios;
     static QVector<QStringList> pagosCuotas;
-    static QVector<QStringList> usuarios;
-    static QVector<QStringList> prestamos;
+    static QStringList usuarioLogeado;
 
 private slots:
     // Abrir ventana de libros

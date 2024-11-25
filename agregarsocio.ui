@@ -133,6 +133,9 @@
        </item>
        <item row="10" column="1">
         <widget class="QComboBox" name="cbxEstado">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
          <item>
           <property name="text">
            <string>Activo</string>

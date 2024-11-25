@@ -9,10 +9,11 @@
 
 // Inicializamos la lista estática
 QVector<QStringList> MainWindow::usuarios;
+QVector<QStringList> MainWindow::prestamos;
 QList<libro> MainWindow::libros;
 QVector<QStringList> MainWindow::socios;
 QVector<QStringList> MainWindow::pagosCuotas;
-QVector<QStringList> MainWindow::prestamos;
+QStringList MainWindow::usuarioLogeado;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
