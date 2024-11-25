@@ -7,16 +7,12 @@
 #include "libro.h"
 #include "ventanapagoscuotas.h"
 
-<<<<<<< HEAD
-QVector<QStringList> MainWindow::usuarios;
-=======
 // Inicializamos la lista estática
-QList<Usuario> MainWindow::usuarios;
->>>>>>> origin/master
-QList<clasePrestamo> MainWindow::prestamos;
+QVector<QStringList> MainWindow::usuarios;
 QList<libro> MainWindow::libros;
 QVector<QStringList> MainWindow::socios;
 QVector<QStringList> MainWindow::pagosCuotas;
+QVector<QStringList> MainWindow::prestamos;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -64,6 +60,11 @@ void MainWindow::setVentanaPagosCuotas(VentanaPagosCuotas *ventanaPagosCuotas)
     this->ventanaPagosCuotas = ventanaPagosCuotas;
 }
 
+void MainWindow::setVentanaPrestamo(Prestamo *ventanaPrestamo)
+{
+    this->ventanaPrestamo = ventanaPrestamo;
+}
+
 // ------------ MENU DE NAVEGACION ------------------
 void MainWindow::on_abrirVentanaLibros_clicked()
 {
@@ -77,8 +78,8 @@ void MainWindow::on_abrirVentanaUsuarios_clicked()
 }
 void MainWindow::on_abrirVentanaPrestamos_clicked()
 {
-    Prestamo *ventana = new Prestamo();
-    ventana->show();
+    ventanaPrestamo->show();
+    ventanaPrestamo->llenarTabla(prestamos);
 }
 void MainWindow::on_abrirVentanaDevoluciones_clicked()
 {

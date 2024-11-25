@@ -8,12 +8,15 @@
 #include <usuario.h>
 #include <claseprestamo.h>
 #include <QList>
+#include "prestamo.h"
+#include "claseprestamo.h"
 
 class InicioSesion;
 class VentanaUsuarios;
 class VentanaSocios;
 class tablaLibros;
 class VentanaPagosCuotas;
+class Prestamo;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -34,23 +37,16 @@ public:
     void setTablaLibros(tablaLibros *tablaLibro);
     void cargarArchivo();
     void setVentanaPagosCuotas(VentanaPagosCuotas *ventanaPagosCuotas);
+    void setVentanaPrestamo(Prestamo *ventanaPrestamo);
 
 
-<<<<<<< HEAD
-    // Declaramos las listas de tipo 'static' para que uso global
-   // static QList<Usuario> usuarios;
-    static QList<clasePrestamo> prestamos;
-    static QList<libro> libros;
-    static QVector<QStringList> socios;
-    static QVector<QStringList> usuarios;
-=======
-    // Declaramos las listas de tipo 'static' para uso global
-    static QList<Usuario> usuarios;
-    static QList<clasePrestamo> prestamos;
+    // Definicion en statico para usarlo global
+
     static QList<libro> libros;
     static QVector<QStringList> socios;
     static QVector<QStringList> pagosCuotas;
->>>>>>> origin/master
+    static QVector<QStringList> usuarios;
+    static QVector<QStringList> prestamos;
 
 private slots:
     // Abrir ventana de libros
@@ -70,5 +66,6 @@ private:
     VentanaSocios *ventanaSocios;
     tablaLibros *tablalibro;
     VentanaPagosCuotas *ventanaPagosCuotas;
+    Prestamo *ventanaPrestamo;
 };
 #endif // MAINWINDOW_H

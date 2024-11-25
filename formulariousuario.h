@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include "QLineEdit"
 
+
 namespace Ui {
 class FormularioUsuarios;
 }

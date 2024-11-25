@@ -4,13 +4,14 @@
 #include <QDialog>
 #include <libro.h>
 #include <socio.h>
-#include "claseprestamo.h"
 #include <usuario.h>
 #include "QMessageBox"
 #include "QLineEdit"
 #include "QDate"
 #include "QDebug"
 #include <mainwindow.h>
+#include "claseprestamo.h"
+
 
 
 namespace Ui {
@@ -26,13 +27,20 @@ public:
     ~agregarPrestamo();
 
 
-    clasePrestamo getPrestamo() const;
-/*
-    void setPrestamoEditar(int idPrestamo, int cantidad, const QDate& fechaPrestamo,
-                           const QDate& fechaDevolucion, Usuario* usuario);*/
+    QStringList getPrestamo() const;
+
+   /* void setPrestamoEditar(int idPrestamo, int cantidad, libro* libro, Socio* socio,
+                           Usuario* usuario,
+                           const QDate& fechaPrestamo,
+                           const QDate& fechaDevolucion);*/
+
+    void setPrestamoEditar(QStringList prestamo);
 
     int validarNumero(QLineEdit* num);
     void llenarComboBox(QVector<QStringList> lista);
+    void llenarComboBoxUsuario(const QVector<QStringList>& usuarios);
+    void llenarComboBoxSocio(const QVector<QStringList>& socios);
+    void llenarComboBoxLibros(const QList<libro>& libros);
 
 
 public slots:
@@ -40,9 +48,9 @@ public slots:
 
 private:
     Ui::agregarPrestamo *ui;
-    clasePrestamo claPrestamo;
+    clasePrestamo clasePrestamos;
     Usuario* usuario;
-    // Socio socio;
+    Socio* socio;
     // Libro libro;
     MainWindow *mainWindow;
 

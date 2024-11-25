@@ -1,6 +1,7 @@
 #include <prestamo.h>
 #include "mainwindow.h"
 #include <ui_prestamo.h>
+#include "archivo.h"
 
 Prestamo::Prestamo(QWidget *parent)
     : QWidget(parent)
@@ -43,43 +44,40 @@ Prestamo::~Prestamo()
 }
 
 void Prestamo::on_agregarPrestamo(){
-/*
+
     agregarPrestamo *formulario = new agregarPrestamo;
 
-    formulario->llenarComboBox(mainWindow->usuarios);
+    formulario->llenarComboBoxUsuario(mainWindow->usuarios);
+    formulario->llenarComboBoxSocio(mainWindow->socios);
+    formulario->llenarComboBoxLibros(mainWindow->libros);
 
     formulario->setWindowTitle("Agregar prestamo");
 
     if (formulario->exec() == QDialog::Accepted) {
 
-        clasePrestamo prestamo = formulario->getPrestamo();
+        QStringList prestamoNuevo = formulario->getPrestamo();
 
-        // Verificar si el prestamos ya existe
-        for (int i = 0; i < mainWindow->prestamos.length(); i++){
-            if(mainWindow->prestamos[i].getIdPrestamo() == prestamo.getIdPrestamo()) {
-                QMessageBox::warning(this, "Agregar prestamos", "Este idprestamos ya existe", QMessageBox::Ok);
-
+        for (const QStringList &prestamo : mainWindow->prestamos) {
+            if (prestamo[0].toInt() == prestamoNuevo[0].toInt()) {
+                QMessageBox::warning(this, "Usuario Existente", "El idUsuario que intenta agregar ya existe.");
                 formulario->deleteLater();
                 return;
             }
         }
 
-        if(prestamo.getFechaPrestamo() < prestamo.getFechaDevolucion()){
-            QMessageBox::warning(this, "Agregar prestamo", "La fecha de prestamo no puede ser despues de la fecha de devolucion", QMessageBox::Ok);
-            formulario->deleteLater();
-            return;
-        }
-
         // Si no existe, agregar el nuevo prestamos
-        mainWindow->prestamos.append(prestamo);
+        mainWindow->prestamos.append(prestamoNuevo);
+
+        guardarArchivo();
 
         llenarTabla(mainWindow->prestamos);
+
+        qDebug() << "nuevo prestamo" << prestamoNuevo;
     }
-    formulario->deleteLater();*/
+    formulario->deleteLater();
 }
 
-void Prestamo::on_editarPrestamo(){/*
-
+void Prestamo::on_editarPrestamo(){
     agregarPrestamo *formulario = new agregarPrestamo;
 
     formulario->setWindowTitle("Editar prestamo");
@@ -91,75 +89,73 @@ void Prestamo::on_editarPrestamo(){/*
         return;
     }
 
-    QString prestamoSeleccionado = ui->tablaPrestamo->item(filaSeleccionada, 0)->text();
-    int indice;
+    // Obtener el índice del usuario seleccionado
+    QString id = ui->tablaPrestamo->item(filaSeleccionada, 0)->text();
+    int indice = buscarIndexPorId(id);
 
-    int prestamoId = prestamoSeleccionado.toInt();
-
-    for (int i = 0; i< mainWindow->prestamos.length(); i ++){
-        if (mainWindow->prestamos[i].getIdPrestamo() == prestamoId){
-            indice = i;
-        }
+    if (indice < 0 || indice >= mainWindow->prestamos.length()) {
+        // Mensaje si no se encuentra el prestamo
+        QMessageBox::warning(this, "Error", "No se pudo encontrar el prestamo seleccionado.", QMessageBox::Ok);
+        formulario->deleteLater();
+        return;
     }
 
-    // Para mostrar los datos en el formulario
-    int id = mainWindow->prestamos[indice].getIdPrestamo();
-    int cant = mainWindow->prestamos[indice].getCantidad();
-    QDate fprestamo = mainWindow->prestamos[indice].getFechaPrestamo();
-    QDate fdevolucion = mainWindow->prestamos[indice].getFechaDevolucion();
- //   libro* lib = mainWindow->prestamos[indice].getUsuario();
-    Usuario* usu = mainWindow->prestamos[indice].getUsuario();
+    formulario->llenarComboBoxUsuario(mainWindow->usuarios);
+    formulario->llenarComboBoxSocio(mainWindow->socios);
+    formulario->llenarComboBoxLibros(mainWindow->libros);
 
-    formulario->setPrestamoEditar();
+    // Cargar los datos del usuario en el formulario
+    QStringList prestamoActual = mainWindow->prestamos[indice];
+    formulario->setPrestamoEditar(prestamoActual);
 
-    // si se acepta se agrega un usuario
+    // Abrir el formulario y procesar los cambios si se aceptan
     if (formulario->exec() == QDialog::Accepted) {
+        QStringList prestamoNuevo = formulario->getPrestamo();
 
-        clasePrestamo prestamo = formulario->getPrestamo();
-
-        for (int i = 0; i < mainWindow->prestamos.length(); i++){
-            if (i != indice) { // Excluir el indice del usuario actual
-                if(mainWindow->prestamos[i].getIdPrestamo() == prestamo.getIdPrestamo()) {
-                    QMessageBox::warning(this, "Agregar prestamo", "Este id ya existe", QMessageBox::Ok);
+        // Validar si el nuevo id ya existe
+        for (int i = 0; i < mainWindow->prestamos.length(); i++) {
+            if (i != indice) { // Excluir el usuario actual de la validación
+                if (mainWindow->prestamos[i][0] == prestamoNuevo[0]) {
+                    QMessageBox::warning(this, "Id Prestamo Existente", "El id que intenta agregar ya existe.");
                     formulario->deleteLater();
                     return;
                 }
             }
         }
 
-        mainWindow->prestamos[indice] = prestamo;
-
+        // Reemplazar el usuario y actualizar la tabla
+        mainWindow->prestamos.replace(indice, prestamoNuevo);
+        guardarArchivo();
         llenarTabla(mainWindow->prestamos);
+        limpiarFiltros();
     }
 
-    formulario->deleteLater();*/
+    // Liberar el formulario
+    formulario->deleteLater();
 }
 
 void Prestamo::on_eliminarPrestamo(){
-    int filaSeleccionada = ui->tablaPrestamo->currentRow();
+    int indice = ui->tablaPrestamo->currentRow();
 
-    if (filaSeleccionada < 0) {
-        QMessageBox::warning(this, "Error", "Debe seleccionar un prestamo para eliminar", QMessageBox::Ok);
-        return; // Salir del método si no hay selección
-    }
+    if (indice >= 0) {
 
-    QString prestamoSeleccionado = ui->tablaPrestamo->item(filaSeleccionada, 0)->text();
-    int indice;
+        QString id = ui->tablaPrestamo->item(indice, 0)->text();
 
-    int prestamoId = prestamoSeleccionado.toInt();
+        indice = buscarIndexPorId(id);;
 
-    for (int i = 0; i< mainWindow->prestamos.length(); i ++){
-        if (mainWindow->prestamos[i].getIdPrestamo() == prestamoId){
-            indice = i;
+        //Definir el mensaje que se mostrará
+        QString Mensaje = "¿Desea eliminar el usuario con DNI " + id + "?";
+        QMessageBox::StandardButton advertencia;
+        advertencia = QMessageBox::critical(this, "Confirmar Eliminacion", Mensaje, QMessageBox::Yes|QMessageBox::No);
+
+        //Si confirma se elimina el socio
+        if (advertencia == QMessageBox::Yes)
+        {
+            mainWindow->prestamos.remove(indice);
+            guardarArchivo();
+            ui->tablaPrestamo->removeRow(indice);
+            limpiarFiltros();
         }
-    }
-
-    QMessageBox::StandardButton advertencia;
-    advertencia = QMessageBox::critical(this, "Eliminar prestamo", "¿Esta seguro de que quiere eliminar este prestamo?", QMessageBox::Yes|QMessageBox::No);
-
-    if(advertencia == QMessageBox::Yes){
-        ui->tablaPrestamo->removeRow(indice);
-        mainWindow->prestamos.removeAt(indice);
     }
 
     llenarTabla(mainWindow->prestamos);
@@ -170,47 +166,32 @@ void Prestamo::on_cerrarPrestamo(){
 }
 
 void Prestamo::on_buscarPrestamo(){
-    // que radiobutton se selecciono
-    int columna = -1;
+    //Obtener el estado de los radio buttons
+    bool porId = ui->botidPrestamo->isChecked();
+    bool porLibro = ui->botlibro->isChecked();
+    bool porSocio = ui->botsocio->isChecked();
+    bool porUsuario = ui->botusuario->isChecked();
 
-    if (ui->botidPrestamo->isChecked()) {
-        columna = 0;
-    } else if (ui->botusuario->isChecked()) {
-        columna = 1;
-    } else if (ui->botlibro->isChecked()) {
-        columna = 2;
-    } else if (ui->botsocio->isChecked()) {
-        columna = 3;
-    }
-
-    if (columna == -1) return;
-
+    //Obtener el texto a buscar
     QString texto = ui->line_buscar->text();
 
-    QList<clasePrestamo> prestamoFiltrados;
-
-    // buscar los usuarios que coincidan con el texto en la columna seleccionada
-    for (int i = 0; i < mainWindow->prestamos.length(); ++i) {
-
-        clasePrestamo prestamo = mainWindow->prestamos[i];
-
-        bool coincide = false;
-
-        switch (columna) {
-        case 0:
-            coincide = QString::number(prestamo.getIdPrestamo()).contains(texto, Qt::CaseInsensitive);
-            break;
-        case 1:
-            coincide = prestamo.getUsuario()->obtenerNombre().contains(texto, Qt::CaseInsensitive);
-            break;
-        }
-
-        // Si coincide agregar el prestamo a la lista filtrada
-        if (coincide) {
-            prestamoFiltrados.append(prestamo);
-        }
+    //De acuerdo al que fue seleccionado ejecutar la búsqueda
+    if (porId)
+    {
+        buscarPorFiltro(texto, 0);
     }
-    llenarTabla(prestamoFiltrados);
+    else if (porLibro)
+    {
+        buscarPorFiltro(texto, 1);
+    }
+    else if (porSocio)
+    {
+        buscarPorFiltro(texto, 2);
+    }
+    else if (porUsuario)
+    {
+        buscarPorFiltro(texto, 5);
+    }
 }
 
 
@@ -219,21 +200,86 @@ void Prestamo::setVentanaMainWindow(MainWindow *mainWindow) {
 }
 
 
-void Prestamo::llenarTabla(const QList<clasePrestamo> &prestamos)
+void Prestamo::llenarTabla(QVector<QStringList> datos)
 {
     // Limpiar la tabla antes de llenarla
     ui->tablaPrestamo->setRowCount(0);
 
-    for (int i = 0; i < prestamos.length(); i++){
+    QTableWidget *tablaPrestamo = ui->tablaPrestamo;
+    tablaPrestamo->setRowCount(datos.size());
 
-        ui->tablaPrestamo->insertRow(i);
-
-        ui->tablaPrestamo->setItem(i, 0, new QTableWidgetItem(QString::number(prestamos[i].getIdPrestamo())));
-        ui->tablaPrestamo->setItem(i, 1, new QTableWidgetItem(QString::number(prestamos[i].getCantidad())));
-        ui->tablaPrestamo->setItem(i, 5, new QTableWidgetItem(prestamos[i].getFechaPrestamo().toString("dd/MM/yyyy")));
-        ui->tablaPrestamo->setItem(i, 6, new QTableWidgetItem(prestamos[i].getFechaDevolucion().toString("dd/MM/yyyy")));
-        ui->tablaPrestamo->setItem(i, 4, new QTableWidgetItem(prestamos[i].getUsuario()->obtenerNombre()));
+    for (int fila = 0; fila < datos.size(); ++fila)
+    {
+        for (int columna = 0; columna < datos[fila].size(); ++columna)
+        {
+            tablaPrestamo->setItem(fila, columna, new QTableWidgetItem(datos[fila][columna]));
+        }
     }
 }
 
 
+//Método para cargar el archivo
+void Prestamo::cargarArchivo()
+{
+    Archivo *archivo = new Archivo("clasePrestamo.csv");
+    mainWindow->prestamos.append(archivo->leerArchivo());
+}
+
+//Método para guardar el archivo
+void Prestamo::guardarArchivo()
+{
+    Archivo *archivo = new Archivo("clasePrestamo.csv");
+
+    if (!archivo->guardarArchivo(mainWindow->prestamos))
+    {
+        QMessageBox::critical(this, "Error", "No se pudo guardar el archivo de prestamo");
+    }
+}
+
+
+//Retorna el indice del vector original buscando con el id
+int Prestamo::buscarIndexPorId(QString &id)
+{
+    for (int i = 0; i < mainWindow->prestamos.size(); ++i)
+    {
+        if (mainWindow->prestamos[i][0] == id)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+//Limpiar filtros
+void Prestamo::limpiarFiltros()
+{
+    ui->line_buscar->clear();
+    ui->botidPrestamo->setChecked(false);
+    ui->botlibro->setChecked(false);
+    ui->botsocio->setChecked(false);
+    ui->botusuario->setChecked(false);
+    llenarTabla(mainWindow->prestamos);
+    ui->line_buscar->setFocus();
+}
+
+//Métodos de búsqueda por nombre
+void Prestamo::buscarPorFiltro(QString &texto, int columna)
+{
+    QVector<QStringList> resultado;
+
+    if (texto.size() == 0)
+    {
+        llenarTabla(mainWindow->prestamos);
+    }
+    else
+    {
+        for (int i = 0; i < mainWindow->prestamos.size(); ++i)
+        {
+            if (mainWindow->prestamos[i][columna].startsWith(texto, Qt::CaseInsensitive))
+            {
+                resultado.append(mainWindow->prestamos[i]);
+            }
+        }
+        llenarTabla(resultado);
+    }
+}

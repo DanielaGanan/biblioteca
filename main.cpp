@@ -3,7 +3,7 @@
 #include "ventanasocios.h"
 #include "tablalibros.h"
 #include "ventanapagoscuotas.h"
-
+#include "prestamo.h"
 #include <QApplication>
 #include <QFontDatabase>
 
@@ -34,27 +34,27 @@ int main(int argc, char *argv[])
     VentanaSocios vS;               // Ventana socios
     tablaLibros tL;
     VentanaPagosCuotas vP;          // Ventana pagos cuotas
+    Prestamo p;                     // Ventana prestamo
 
     mW.setVentanaInicioSesion(&is);
     mW.setVentanaUsuarios(&vU);
     mW.setVentanaSocios(&vS);
     mW.setTablaLibros(&tL);
     mW.setVentanaPagosCuotas(&vP);
+    mW.setVentanaPrestamo(&p);
 
     is.setVentanaMainWindow(&mW);
     vU.setVentanaMainWindow(&mW);
     vS.setVentanaMainWindow(&mW);
     vP.setVentanaMainWindow(&mW);
+    p.setVentanaMainWindow(&mW);
 
     vS.cargarArchivo(); //carga el archivo de socios
-<<<<<<< HEAD
-    vU.cargarArchivo();
-    is.show();
-=======
+    p.cargarArchivo();  //carga el archivo de prestamo
+    vU.cargarArchivo();  //carga el archivo de usuarios
     vP.cargarArchivo(); //carga el archivo de pagosCuotas
     tL.cargarDesdeCSV(); //carga el archivo de libros
     is.show(); //Mostrar ventana de inicio de sesión
 
->>>>>>> origin/master
     return a.exec();
 }

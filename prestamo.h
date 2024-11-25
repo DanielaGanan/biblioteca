@@ -3,8 +3,10 @@
 
 #include <QWidget>
 #include "QDebug"
-#include <agregarprestamo.h>
-#include <claseprestamo.h>
+#include "agregarprestamo.h"
+#include "archivo.h"
+#include "mainwindow.h"
+
 
 class MainWindow;
 
@@ -21,7 +23,17 @@ public:
     ~Prestamo();
 
     void setVentanaMainWindow(MainWindow *mainWindow);
-    void llenarTabla(const QList<clasePrestamo> &prestamos);
+
+    // Clases de archivo
+    void cargarArchivo();
+    void guardarArchivo();
+
+    int buscarIndexPorId(QString &id);
+    void buscarPorFiltro(QString &texto, int columna);
+
+    void limpiarFiltros();
+
+    void llenarTabla(QVector<QStringList> datos);
 
 
 private slots:
@@ -35,6 +47,7 @@ private slots:
 private:
     Ui::Prestamo *ui;
     MainWindow *mainWindow;
+    clasePrestamo *clasePrestamos;
 
 };
 

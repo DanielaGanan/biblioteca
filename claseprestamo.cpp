@@ -1,11 +1,26 @@
 #include <claseprestamo.h>
-
-clasePrestamo::clasePrestamo(const int& idPrestamo, const int& cantidad,
-                             const QDate& fechaPrestamo, const QDate& fechaDevolucion,
-                             Usuario* usuario)
+/*
+clasePrestamo::clasePrestamo(const int& idPrestamo,
+                             const int& cantidad,
+                             const QDate& fechaPrestamo,
+                             const QDate& fechaDevolucion,
+                             Usuario* usuario,
+                             Socio* socio)
     : idPrestamo(idPrestamo), cantidad(cantidad),
-    fechaPrestamo(fechaPrestamo), fechaDevolucion(fechaDevolucion), usuario(usuario) {}
+    fechaPrestamo(fechaPrestamo), fechaDevolucion(fechaDevolucion), usuario(usuario),
+    socio(socio) {}
+*/
 
+clasePrestamo::clasePrestamo(const int& idPrestamo,
+                             const int& cantidad,
+                             const QString& libro,
+                             const QString& socio,
+                             const QString& usuario,
+                             const QDate& fechaPrestamo,
+                             const QDate& fechaDevolucion)
+    : idPrestamo(idPrestamo), cantidad(cantidad),
+        libro(libro), socio(socio), usuario(usuario),
+        fechaPrestamo(fechaPrestamo), fechaDevolucion(fechaDevolucion) {}
 
 clasePrestamo::~clasePrestamo() {}
 
@@ -27,19 +42,24 @@ QDate clasePrestamo::getFechaDevolucion() const{
     return fechaDevolucion;
 }
 
-/*
-libro clasePrestamo::getlibro() const{
+
+QString clasePrestamo::getlibro() const{
     return libro;
 }
 
 
-Socio clasePrestamo::getsocio(){
+QString clasePrestamo::getsocio() const{
     return socio;
-}*/
+}
 
-Usuario *clasePrestamo::getUsuario() const{
+QString clasePrestamo::getUsuario() const{
     return usuario;
 }
+
+QVector<QStringList> clasePrestamo::getClasePrestamo() const {
+    return Prestamos;
+}
+
 
 // Setters
 void clasePrestamo::setIdPrestamo(int nuevoidPrestamo){
@@ -57,17 +77,17 @@ void clasePrestamo::setFechaPrestamo(const QDate& nuevaFechaPrestamo){
 void clasePrestamo::setFechaDevolucion(const QDate& nuevaFechaDevolucion){
     this->fechaDevolucion = nuevaFechaDevolucion;
 }
- /*
-void clasePrestamo::setlibro(libro* nuevolibro){
+
+void clasePrestamo::setlibro(QString nuevolibro){
     this->libro = nuevolibro;
 }
 
 
-void clasePrestamo::setsocio(Socio* nuevoSocio){
+void clasePrestamo::setsocio(QString nuevoSocio){
     this->socio = nuevoSocio;
-}*/
+}
 
-void clasePrestamo::setUsuario(Usuario* nuevoUsuario){
+void clasePrestamo::setUsuario(QString nuevoUsuario){
     this->usuario = nuevoUsuario;
 }
 
