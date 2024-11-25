@@ -1,13 +1,16 @@
 #include "agregarpago.h"
 #include "ui_agregarpago.h"
 #include <QMessageBox>
+#include <QDate>
 
 agregarPago::agregarPago(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::agregarPago)
 {
     ui->setupUi(this);
-    ui->dtFechaPago->setDate(QDate::currentDate());
+
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &agregarPago::on_aceptar);
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &agregarPago::reject);
 }
 
 agregarPago::~agregarPago()
@@ -15,12 +18,16 @@ agregarPago::~agregarPago()
     delete ui;
 }
 
-void agregarPago::on_buttonBox_accepted()
+void agregarPago::on_aceptar()
 {
-    bool condicion = false; /*ui->txtDniUsuario->text().isEmpty() ||
+    bool condicion = ui->txtDniUsuario->text().isEmpty() ||
+                     ui->txtNombreUsuario->text().isEmpty() ||
+                     ui->txtApellidoUsuario->text().isEmpty() ||
                      ui->txtDniSocio->text().isEmpty() ||
-                     ui->sbIdPago->text().isEmpty() ||
-                     ui->sbMonto->text().isEmpty();*/
+                     ui->txtNombreSocio->text().isEmpty() ||
+                     ui->txtApellidoSocio->text().isEmpty() ||
+                     ui->sbIdPago->value() <= 0 ||
+                     ui->sbMonto->value() <= 0;
 
     if (condicion)
     {
@@ -30,10 +37,18 @@ void agregarPago::on_buttonBox_accepted()
     }
     else
     {
-        pago->setDniUsuario(ui->txtDniUsuario->text().toInt());
-        pago->setDniSocio(ui->txtDniSocio->text().toInt());
-        pago->setIdPago(ui->sbIdPago->value());
-        pago->setFechaPago(ui->dtFechaPago->date());
+        pago.setIdPago(ui->sbIdPago->value());
+        qDebug() << pago.getIdPago();
+        pago.setDniUsuario(ui->txtDniUsuario->text().toInt());
+        qDebug() << pago.getDniUsuario();
+        pago.setDniSocio(ui->txtDniSocio->text().toInt());
+        qDebug() << pago.getDniSocio();
+        pago.setMonto(ui->sbMonto->value());
+        qDebug() << pago.getMonto();
+        pago.setFechaPago(ui->dtFechaPago->date());
+        qDebug() << pago.getFechaPago();
+        pago.setFechaRegistro(QDate::currentDate());
+        qDebug() << pago.getFechaRegistro();
 
         accept();
     }
@@ -43,42 +58,35 @@ QStringList agregarPago::getDatosPago() const
 {
     QStringList datosPago;
 
-    datosPago.append({QString::number(this->pago->getIdPago()),
-                      QString::number(this->pago->getDniUsuario()),
-                      QString::number(this->pago->getDniSocio()),
-                      QString::number(this->pago->getMonto()),
-                      this->pago->getFechaPago().toString(),
-                      this->pago->getFechaRegistro().toString()});
+    datosPago.append({QString::number(this->pago.getIdPago()),
+                      QString::number(this->pago.getDniUsuario()),
+                      QString::number(this->pago.getDniSocio()),
+                      QString::number(this->pago.getMonto()),
+                      this->pago.getFechaPago().toString("dd/MM/yyyy"),
+                      this->pago.getFechaRegistro().toString("dd/MM/yyyy")});
 
     return datosPago;
-}
-
-void agregarPago::setDatosPago(QStringList &datosPago)
-{
-    ui->txtDniUsuario->setText(datosPago[0]);
-    ui->txtNombreUsuario->setText(datosPago[1]);
-    ui->txtApellidoUsuario->setText(datosPago[2]);
-    ui->txtDniSocio->setText(datosPago[3]);
-    ui->txtNombreSocio->setText(datosPago[4]);
-    ui->txtApellidoSocio->setText(datosPago[5]);
-    ui->sbIdPago->setValue(datosPago[6].toInt());
-    ui->sbMonto->setValue(datosPago[7].toDouble());
-    ui->dtFechaPago->setDate(QDate::fromString(datosPago[8]));
 }
 
 void agregarPago::setNuevoId(int &id)
 {
     ui->sbIdPago->setValue(id);
+    ui->dtFechaPago->setDate(QDate::currentDate());
 }
 
 void agregarPago::setSocios(QVector<QStringList> &socios)
 {
     this->socios = socios;
-    qDebug() << this->socios.size();
-    qDebug() << socios.size();
 }
 
-void agregarPago::on_pushButton_clicked()
+void agregarPago::setUsuario(QStringList &usuario)
+{
+    ui->txtDniUsuario->setText(usuario[2]);
+    ui->txtNombreUsuario->setText(usuario[0]);
+    ui->txtApellidoUsuario->setText(usuario[1]);
+}
+
+void agregarPago::on_btnBuscarDni_clicked()
 {
     if (ui->txtDniSocio->text().isEmpty())
     {
@@ -111,3 +119,11 @@ void agregarPago::on_pushButton_clicked()
     ui->txtApellidoSocio->setText(socio[1]);
 }
 
+void agregarPago::setPagoEditar(QStringList &pago)
+{
+    ui->txtDniSocio->setText(pago[2]);
+    ui->sbIdPago->setValue(pago[0].toInt());
+    ui->sbMonto->setValue(pago[3].toDouble());
+    qDebug() << pago[4];
+    ui->dtFechaPago->setDate(QDate::fromString(pago[4], "dd/MM/yyyy"));
+}

@@ -232,7 +232,7 @@ void VentanaSocios::buscar()
     }
 }
 
-//Métodos de búsqueda por nombre
+//Métodos de búsqueda por filtro
 void VentanaSocios::buscarPorFiltro(QString &texto, int columna)
 {
     QVector<QStringList> resultado;

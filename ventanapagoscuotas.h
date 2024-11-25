@@ -26,11 +26,18 @@ public:
     void guardarArchivo();
     void actualizarTabla(QVector<QStringList> &datos);
     void buscar();
+    void buscarPorFiltro(QString &buscar, int columna);
     QStringList buscarSocioDni(QString &dni);
     int obtenerUltimoIdPago();
+    int buscarIndexPorIdPago(QString &id);
+    void limpiar();
+    void verficarPagos();
 
 private slots:
     void on_btnAgregar_clicked();
+    void on_modificar();
+    void on_eliminar();
+    void on_cerrar();
 
 private:
     Ui::VentanaPagosCuotas *ui;

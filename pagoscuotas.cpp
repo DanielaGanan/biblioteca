@@ -12,7 +12,7 @@ PagosCuotas::PagosCuotas(const int &idPago,
     this->dniSocio = dniSocio,
     this->monto = monto;
     this->fechaPago = fechaPago;
-    this->fechaRegisto = fechaRegistro;
+    this->fechaRegistro = fechaRegistro;
 }
 
 PagosCuotas::~PagosCuotas() {}
@@ -45,7 +45,7 @@ QDate PagosCuotas::getFechaPago() const
 
 QDate PagosCuotas::getFechaRegistro() const
 {
-    return fechaRegisto;
+    return fechaRegistro;
 }
 
 //Setters
@@ -76,5 +76,5 @@ void PagosCuotas::setFechaPago(const QDate &fecha)
 
 void PagosCuotas::setFechaRegistro(const QDate &fecha)
 {
-    this->fechaRegisto = fecha;
+    this->fechaRegistro = fecha;
 }

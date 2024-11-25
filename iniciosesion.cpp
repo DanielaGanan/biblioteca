@@ -35,8 +35,11 @@ void InicioSesion::on_iniciarSesion() {
         qDebug() << "Datos del usuario:" << usuario;
 
         if (usuario.size() > 6 && usuario[5] == nombreUsuario && usuario[6] == contraseña) {
-            QMessageBox::information(this, "Login exitoso", "¡Bienvenido!");
+            QString mensaje = "¡Bienvenido " + usuario[0] + "!";
+            QMessageBox::information(this, "Login exitoso", mensaje);
             this->close();
+            mainWindow->usuarioLogeado.clear();
+            mainWindow->usuarioLogeado.append(usuario);
             mainWindow->show();
             ui->usuarioLineEdit->clear();
             ui->contrasenaLineEdit->clear();

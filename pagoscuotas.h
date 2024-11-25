@@ -36,7 +36,7 @@ private:
     int dniSocio;
     double monto;
     QDate fechaPago;
-    QDate fechaRegisto;
+    QDate fechaRegistro;
 };
 
 #endif // PAGOSCUOTAS_H

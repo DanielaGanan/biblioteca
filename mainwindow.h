@@ -41,6 +41,7 @@ public:
     static QList<libro> libros;
     static QVector<QStringList> socios;
     static QVector<QStringList> pagosCuotas;
+    static QStringList usuarioLogeado;
 
 private slots:
     // Abrir ventana de libros

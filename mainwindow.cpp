@@ -13,6 +13,7 @@ QList<clasePrestamo> MainWindow::prestamos;
 QList<libro> MainWindow::libros;
 QVector<QStringList> MainWindow::socios;
 QVector<QStringList> MainWindow::pagosCuotas;
+QStringList MainWindow::usuarioLogeado;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
