@@ -53,8 +53,18 @@ bool Archivo::guardarArchivo(QVector<QStringList> &datos)
     }
 
     QTextStream salida(&archivo);
+
+    int index = 0;
+
     for (const QStringList &fila : datos)
     {
+        if (index == 0)
+        {
+            salida << "\n";
+            salida << fila.join(',') << "\n";
+            index++;
+            continue;
+        }
         salida << fila.join(',') << "\n";
     }
     archivo.close();
