@@ -10,7 +10,8 @@ public:
                 const int &dniUsuario = 0,
                 const int &dniSocio = 0,
                 const double &monto = 0,
-                const QDate &fechaPago = QDate::currentDate());
+                const QDate &fechaPago = QDate::currentDate(),
+                const QDate &fechaRegistro = QDate::currentDate());
     ~PagosCuotas();
 
     //Getters
@@ -19,6 +20,7 @@ public:
     int getDniSocio() const;
     double getMonto() const;
     QDate getFechaPago() const;
+    QDate getFechaRegistro() const;
 
     //Setters
     void setIdPago(const int &id);
@@ -26,6 +28,7 @@ public:
     void setDniSocio(const int &dni);
     void setMonto(const double &monto);
     void setFechaPago(const QDate &fecha);
+    void setFechaRegistro(const QDate &fecha);
 
 private:
     int idPago;
@@ -33,6 +36,7 @@ private:
     int dniSocio;
     double monto;
     QDate fechaPago;
+    QDate fechaRegisto;
 };
 
 #endif // PAGOSCUOTAS_H

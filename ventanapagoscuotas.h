@@ -27,6 +27,7 @@ public:
     void actualizarTabla(QVector<QStringList> &datos);
     void buscar();
     QStringList buscarSocioDni(QString &dni);
+    int obtenerUltimoIdPago();
 
 private slots:
     void on_btnAgregar_clicked();
