@@ -4,13 +4,15 @@ PagosCuotas::PagosCuotas(const int &idPago,
                          const int &dniUsuario,
                          const int &dniSocio,
                          const double &monto,
-                         const QDate &fecha)
+                         const QDate &fechaPago,
+                         const QDate &fechaRegistro)
 {
     this->idPago = idPago;
-    this->dniUsuario = dniUsuario;
-    this->dniSocio = dniSocio;
+    this->dniUsuario = dniUsuario,
+    this->dniSocio = dniSocio,
     this->monto = monto;
-    this->fechaPago = fecha;
+    this->fechaPago = fechaPago;
+    this->fechaRegisto = fechaRegistro;
 }
 
 PagosCuotas::~PagosCuotas() {}
@@ -41,6 +43,11 @@ QDate PagosCuotas::getFechaPago() const
     return fechaPago;
 }
 
+QDate PagosCuotas::getFechaRegistro() const
+{
+    return fechaRegisto;
+}
+
 //Setters
 void PagosCuotas::setIdPago(const int &id)
 {
@@ -65,4 +72,9 @@ void PagosCuotas::setMonto(const double &monto)
 void PagosCuotas::setFechaPago(const QDate &fecha)
 {
     this->fechaPago = fecha;
+}
+
+void PagosCuotas::setFechaRegistro(const QDate &fecha)
+{
+    this->fechaRegisto = fecha;
 }
