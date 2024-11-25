@@ -22,6 +22,7 @@ void InicioSesion::setVentanaMainWindow(MainWindow *mainWindow) {
 }
 
 void InicioSesion::on_iniciarSesion() {
+    mainWindow->show();
     QString nombreUsuario = ui->usuarioLineEdit->text();
     QString contraseña = ui->contrasenaLineEdit->text();
 
@@ -30,8 +31,11 @@ void InicioSesion::on_iniciarSesion() {
         return;
     }
 
-    for (const Usuario& usuario : mainWindow->usuarios) {
-        if (usuario.getNombreUsuario() == nombreUsuario && usuario.getContraseña() == contraseña) {
+    for (const QStringList &usuario : mainWindow->usuarios) {
+
+        qDebug() << "Datos del usuario:" << usuario;
+
+        if (usuario.size() > 6 && usuario[5] == nombreUsuario && usuario[6] == contraseña) {
             QMessageBox::information(this, "Login exitoso", "¡Bienvenido!");
             this->close();
             mainWindow->show();
@@ -41,4 +45,6 @@ void InicioSesion::on_iniciarSesion() {
         }
     }
     QMessageBox::warning(this, "Error de inicio de sesión", "El usuario o contraseña son inválidos.");
+    ui->usuarioLineEdit->clear();
+    ui->contrasenaLineEdit->clear();
 }

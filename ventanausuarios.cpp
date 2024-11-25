@@ -1,5 +1,6 @@
 #include "ventanausuarios.h"
 #include "mainwindow.h"
+#include "archivo.h"
 #include "ui_ventanausuarios.h"
 
 VentanaUsuarios::VentanaUsuarios(QWidget *parent)
@@ -28,21 +29,6 @@ VentanaUsuarios::VentanaUsuarios(QWidget *parent)
         "Contraseña"
     });
 
-    // Agregar usuario administrador
-    admin.setNombreUsuario("admin");
-    admin.setContraseña("1234");
-
-    mainWindow->usuarios.append(admin);
-
-    ui->tabla->insertRow(0);
-    ui->tabla->setItem(0, 0, new QTableWidgetItem(admin.obtenerNombre()));
-    ui->tabla->setItem(0, 1, new QTableWidgetItem(admin.obtenerApellido()));
-    ui->tabla->setItem(0, 2, new QTableWidgetItem(admin.obtenerDni()));
-    ui->tabla->setItem(0, 3, new QTableWidgetItem(admin.obtenerDireccion()));
-    ui->tabla->setItem(0, 4, new QTableWidgetItem(admin.obtenerTelefono()));
-    ui->tabla->setItem(0, 5, new QTableWidgetItem(admin.getNombreUsuario()));
-    ui->tabla->setItem(0, 6, new QTableWidgetItem(admin.getContraseña()));
-
     // Conectamos los botones y qline
     connect(ui->botAgregar, &QPushButton::clicked, this, &VentanaUsuarios::on_agregarUsuario);
     connect(ui->botEditar, &QPushButton::clicked, this, &VentanaUsuarios::on_editarUsuario);
@@ -66,181 +52,196 @@ void VentanaUsuarios::on_agregarUsuario() {
 
     if (formulario->exec() == QDialog::Accepted) {
 
-        Usuario usuario = formulario->getUsuario();
+        QStringList nuevoUsuario = formulario->getUsuario();
 
-        // Verificar si el usuario ya existe
-        for (int i = 0; i < mainWindow->usuarios.length(); i++){
-            if(mainWindow->usuarios[i].getNombreUsuario() == usuario.getNombreUsuario()) {
-                QMessageBox::warning(this, "Agregar usuario", "Este usuario ya existe", QMessageBox::Ok);
-                formulario->deleteLater();
-                return;
-            }
-
-            if(mainWindow->usuarios[i].obtenerDni() == usuario.obtenerDni()) {
-                QMessageBox::warning(this, "Agregar usuario", "Dni inválido", QMessageBox::Ok);
-                formulario->deleteLater();
-                return;
-            }
+        if (validarSiExisteDni(nuevoUsuario[2]) || validarSiExisteUsuario(nuevoUsuario[5]))
+        {
+            QMessageBox::warning(this, "Usuario Existente", "El dni o usuario que intenta agregar ya existe");
+            formulario->deleteLater();
+            return;
         }
+
         // Si no existe, agregar el nuevo usuario
-        mainWindow->usuarios.append(usuario);
+        mainWindow->usuarios.append(nuevoUsuario);
 
         llenarTabla(mainWindow->usuarios);
+
+        guardarArchivo();
+
+        limpiarFiltros();
     }
     formulario->deleteLater();
 }
 
 void VentanaUsuarios::on_editarUsuario() {
-    FormularioUsuarios *formulario = new FormularioUsuarios;
 
+    // Crear y configurar el formulario de edición
+    FormularioUsuarios *formulario = new FormularioUsuarios;
     formulario->setWindowTitle("Editar usuario");
 
     int filaSeleccionada = ui->tabla->currentRow();
 
-    if (filaSeleccionada == -1) {
-        QMessageBox::warning(this, "Advertencia", "Debe seleccionar una fila primero.", QMessageBox::Ok);
+    if (filaSeleccionada < 0) {
+        // Mensaje si no se seleccionó una fila
+        QMessageBox::warning(this, "Advertencia", "Primero debe seleccionar el socio que desea modificar.", QMessageBox::Ok);
+        formulario->deleteLater();
         return;
     }
 
-    QString usuarioSeleccionado = ui->tabla->item(filaSeleccionada, 5)->text();
-    int indice;
+    // Obtener el índice del usuario seleccionado
+    QString dni = ui->tabla->item(filaSeleccionada, 2)->text();
+    int indice = buscarIndexPorDni(dni);
 
-    for (int i = 0; i< mainWindow->usuarios.length(); i ++){
-        if (mainWindow->usuarios[i].getNombreUsuario() == usuarioSeleccionado){
-            indice = i;
-        }
+    if (indice < 0 || indice >= mainWindow->usuarios.length()) {
+        // Mensaje si no se encuentra el usuario (precaución adicional)
+        QMessageBox::warning(this, "Error", "No se pudo encontrar el usuario seleccionado.", QMessageBox::Ok);
+        formulario->deleteLater();
+        return;
     }
 
-    // Para mostrar los datos en el formulario
-    QString nombre = mainWindow->usuarios[indice].obtenerNombre();
-    QString apellido = mainWindow->usuarios[indice].obtenerApellido();
-    int dni = mainWindow->usuarios[indice].obtenerDni();
-    QString direccion = mainWindow->usuarios[indice].obtenerDireccion();
-    QString telefono = mainWindow->usuarios[indice].obtenerTelefono();
-    QString usuario = mainWindow->usuarios[indice].getNombreUsuario();
-    QString contraseña = mainWindow->usuarios[indice].getContraseña();
+    // Cargar los datos del usuario en el formulario
+    QStringList usuarioActual = mainWindow->usuarios[indice];
+    formulario->setUsuarioEditar(usuarioActual);
 
-    formulario->setUsuarioEditar(nombre, apellido, dni, direccion, telefono, usuario, contraseña);
-
-    // si se acepta se agrega un usuario
+    // Abrir el formulario y procesar los cambios si se aceptan
     if (formulario->exec() == QDialog::Accepted) {
+        QStringList usuarioNuevo = formulario->getUsuario();
 
-        Usuario usuario = formulario->getUsuario();
-
-        for (int i = 0; i < mainWindow->usuarios.length(); i++){
-            if (i != indice) { // Excluir el indice del usuario actual
-                if(mainWindow->usuarios[i].getNombreUsuario() == usuario.getNombreUsuario()) {
-                    QMessageBox::warning(this, "Agregar usuario", "Este usuario ya existe", QMessageBox::Ok);
+        // Validar si el nuevo DNI o usuario ya existen
+        for (int i = 0; i < mainWindow->usuarios.length(); i++) {
+            if (i != indice) { // Excluir el usuario actual de la validación
+                if (mainWindow->usuarios[i][2] == usuarioNuevo[2]) {
+                    QMessageBox::warning(this, "Usuario Existente", "El DNI que intenta agregar ya existe.");
                     formulario->deleteLater();
                     return;
                 }
-
-                if(mainWindow->usuarios[i].obtenerDni() == usuario.obtenerDni()) {
-                    QMessageBox::warning(this, "Agregar usuario", "Dni inválido", QMessageBox::Ok);
+                if (mainWindow->usuarios[i][5] == usuarioNuevo[5]) {
+                    QMessageBox::warning(this, "Usuario Existente", "El usuario que intenta agregar ya existe.");
                     formulario->deleteLater();
                     return;
                 }
             }
         }
 
-        mainWindow->usuarios[indice] = usuario;
-
+        // Reemplazar el usuario y actualizar la tabla
+        mainWindow->usuarios.replace(indice, usuarioNuevo);
+        guardarArchivo();
         llenarTabla(mainWindow->usuarios);
+        limpiarFiltros();
     }
 
+    // Liberar el formulario
     formulario->deleteLater();
 }
 
+
 void VentanaUsuarios::on_eliminarUsuario() {
-    int filaSeleccionada = ui->tabla->currentRow();
+   // int filaSeleccionada = ui->tabla->currentRow();
 
-    if (filaSeleccionada < 0) {
-        QMessageBox::warning(this, "Error", "Debe seleccionar un usuario para eliminar", QMessageBox::Ok);
-        return; // Salir del método si no hay selección
-    }
+    int indice = ui->tabla->currentRow();
 
-    QString usuarioSeleccionado = ui->tabla->item(filaSeleccionada, 5)->text();
-    int indice;
+   if (indice >= 0)
+   {
+       //Con el indice de la tabla actual busco el dni
+       QString dni = ui->tabla->item(indice, 2)->text();
 
-    for (int i = 0; i< mainWindow->usuarios.length(); i ++){
-        if (mainWindow->usuarios[i].getNombreUsuario() == usuarioSeleccionado){
-            indice = i;
-        }
-    }
-/*
-    if (indice < 0) {
-        QMessageBox::warning(this, "Error", "Debe seleccionar un usuario para eliminar", QMessageBox::Ok);
-    }*/
+       //Con el dni busco el indice en el vector original
+       indice = buscarIndexPorDni(dni);
 
-    QMessageBox::StandardButton advertencia;
-    advertencia = QMessageBox::critical(this, "Eliminar usuario", "¿Esta seguro de que quiere eliminar este usuario?", QMessageBox::Yes|QMessageBox::No);
+       //Definir el mensaje que se mostrará
+       QString Mensaje = "¿Desea eliminar el usuario con DNI " + dni + "?";
+       QMessageBox::StandardButton advertencia;
+       advertencia = QMessageBox::critical(this, "Confirmar Eliminacion", Mensaje, QMessageBox::Yes|QMessageBox::No);
 
-    if(advertencia == QMessageBox::Yes){
-        ui->tabla->removeRow(indice);
-        mainWindow->usuarios.removeAt(indice);
-    }
-
+       //Si confirma se elimina el socio
+       if (advertencia == QMessageBox::Yes)
+       {
+           mainWindow->usuarios.remove(indice);
+           guardarArchivo();
+           ui->tabla->removeRow(indice);
+           limpiarFiltros();
+       }
+   }
     llenarTabla(mainWindow->usuarios);
 }
 
-Usuario VentanaUsuarios::buscarUsuarioDni(int dni){
+//Métodos de búsqueda por nombre
+void VentanaUsuarios::buscarPorFiltro(QString &texto, int columna)
+{
+    QVector<QStringList> resultado;
 
-    for (int i = 0; i < mainWindow->usuarios.length(); ++i) {
-        if(mainWindow->usuarios[i].obtenerDni() == dni) return mainWindow->usuarios[i];
+    if (texto.size() == 0)
+    {
+        llenarTabla(mainWindow->usuarios);
+    }
+    else
+    {
+        for (int i = 0; i < mainWindow->usuarios.size(); ++i)
+        {
+            if (mainWindow->usuarios[i][columna].startsWith(texto, Qt::CaseInsensitive))
+            {
+                resultado.append(mainWindow->usuarios[i]);
+            }
+        }
+        llenarTabla(resultado);
     }
 }
+
+
+QStringList VentanaUsuarios::buscarUsuarioDni(int dni){
+
+    // Recorrer el QVector<QStringList>
+    for (const QStringList &usuario : mainWindow->usuarios) {
+        // Verificar que no esté vacío y que el DNI coincida
+        if (!usuario.isEmpty() && usuario[2].toInt() == dni) { // Asumiendo que el DNI está en la posición 2
+                return usuario;
+        }
+    }
+     return QStringList();
+}
+
+QStringList VentanaUsuarios::buscarPorUsuario(QString &usuarioEnviado){
+
+    // Recorrer el QVector<QStringList>
+    for (const QStringList &usuario : mainWindow->usuarios) {
+        // Verificar que no esté vacío y que el DNI coincida
+        if (!usuario.isEmpty() && usuario[5] == usuarioEnviado) {
+            return usuario;
+        }
+    }
+    return QStringList();
+}
+
 
 
 void VentanaUsuarios::on_buscarUsuario(){
 
-    // que radiobutton se selecciono
-    int columna = -1;
+    //Obtener el estado de los radio buttons
+    bool porNombre = ui->button_Nombre->isChecked();
+    bool porApellido = ui->button_Apellido->isChecked();
+    bool porDni = ui->button_dni->isChecked();
+    bool porUsuario = ui->botton_usuario->isChecked();
 
-    if (ui->button_dni->isChecked()) {
-        columna = 0;
-    } else if (ui->button_Nombre->isChecked()) {
-        columna = 1;
-    } else if (ui->button_Apellido->isChecked()) {
-        columna = 2;
-    } else if (ui->botton_usuario->isChecked()) {
-        columna = 3;
-    }
-
-    if (columna == -1) return;
-
+    //Obtener el texto a buscar
     QString texto = ui->lineBuscar->text();
 
-    QList<Usuario> usuariosFiltrados;
-
-    // buscar los usuarios que coincidan con el texto en la columna seleccionada
-    for (int i = 0; i < mainWindow->usuarios.length(); ++i) {
-
-        Usuario usuario = mainWindow->usuarios[i];
-
-        bool coincide = false;
-
-        switch (columna) {
-        case 0:
-            coincide = QString::number(usuario.obtenerDni()).contains(texto, Qt::CaseInsensitive);
-            break;
-        case 1:
-            coincide = usuario.obtenerNombre().contains(texto, Qt::CaseInsensitive);
-            break;
-        case 2:
-            coincide = usuario.obtenerApellido().contains(texto, Qt::CaseInsensitive);
-            break;
-        case 3:
-            coincide = usuario.getNombreUsuario().contains(texto, Qt::CaseInsensitive);
-            break;
-        }
-
-        // Si coincide agregar el usuario a la lista filtrada
-        if (coincide) {
-            usuariosFiltrados.append(usuario);
-        }
+    //De acuerdo al que fue seleccionado ejecutar la búsqueda
+    if (porNombre)
+    {
+        buscarPorFiltro(texto, 0);
     }
-
-    llenarTabla(usuariosFiltrados);
+    else if (porApellido)
+    {
+        buscarPorFiltro(texto, 1);
+    }
+    else if (porDni)
+    {
+        buscarPorFiltro(texto, 2);
+    }
+    else if (porUsuario)
+    {
+        buscarPorFiltro(texto, 5);
+    }
 }
 
 void VentanaUsuarios::on_cerrarUsuario(){
@@ -251,21 +252,90 @@ void VentanaUsuarios::setVentanaMainWindow(MainWindow *mainWindow) {
     this->mainWindow = mainWindow;
 }
 
-void VentanaUsuarios::llenarTabla(const QList<Usuario>& usuarios)
+void VentanaUsuarios::llenarTabla(QVector<QStringList> datos)
 {
     // Limpiar la tabla antes de llenarla
     ui->tabla->setRowCount(0);
 
-    for (int i = 0; i < usuarios.length(); i++){
+    QTableWidget *tabla = ui->tabla;
+    tabla->setRowCount(datos.size());
 
-        ui->tabla->insertRow(i);
+    for (int fila = 0; fila < datos.size(); ++fila)
+    {
+        for (int columna = 0; columna < datos[fila].size(); ++columna)
+        {
+            tabla->setItem(fila, columna, new QTableWidgetItem(datos[fila][columna]));
+        }
+    }
+}
 
-        ui->tabla->setItem(i, 0, new QTableWidgetItem(usuarios[i].obtenerNombre()));
-        ui->tabla->setItem(i, 1, new QTableWidgetItem(usuarios[i].obtenerApellido()));
-        ui->tabla->setItem(i, 2, new QTableWidgetItem(QString::number(usuarios[i].obtenerDni())));
-        ui->tabla->setItem(i, 3, new QTableWidgetItem(usuarios[i].obtenerDireccion()));
-        ui->tabla->setItem(i, 4, new QTableWidgetItem(usuarios[i].obtenerTelefono()));
-        ui->tabla->setItem(i, 5, new QTableWidgetItem(usuarios[i].getNombreUsuario()));
-        ui->tabla->setItem(i, 6, new QTableWidgetItem(usuarios[i].getContraseña()));
+//Limpiar filtros
+void VentanaUsuarios::limpiarFiltros()
+{
+    ui->lineBuscar->clear();
+    ui->botton_usuario->setChecked(false);
+    ui->button_Apellido->setChecked(false);
+    ui->button_Nombre->setChecked(false);
+    ui->button_dni->setChecked(false);
+    llenarTabla(mainWindow->usuarios);
+    ui->lineBuscar->setFocus();
+}
+
+//Método para validar existe el dni
+bool VentanaUsuarios::validarSiExisteDni(QString nuevoDni)
+{
+    // Recorrer el DNI de los usuarios existentes y comparar con el nuevo DNI
+    for (const QStringList &usuario : mainWindow->usuarios)
+    {
+        // Verifica si el DNI (campo en la posición 2) ya existe
+        if (usuario.size() > 2 && usuario[2] == nuevoDni)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool VentanaUsuarios::validarSiExisteUsuario(QString nuevoUsu)
+{
+    for (const QStringList &usuario : mainWindow->usuarios)
+    {
+        // Verifica si el DNI (campo en la posición 2) ya existe
+        if (usuario.size() > 5 && usuario[5] == nuevoUsu)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//Retorna el indice del vector original buscando con el dni
+int VentanaUsuarios::buscarIndexPorDni(QString &dni)
+{
+    for (int i = 0; i < mainWindow->usuarios.size(); ++i)
+    {
+        if (mainWindow->usuarios[i][2] == dni)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+//Método para cargar el archivo
+void VentanaUsuarios::cargarArchivo()
+{
+    Archivo *archivo = new Archivo("usuarios.csv");
+    mainWindow->usuarios.append(archivo->leerArchivo());
+}
+
+//Método para guardar el archivo
+void VentanaUsuarios::guardarArchivo()
+{
+    Archivo *archivo = new Archivo("usuarios.csv");
+
+    if (!archivo->guardarArchivo(mainWindow->usuarios))
+    {
+        QMessageBox::critical(this, "Error", "No se pudo guardar el archivo de usuario");
     }
 }

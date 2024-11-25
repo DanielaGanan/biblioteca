@@ -27,12 +27,12 @@ public:
 
 
     clasePrestamo getPrestamo() const;
-
+/*
     void setPrestamoEditar(int idPrestamo, int cantidad, const QDate& fechaPrestamo,
-                           const QDate& fechaDevolucion, Usuario* usuario);
+                           const QDate& fechaDevolucion, Usuario* usuario);*/
 
     int validarNumero(QLineEdit* num);
-    void llenarComboBox(const QList<Usuario>& usuarios);
+    void llenarComboBox(QVector<QStringList> lista);
 
 
 public slots:
