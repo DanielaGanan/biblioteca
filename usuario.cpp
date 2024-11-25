@@ -14,6 +14,7 @@ Usuario::Usuario(const QString& nombre,
 
 Usuario::~Usuario() {}
 
+//Getters
 QString Usuario::getNombreUsuario() const {
     return NombreUsuario;
 }
@@ -22,10 +23,19 @@ QString Usuario::getContraseña() const {
     return Contraseña;
 }
 
+QVector<QStringList> Usuario::getUsuarios() const {
+    return Usuarios;
+}
+
+// Setters
 void Usuario::setNombreUsuario(QString user) {
     NombreUsuario = user;
 }
 
 void Usuario::setContraseña(QString contraseña) {
     Contraseña = contraseña;
+}
+
+void Usuario::setUsuarios(const QVector<QStringList> usuarios) {
+    this->Usuarios = usuarios;
 }

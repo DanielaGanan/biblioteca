@@ -18,11 +18,9 @@ public:
     explicit FormularioUsuarios(QWidget *parent = nullptr);
     ~FormularioUsuarios();
 
-    Usuario getUsuario() const;
+    QStringList getUsuario() const;
 
-    void setUsuarioEditar(QString nombre, QString apellido,
-                          int dni, QString direccion, QString telefono,
-                          QString nombreUsuario, QString contraseña);
+    void setUsuarioEditar(QStringList usuario);
     int validarNumero(QLineEdit* num);
 
 private slots:

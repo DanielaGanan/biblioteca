@@ -6,7 +6,7 @@
 #include "ventanausuarios.h"
 #include "ventanasocios.h"
 
-QList<Usuario> MainWindow::usuarios;
+QVector<QStringList> MainWindow::usuarios;
 QList<clasePrestamo> MainWindow::prestamos;
 QList<libro> MainWindow::libros;        // Inicializamos la lista estática
 QVector<QStringList> MainWindow::socios;
@@ -51,6 +51,7 @@ void MainWindow::on_abrirVentanaLibros_clicked()
 void MainWindow::on_abrirVentanaUsuarios_clicked()
 {
     ventanaUsuarios->show();
+    ventanaUsuarios->llenarTabla(usuarios);
 }
 void MainWindow::on_abrirVentanaPrestamos_clicked()
 {

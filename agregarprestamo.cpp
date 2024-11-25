@@ -62,30 +62,31 @@ void agregarPrestamo::on_aceptar() {
         nombreSeleccionado = nombreApellido[0];
         apellidoSeleccionado = nombreApellido[1];
     }
-
+/*
     // Verificar si el nombre y apellido seleccionado son iguales
     for (Usuario& usuario : mainWindow->usuarios) {
-        if (usuario.obtenerNombre() == nombreSeleccionado && usuario.obtenerApellido() == apellidoSeleccionado) {
+        if (usuario[i].obtenerNombre() == nombreSeleccionado && usuario[i].obtenerApellido() == apellidoSeleccionado) {
             qDebug() << "Coincide con el usuario: " << nombreSeleccionado << apellidoSeleccionado;
             claPrestamo.setUsuario(&usuario);
             break;
         }
     }
-    accept();
+    accept();*/
 }
 
-clasePrestamo agregarPrestamo::getPrestamo() const {
-    return claPrestamo;
+clasePrestamo agregarPrestamo::getPrestamo() const{
+    return clasePrestamo();
 }
 
-void agregarPrestamo::llenarComboBox(const QList<Usuario>& usuarios){
 
+void agregarPrestamo::llenarComboBox(QVector<QStringList> lista){
+/*
     for (const Usuario& usuario : usuarios) {
         QString texto = usuario.obtenerNombre() + " " + usuario.obtenerApellido();
         ui->empleadoComboBox->addItem(texto);  // Solo agregar el texto
-    }
+    }*/
 }
-
+/*
 void agregarPrestamo::setPrestamoEditar(int idPrestamo, int cantidad, const QDate& fechaPrestamo,
                                         const QDate& fechaDevolucion, Usuario* usuario){
     ui->idPrestamoQLine->setText(QString::number(idPrestamo));
@@ -100,6 +101,6 @@ void agregarPrestamo::setPrestamoEditar(int idPrestamo, int cantidad, const QDat
     }
 
 
-}
+}*/
 
 

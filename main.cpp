@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
     vU.setVentanaMainWindow(&mW);
     vS.setVentanaMainWindow(&mW);
     vS.cargarArchivo(); //carga el archivo de socios
+    vU.cargarArchivo();
     is.show();
     return a.exec();
 }

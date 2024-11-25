@@ -36,7 +36,10 @@ int FormularioUsuarios::validarNumero(QLineEdit* num)
 }
 
 void FormularioUsuarios::on_aceptar() {
-    if (ui->line_nombreUsuario->text().isEmpty() || ui->line_contrasena->text().isEmpty()){
+    if (ui->line_nombreUsuario->text().isEmpty() || ui->line_contrasena->text().isEmpty() ||
+        ui->line_apellido->text().isEmpty() || ui->line_nombre->text().isEmpty() ||
+        ui->line_dni->text().isEmpty() || ui->line_telefono->text().isEmpty() ||
+        ui->line_direccion->text().isEmpty()){
         QMessageBox::warning(this, "Advertencia", "Los campos no pueden estar vacios");
         reject();
         return;
@@ -47,12 +50,16 @@ void FormularioUsuarios::on_aceptar() {
         return;
     }
 
+    int dni = validarNumero(ui->line_dni);
+    if (dni == -1) {
+        QMessageBox::warning(this, "Advertencia", "El DNI ingresado no es válido.");
+        reject();
+        return;
+    }
+
+    usuario.establecerDni(validarNumero(ui->line_dni));
     usuario.establecerNombre(ui->line_nombre->text());
     usuario.establecerApellido(ui->line_apellido->text());
-
-    if(validarNumero(ui->line_dni) == -1)      return; // retorna si el dni no es valido
-    usuario.establecerDni(validarNumero(ui->line_dni));
-
     usuario.establecerDireccion(ui->line_direccion->text());
     usuario.establecerTelefono(ui->line_telefono->text());
     usuario.setNombreUsuario(ui->line_nombreUsuario->text());
@@ -61,17 +68,32 @@ void FormularioUsuarios::on_aceptar() {
     accept();
 }
 
-Usuario FormularioUsuarios::getUsuario() const {
+QStringList FormularioUsuarios::getUsuario() const {
+
+    QStringList usuario;
+
+    if (this->usuario.obtenerDni() <= 0) {
+        QMessageBox::warning(nullptr, "Error", "El DNI del usuario no es válido.");
+        return QStringList(); // Devuelve una lista vacía si hay error
+    }
+
+    usuario.append({this->usuario.obtenerNombre(),
+                    this->usuario.obtenerApellido(),
+                    QString::number(this->usuario.obtenerDni()),
+                    this->usuario.obtenerDireccion(),
+                    this->usuario.obtenerTelefono(),
+                    this->usuario.getNombreUsuario(),
+                    this->usuario.getContraseña()});
     return usuario;
 }
 
-void FormularioUsuarios::setUsuarioEditar(QString nom, QString apell, int dni, QString dire, QString tel, QString user, QString pass) {
+void FormularioUsuarios::setUsuarioEditar(QStringList usuario) {
 
-    ui->line_nombre->setText(nom);
-    ui->line_apellido->setText(apell);
-    ui->line_dni->setText(QString::number(dni));
-    ui->line_direccion->setText(dire);
-    ui->line_telefono->setText(tel);
-    ui->line_nombreUsuario->setText(user);
-    ui->line_contrasena->setText(pass);
+    ui->line_nombre->setText(usuario[0]);
+    ui->line_apellido->setText(usuario[1]);
+    ui->line_dni->setText(usuario[2]);
+    ui->line_direccion->setText(usuario[3]);
+    ui->line_telefono->setText(usuario[4]);
+    ui->line_nombreUsuario->setText(usuario[5]);
+    ui->line_contrasena->setText(usuario[6]);
 }

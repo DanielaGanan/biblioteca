@@ -43,7 +43,7 @@ Prestamo::~Prestamo()
 }
 
 void Prestamo::on_agregarPrestamo(){
-
+/*
     agregarPrestamo *formulario = new agregarPrestamo;
 
     formulario->llenarComboBox(mainWindow->usuarios);
@@ -75,10 +75,10 @@ void Prestamo::on_agregarPrestamo(){
 
         llenarTabla(mainWindow->prestamos);
     }
-    formulario->deleteLater();
+    formulario->deleteLater();*/
 }
 
-void Prestamo::on_editarPrestamo(){
+void Prestamo::on_editarPrestamo(){/*
 
     agregarPrestamo *formulario = new agregarPrestamo;
 
@@ -110,7 +110,7 @@ void Prestamo::on_editarPrestamo(){
  //   libro* lib = mainWindow->prestamos[indice].getUsuario();
     Usuario* usu = mainWindow->prestamos[indice].getUsuario();
 
-    formulario->setPrestamoEditar(id, cant, fprestamo, fdevolucion, usu);
+    formulario->setPrestamoEditar();
 
     // si se acepta se agrega un usuario
     if (formulario->exec() == QDialog::Accepted) {
@@ -132,7 +132,7 @@ void Prestamo::on_editarPrestamo(){
         llenarTabla(mainWindow->prestamos);
     }
 
-    formulario->deleteLater();
+    formulario->deleteLater();*/
 }
 
 void Prestamo::on_eliminarPrestamo(){

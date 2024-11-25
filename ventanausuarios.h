@@ -2,8 +2,8 @@
 #define VENTANAUSUARIOS_H
 
 #include <QDialog>
-#include <usuario.h>
 #include <formulariousuario.h>
+#include "usuario.h"
 
 class MainWindow;
 
@@ -20,8 +20,24 @@ public:
     ~VentanaUsuarios();
 
     void setVentanaMainWindow(MainWindow *mainWindow);
-    void llenarTabla(const QList<Usuario> &usuari);
-    Usuario buscarUsuarioDni(int dni);
+
+    // Clases de archivo
+    void cargarArchivo();
+    void guardarArchivo();
+
+    // Llenar la tabla con valores usuarios
+    void llenarTabla(QVector<QStringList> datos);
+
+    QStringList buscarUsuarioDni(int dni);
+    QStringList buscarPorUsuario(QString &usuarioEnviado);
+    void buscarPorFiltro(QString &texto, int columna);
+
+    int buscarIndexPorDni(QString &dni);
+
+    bool validarSiExisteUsuario(QString nuevoUsu);
+    bool validarSiExisteDni(QString nuevoDni);
+
+    void limpiarFiltros();
 
 private slots:
     void on_agregarUsuario();
@@ -32,7 +48,7 @@ private slots:
 
 private:
     Ui::VentanaUsuarios *ui;
-    Usuario admin;
+    Usuario *usuario;
     MainWindow *mainWindow;
 };
 
