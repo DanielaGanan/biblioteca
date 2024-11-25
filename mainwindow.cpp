@@ -1,15 +1,22 @@
 #include "mainwindow.h"
 #include "iniciosesion.h"
-#include "pagarcuota.h"
 #include "prestamo.h"
 #include "ui_mainwindow.h"
 #include "ventanausuarios.h"
 #include "ventanasocios.h"
+#include "libro.h"
+#include "ventanapagoscuotas.h"
 
+<<<<<<< HEAD
 QVector<QStringList> MainWindow::usuarios;
+=======
+// Inicializamos la lista estática
+QList<Usuario> MainWindow::usuarios;
+>>>>>>> origin/master
 QList<clasePrestamo> MainWindow::prestamos;
-QList<libro> MainWindow::libros;        // Inicializamos la lista estática
+QList<libro> MainWindow::libros;
 QVector<QStringList> MainWindow::socios;
+QVector<QStringList> MainWindow::pagosCuotas;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,6 +24,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->botCerrarSesion, &QPushButton::clicked, this, &MainWindow::on_cerrarSesion);
+
+    // ------------ MOSTRAR LEYENDA ------------
+    ui->abrirVentanaSocios->setToolTip("Gestionar socios");
+    ui->abrirVentanaLibros->setToolTip("Ver lista de libros");
+    ui->abrirVentanaUsuarios->setToolTip("Gestionar usuarios");
+    ui->abrirVentanaPagos->setToolTip("Controlar pagos");
+    ui->abrirVentanaPrestamos->setToolTip("Registrar prestamos");
+    ui->abrirVentanaDevoluciones->setToolTip("Registrar devoluciones");
+    ui->botCerrarSesion->setToolTip("Cerrar sesion / Cambiar de usuario");
 
 }
 
@@ -40,13 +56,19 @@ void MainWindow::setVentanaSocios(VentanaSocios *ventanaSocios)
 {
     this->ventanaSocios = ventanaSocios;
 }
-
+void MainWindow::setTablaLibros(tablaLibros *tablaLibro) {
+    this->tablalibro = tablaLibro;
+}
+void MainWindow::setVentanaPagosCuotas(VentanaPagosCuotas *ventanaPagosCuotas)
+{
+    this->ventanaPagosCuotas = ventanaPagosCuotas;
+}
 
 // ------------ MENU DE NAVEGACION ------------------
 void MainWindow::on_abrirVentanaLibros_clicked()
 {
-    tablaLibros *ventana = new tablaLibros();
-    ventana->show();
+    tablalibro->show();
+    this->tablalibro->actualizarTabla();
 }
 void MainWindow::on_abrirVentanaUsuarios_clicked()
 {
@@ -64,12 +86,13 @@ void MainWindow::on_abrirVentanaDevoluciones_clicked()
 }
 void MainWindow::on_abrirVentanaPagos_clicked()
 {
-    PagarCuota *ventana = new PagarCuota();
-    ventana->show();
+    ventanaPagosCuotas->show();
+    this->ventanaPagosCuotas->actualizarTabla(this->pagosCuotas);
 }
 void MainWindow::on_abrirVentanaSocios_clicked()
 {
     ventanaSocios->show();
     this->ventanaSocios->actualizarTabla(this->socios);
 }
+
 

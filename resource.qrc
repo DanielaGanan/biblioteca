@@ -1,10 +1,23 @@
 <RCC>
-    <qresource prefix="/new/prefix1">
-        <file>recursos/estante background.jpg</file>
-    </qresource>
     <qresource prefix="/">
         <file>recursos/estilos.css</file>
         <file>recursos/estante background.jpg</file>
-        <file>recursos/icono libros.jpg</file>
+        <file>recursos/Fuentes/Montserrat/Montserrat-VariableFont_wght.ttf</file>
+        <file>recursos/Fuentes/Montserrat/Montserrat-Italic-VariableFont_wght.ttf</file>
+        <file>recursos/Img/administrador.png</file>
+        <file>recursos/Img/ajustes.png</file>
+        <file>recursos/Img/cerrar-sesion.png</file>
+        <file>recursos/Img/devolver.png</file>
+        <file>recursos/Img/libro.png</file>
+        <file>recursos/Img/nueva-cuenta.png</file>
+        <file>recursos/Img/registro.png</file>
+        <file>recursos/Img/administrador (1).png</file>
+        <file>recursos/Img/devolver (1).png</file>
+        <file>recursos/Img/ingresos (1).png</file>
+        <file>recursos/Img/libro (1).png</file>
+        <file>recursos/Img/registro (1).png</file>
+        <file>recursos/Img/sistema-de-gestion-de-contenidos.png</file>
+        <file>recursos/Img/pagina-de-inicio-de-sesion.png</file>
+        <file>recursos/fondo de biblioteca.jpg</file>
     </qresource>
 </RCC>

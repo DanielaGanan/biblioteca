@@ -6,106 +6,117 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>475</width>
-    <height>298</height>
+    <width>545</width>
+    <height>313</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <item row="2" column="1">
-    <widget class="QTableWidget" name="tabla"/>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/recursos/Img/administrador (1).png</normaloff>:/recursos/Img/administrador (1).png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="3">
+    <widget class="QPushButton" name="botEliminar">
+     <property name="text">
+      <string>Eliminar</string>
+     </property>
+    </widget>
    </item>
-   <item row="5" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="botAgregar">
-       <property name="text">
-        <string>Agregar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="botEditar">
-       <property name="text">
-        <string>Editar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="botEliminar">
-       <property name="text">
-        <string>Eliminar</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+   <item row="2" column="4">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
-   <item row="1" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item row="2" column="1" colspan="2">
+    <widget class="QPushButton" name="botEditar">
+     <property name="text">
+      <string>Editar</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="7">
+    <layout class="QGridLayout" name="gridLayout_2">
      <property name="leftMargin">
-      <number>50</number>
+      <number>0</number>
      </property>
      <property name="topMargin">
       <number>5</number>
      </property>
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Buscar por:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="button_dni">
-       <property name="text">
-        <string>DNI</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="button_Nombre">
-       <property name="text">
-        <string>Nombre</string>
-       </property>
-      </widget>
-     </item>
-     <item>
+     <item row="0" column="4">
       <widget class="QRadioButton" name="button_Apellido">
        <property name="text">
         <string>Apellido</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="5">
       <widget class="QRadioButton" name="botton_usuario">
        <property name="text">
         <string>Usuario</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="label">
+     <item row="0" column="3">
+      <widget class="QRadioButton" name="button_Nombre">
        <property name="text">
-        <string/>
+        <string>Nombre</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="6">
       <widget class="QLineEdit" name="lineBuscar"/>
+     </item>
+     <item row="0" column="2">
+      <widget class="QRadioButton" name="button_dni">
+       <property name="text">
+        <string>DNI</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Buscar por:</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
-   <item row="6" column="1">
+   <item row="2" column="5">
     <widget class="QPushButton" name="botCerrar">
      <property name="text">
       <string>Cerrar</string>
      </property>
     </widget>
    </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="botAgregar">
+     <property name="text">
+      <string>Agregar</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="7">
+    <widget class="QTableWidget" name="tabla"/>
+   </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "pagarcuota.h"
 #include "ui_pagarcuota.h"
 
@@ -6,6 +7,8 @@ PagarCuota::PagarCuota(QWidget *parent)
     , ui(new Ui::PagarCuota)
 {
     ui->setupUi(this);
+    // Colocar nombre a ventana
+    this->setWindowTitle("Actualizar pagos");
 }
 
 PagarCuota::~PagarCuota()
@@ -83,3 +86,5 @@ void PagarCuota::buscarPagoSocio(Socio)
 
 }
 */
+=======
+>>>>>>> 944893d066873667d03f804d52f8ac02a7237a45

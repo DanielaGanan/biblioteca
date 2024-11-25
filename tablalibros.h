@@ -9,6 +9,8 @@
 #include <qdatetime.h>
 #include <QFile>
 
+class MainWindow;
+
 namespace Ui {
 class tablaLibros;
 }
@@ -21,20 +23,22 @@ public:
     explicit tablaLibros(QWidget *parent = nullptr);
     ~tablaLibros();
 
+    void setVentanaMainWindow(MainWindow *mainWindow);
+    void cargarDesdeCSV();
+    void actualizarTabla();
+
 private slots:
     void onAgregarLibro();
     void onModificarLibro();
     void onEliminarLibro();
     void actualizarLibro(int fila, const libro &libro);
     void filtrarLibros();
-    void mostrarTodosLosLibros();
     void guardarEnCSV();
-    void cargarDesdeCSV();
 
 private:
     Ui::tablaLibros *ui;
     QList<libro> &libros;  // Referencia a la lista estática 'libros'
-    void actualizarTabla();
+    MainWindow *mainWindow;
 };
 
 #endif // TABLALIBROS_H
