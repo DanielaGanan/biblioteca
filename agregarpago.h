@@ -28,6 +28,7 @@ public:
 private slots:
     void on_aceptar();
     void on_btnBuscarDni_clicked();
+    void on_selectSocio();
 
 private:
     Ui::agregarPago *ui;

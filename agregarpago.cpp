@@ -2,6 +2,7 @@
 #include "ui_agregarpago.h"
 #include <QMessageBox>
 #include <QDate>
+#include "selectsocio.h"
 
 agregarPago::agregarPago(QWidget *parent)
     : QDialog(parent)
@@ -11,6 +12,7 @@ agregarPago::agregarPago(QWidget *parent)
 
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &agregarPago::on_aceptar);
     connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &agregarPago::reject);
+    connect(ui->btnSelectSocio, &QPushButton::clicked, this, &agregarPago::on_selectSocio);
 }
 
 agregarPago::~agregarPago()
@@ -126,4 +128,21 @@ void agregarPago::setPagoEditar(QStringList &pago)
     ui->sbMonto->setValue(pago[3].toDouble());
     qDebug() << pago[4];
     ui->dtFechaPago->setDate(QDate::fromString(pago[4], "dd/MM/yyyy"));
+}
+
+void agregarPago::on_selectSocio()
+{
+    SelectSocio *form = new SelectSocio;
+
+    form->setSocios(socios);
+
+    if (form->exec() == QDialog::Accepted)
+    {
+        QStringList nuevoSocio = form->getSocio();
+        ui->txtDniSocio->setText(nuevoSocio[2]);
+        ui->txtNombreSocio->setText(nuevoSocio[0]);
+        ui->txtApellidoSocio->setText(nuevoSocio[1]);
+    }
+
+    form->deleteLater();
 }
